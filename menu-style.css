@@ -1,0 +1,483 @@
+/*Menu Page*/
+.menu-body {
+    min-height: 100vh;
+}
+
+/* Menu title/header */
+.menu-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #BAC9A3;
+    color: #F8EFE5;
+    position: relative;
+    max-width: 100%;
+    height: 50vh;
+    background-image: url('spencer-davis-W_GSHCi0cR8-unsplash (1).jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+
+}
+
+.menu-title h1 {
+    font-size: 5rem;
+    text-align: center;
+    color: beige;
+}
+
+.menu-main {
+    position: relative;
+}
+
+/*Navigation of Menu*/
+.menu-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #CE5B68;
+    width: 100%;
+    max-height: 60px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.menu-nav-2 {
+    display: none;
+}
+
+.menu-section-nav {
+    margin: 0 1%;
+    font-size: 1.4em;
+    padding: 1%;
+    width: 130px;
+    text-align: center;
+    color: #F8EFE5;
+}
+
+.menu-section-links {
+    text-decoration: none;
+    color: #F8EFE5;
+    width: max-content;
+}
+
+.menu-section-nav,
+.menu-section-links:hover {
+    color: #fad370;
+}
+
+.main-section-nav,
+.bev-section-nav {
+    position: relative;
+    display: inline-block;
+}
+
+.main-items-list,
+.beverages-items-list {
+    list-style: none;
+    padding: 10%;
+    text-align: left;
+    background-color: #CE5B68;
+    font-size: 1.2rem;
+    position: absolute;
+    left: 0;
+    display: none;
+    min-width: 160px;
+    z-index: 1;
+    margin-top: 1%;
+}
+
+.main-items-options,
+.bev-items-options {
+    margin: 1.5%;
+    display: block;
+    width: fit-content;
+}
+
+.main-items-links,
+.bev-items-links {
+    text-decoration: none;
+    color: #F8EFE5;
+}
+
+.main-items-links:hover,
+.bev-items-links:hover {
+    color: #FAD370;
+}
+
+#cart-icon-menu {
+    cursor: pointer;
+    font-size: 1.8em;
+    position: absolute;
+    right: 10px;
+    top: 25%;
+    margin-right: 0;
+}
+
+#cart-icon-menu:hover {
+    fill: #FAD370;
+}
+
+/*Menu*/
+.menu-sections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+}
+
+.section-title {
+    padding-top: 65px;
+    margin-top: -65px;
+    margin: 1%;
+    font-size: 2em;
+    text-align: center;
+    font-weight: 700;
+    width: 100%;
+}
+
+.subsection-title {
+    scroll-margin-top: 87px;
+    text-align: center;
+    font-size: 1.2rem;
+    border-bottom: 1px solid black;
+    padding: 10px 0;
+}
+
+.menu-subsection {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 85vw;
+}
+
+.menu-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 85vw;
+
+}
+
+.menu-item {
+    margin: 30px 0;
+    margin-right: 45px;
+    background-color: #BAC9A3;
+    width: 230px;
+    height: 380px;
+    padding: 15px;
+    position: relative;
+    border-radius: 3px;
+
+}
+
+.img-menu-item {
+    width: 230px;
+    height: 200px;
+}
+
+.menu-item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-item-details>div {
+    display: flex;
+    align-items: center;
+}
+
+.menu-item-name {
+    text-align: center;
+    margin: 0.2%;
+}
+
+.menu-item-description {
+    height: 100px;
+}
+
+.quantity-title {
+    font-weight: 700;
+}
+
+.menu-item-price {
+    font-weight: bold;
+}
+
+.menu-item-quantity {
+    margin: 1%;
+    margin-right: 5%;
+    width: 35px;
+    font-size: 0.8rem;
+}
+
+input[type=number] {
+    outline: none;
+    margin-left: 5px;
+    font-size: 1.1rem
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+
+}
+
+.add-btn {
+    padding: 3% 6%;
+    border-radius: 100%;
+    border: 0;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 1.3rem;
+    background-color: #104d40;
+    color: white;
+}
+
+/*Checkout*/
+.checkout {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 3px dashed black;
+}
+
+.total-title,
+.total-price {
+    padding: 2% 1%;
+    align-self: center;
+}
+
+.checkout-btn {
+    padding: 0.7% 1%;
+    font-size: 1.2rem;
+    margin: 1%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+#cart-icon-checkout {
+    fill: black;
+    font-size: 2em;
+}
+
+#checkout-icon {
+    fill: black;
+    margin-right: 5px;
+}
+
+/*Up and Down Buttons*/
+.up-down {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 10px;
+    right: -50px;
+}
+
+.up-down-btns {
+    background-color: #CE5B68;
+    padding: 15px;
+    font-size: 1.2rem;
+    margin: 0.2%;
+    border-radius: 100%;
+}
+
+#up-btn {
+    display: none;
+}
+
+.up-down-btns:hover {
+    background-color: #fad370;
+}
+
+.small-cart {
+    display: none;
+}
+
+/*Pop-up Msg*/
+.pop-up-container {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    position: fixed;
+
+}
+
+.pop-up {
+    width: 300px;
+    height: 180px;
+    background-color: #F8EFE5;
+    z-index: 5;
+    display: none;
+    text-align: center;
+    border-radius: 12px;
+}
+
+.pop-up h2 {
+    margin-bottom: 2%;
+}
+
+.close-btn {
+    background-color: #F8EFE5;
+    border: none;
+    font-size: 1.4rem;
+    align-self: flex-end;
+    margin: 2%;
+}
+
+.close-btn svg {
+    background-color: #F8EFE5;
+    fill: black;
+}
+
+.close-btn svg:hover {
+    fill: #FAD370;
+}
+
+#login-btn {
+    font-size: 1.2rem;
+    margin: 1%;
+    margin-top: 10%;
+    padding: 1% 2.5%;
+    align-self: center;
+    border-radius: 12px;
+    background-color: #FAD370;
+    border: none;
+    width: 100px;
+}
+
+#login-btn:hover {
+    background-color: #debb61;
+}
+
+@media screen and (max-width: 1100px) {
+    .pop-up {
+        left: 35%;
+    }
+}
+
+@media screen and (max-width: 899px) {
+    .menu-section-links {
+        font-size: 20px;
+    }
+
+    .main-items-links,
+    .bev-items-links {
+        font-size: 17px;
+    }
+
+    .beverages-items-list,
+    .main-items-list {
+        min-width: 120px;
+        margin-top: 1.5%;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .pop-up {
+        left: 30%;
+    }
+
+    .menu-nav {
+        display: none;
+    }
+
+    .menu-nav-2 {
+        display: block;
+        align-items: center;
+        background-color: #CE5B68;
+        height: fit-content;
+        padding: 7px;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .menu-nav-2 ul {
+        list-style: none;
+        display: flex;
+        /* flex-wrap: wrap; */
+        /* justify-content: center; */
+        overflow: auto;
+        white-space: nowrap;
+    }
+
+    .menu-nav-2 li {
+        display: inline;
+        border: 1px solid #F8EFE5;
+        box-shadow: 1px 1px gray;
+        padding: 5px;
+        margin: 0.8%;
+        max-height: 20px;
+        width: fit-content;
+        border-radius: 12px;
+    }
+
+    .menu-nav-2 a {
+        text-decoration: none;
+        color: #F8EFE5;
+    }
+
+    .menu-nav-2 li:hover {
+        border-color: #FAD370;
+    }
+
+    .menu-nav-2 a:hover {
+        color: #fad370;
+    }
+
+    .small-cart {
+        display: flex;
+        align-items: center;
+        background-color: #CE5B68;
+        padding: 15px;
+        border-radius: 100%;
+        margin-bottom: 8px;
+    }
+}
+
+@media screen and (max-width: 743px) {
+    .menu-title h1 {
+        font-size: 3.5rem;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    .section-title {
+        scroll-margin-top: 20px;
+    }
+
+    .pop-up {
+        left: 24%;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    .subsection-title {
+        scroll-margin-top: 50px;
+    }
+
+    .pop-up {
+        left: 20%;
+    }
+
+    .menu-title h1 {
+        font-size: 3rem;
+    }
+
+
+}

@@ -1,0 +1,414 @@
+@import url('https://fonts.cdnfonts.com/css/tw-cen-mt-std');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+body{
+    background-color: beige;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #fad370;
+    border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #CE5B68;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1 {
+    margin: 0.5%;
+    font-family: 'Tw Cen MT Std', sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+a,
+button {
+    color: black;
+}
+
+
+@keyframes openPage {
+    0% {
+        opacity: 0.1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/*Navigation Bar*/
+.nav-bar {
+    display: flex;
+    font-size: 1.3em;
+    background-color: #104d40;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    z-index: 1;
+    font-weight: 400;
+    padding: 0.35% 0;
+}
+
+.nav-2 {
+    display: none;
+}
+
+.nav-options {
+    padding: 0.5%;
+    margin: 0.5%;
+    text-decoration: none;
+    color: #F8EFE5;
+    font-weight: 400;
+}
+
+
+.nav-options:hover {
+    color: #fad370;
+}
+
+.logo {
+    margin-top: 16px;
+    position: absolute;
+    left: 0;
+    padding: 20px 0;
+}
+
+.logo-img {
+    height: 120px;
+    width: 230px;
+    margin-top: 1.5%;
+    padding: 2%;
+    padding-right: 1.5%;
+}
+
+.account-icon {
+    background-color: #F8EFE5;
+    border-radius: 100%;
+    border: 1px solid black;
+    position: absolute;
+    right: 0;
+    padding: 0.5% 0.7%;
+    margin: 0.5%;
+    width: 15px;
+    height: 20px;
+}
+
+.account-icons {
+    fill: black;
+    font-size: 1.5rem;
+}
+
+.account {
+    list-style: none;
+    position: absolute;
+    top: 52px;
+    right: 1.5%;
+    background-color: #F8EFE5;
+    font-size: 15px;
+    font-weight: 600;
+    width: 120px;
+    height: 75px;
+    /* margin-right: 0.01%; */
+    /* height: 15vh; */
+    z-index: 1;
+    border: 1px solid gray;
+}
+
+#account {
+    display: none;
+}
+
+.account-section,
+.signed-out {
+    margin: 1%;
+    padding: 3%;
+    display: block;
+    width: min-content;
+    list-style: none;
+}
+
+.account-section a {
+    text-decoration: none;
+    color: black;
+}
+
+.account-info {
+    display: none;
+    align-items: center;
+}
+
+.account-info_div {
+    display: flex;
+    justify-content: space-between;
+    width: 110px;
+    align-items: center;
+    border-bottom: 1px solid black;
+    padding-bottom: 8px;
+}
+
+.account-info_div>a {
+    border: none;
+    background: none;
+    text-decoration: none;
+}
+
+.signed-out {
+    width: 90%;
+    margin-left: 1.5%;
+}
+
+.signed-out li {
+    padding-right: 2%;
+    margin-bottom: 7px;
+}
+
+.signed-out li:nth-child(1) {
+    margin-top: 8px;
+}
+
+.signed-out a:hover {
+    color: #CE5B68;
+}
+
+#username-text {
+    cursor: context-menu;
+}
+
+.cart-icon {
+    cursor: pointer;
+}
+
+#sign-out-btn:hover {
+    color: #CE5B68;
+}
+
+.cart-btn:hover svg {
+    fill: #CE5B68;
+}
+
+#sign-out-btn,
+#sign-out-btn2 {
+    border: none;
+    background-color: #F8EFE5;
+    font-weight: 600;
+    padding: 2px;
+    margin: 5px;
+}
+
+/*Footer*/
+.footer {
+    background-color: #104d40;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    bottom: 0%;
+    color: #F8EFE5;
+    margin-top: auto;
+    overflow: hidden;
+}
+
+.footer-p1 {
+    display: flex;
+    width: 35vw;
+}
+
+.footer-logo {
+    width: 60px;
+    align-self: flex-start;
+}
+
+.contact-footer {
+    margin: 1%;
+    width: 500px;
+}
+
+.footer-div-p1 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-self: flex-end;
+    margin-left: 1%;
+}
+
+.footer-p2 {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+}
+
+.icons-list {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.icons-list a {
+    text-decoration: none;
+    padding: 1%;
+    margin: 2% 3.5%;
+}
+
+.social-media-icons {
+    font-size: 2rem;
+}
+
+.social-media-icons:hover {
+    fill: #fad370;
+}
+
+
+/*Media Queries*/
+@media screen and (max-width:1200px) {
+    .nav-options:nth-child(2) {
+        margin-left: 8%;
+    }
+
+    .logo-img {
+        height: 110px;
+        width: 210px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    
+    .nav-bar {
+        font-size: 1.3em;
+    }
+
+    .footer-div-p1 {
+        font-size: 15px;
+    }
+    ::-webkit-scrollbar{
+        display: none;
+    }
+
+    .nav-1 {
+        display: none;
+    }
+    /* Navigation for smaller screens */
+    .nav-2 {
+        display: flex;
+        font-size: 1.3em;
+        background-color: #104d40;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        z-index: 1;
+        font-weight: 400;
+        height: 10vh;
+    }
+    
+    .drop-nav-bar {
+        position: absolute;
+        right: 5%;
+        background-color: #104d40;
+        border: none;
+        width: 15px;
+    }
+
+    .nav-items {
+        display: none;
+        list-style: none;
+        position: absolute;
+        top: 82%;
+        right: 1.5%;
+        background-color: #F8EFE5;
+        font-size: 15px;
+        font-weight: 600;
+        width: 150px;
+        height: fit-content;
+        z-index: 1;
+        margin: 0.2%;
+        border: 1px solid gray;
+    }
+
+    .nav-items:first ul li{
+        margin: 5px 0;
+    }
+
+    .nav-2 li {
+        list-style: none;
+
+    }
+
+    .nav-options-nav2 {
+        text-decoration: none;
+        color: black;
+        margin-left: 5px;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        padding: 3px 0;
+    }
+
+    .nav-options-nav2:hover {
+        color: #CE5B68;
+    }
+
+    .account-section {
+        border-top: 1px solid black;
+    }
+
+    .account-info_div {
+        width: 135px;
+    }
+    .nav-2 .logo{
+        width: 200px;
+        max-height: 90px;
+        margin-bottom: 40px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .footer-div-p1 {
+        display: none;
+    }
+
+    .social-media-icons {
+        font-size: 1.8rem;
+    }
+
+}
+
+.transition-fade {
+    animation: openPage 550ms linear 1 forwards;
+}
+
+html.is-animating .transition-fade {
+    opacity: 0;
+}
