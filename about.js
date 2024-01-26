@@ -92,10 +92,12 @@ $(document).ready(function () {
     });
     // wrap event style on 926px
     let description = $(".desc-content")
-    let event_cont = $(".event-cont")
-    if (windowWidth <= '926px') {
-        description.css({ 'opacity': 1 })
-        event_cont.removeClass(description)
-    }
+    // let event_cont = $(".event-cont")
+    // if (windowWidth <= '926px') {
+    //     description.css({ 'opacity': 1 })
+    //     event_cont.removeClass(description)
+    // }
+
+   
     
 });

@@ -149,22 +149,21 @@
   margin-bottom: 1.1%;
 }
 
-#hidden-p {
-  display: none;
-}
 
 .event-cont {
   position: relative;
   max-width: 400px;
   max-height: 600px;
-  padding: 0.55%;
+  padding: 0.30%;
   background-color: #104d40;
   overflow: hidden;
+  border-radius: 6px;
 }
 
 .event-img {
   width: 400px;
   height: 600px;
+  border-radius: 6px;
   display: block;
   margin: auto;
 }
@@ -184,29 +183,26 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   transition: 0.6s;
-}
-
-.desc-content:hover {
-  opacity: 1;
 }
 
 .desc-h3 {
   font-weight: 400;
-  font-size: 1.8em;
+  font-size: 1.5em;
   color: #fdc841;
   margin-bottom: 5%;
 }
 
 .desc {
-  font-size: 1.3em;
+  font-size: 1.1em;
   line-height: 1.2;
   color: #fff;
   text-align: start;
-  width: 50%;
+  width: 75%;
+  margin-bottom: 5%;
 }
+
 
 /* Our Food design */
 .our-food-container {
@@ -220,7 +216,12 @@
   align-items: center;
   border-top: 1px solid black;
 }
-
+.our-food-container marquee{
+  background-color: #104d40;
+  color: white;
+  font-size: 1.2rem;
+  padding: 5px;
+}
 #h1-story,
 #h1-event,
 #h1-our-food {
@@ -240,14 +241,17 @@
   max-width: 50vw;
   max-height: 48vh;
   background-color: #104d40;
-  padding: 0.55%;
+  padding: 0.15%;
+  border-radius: 6px;
   overflow: hidden;
+  margin-top: 10px;
 }
 
 #our-food-img {
   width: 100%;
   height: 48vh;
   z-index: -1;
+  border-radius: 6px;
 }
 
 .in-text {
@@ -349,9 +353,6 @@
 @media (max-width: 1250px) {
 
   /* event part */
-  .event-img-container {
-    flex-wrap: wrap;
-  }
 
   .event-cont {
     margin: 2% 1%;
@@ -430,24 +431,6 @@
 @media screen and (max-width: 926px) {
 
   /* event part */
-  .bd,
-  .omn {
-    display: none;
-  }
-
-  .fg-h3,
-  .fg-desc {
-    display: none;
-  }
-
-  #hidden-p {
-    display: block;
-    font-size: 1.15em;
-    line-height: 1.4;
-    color: #fff;
-    text-align: start;
-    width: 50%;
-  }
 
   .event-cont {
     margin: 3% 0;
@@ -748,195 +731,4 @@
     top: -400px;
     opacity: 0;
   }
-}
-.event-container {
-  background: #eee;
-  font-family: "Tahoma";
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.event-container #scene {
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  width: 1000px;
-  height: 400px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  background-color: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  overflow: hidden;
-}
-.event-container #scene #left-zone {
-  background: #fff;
-  height: 75%;
-  flex-grow: 0;
-  display: flex;
-  width: 250px;
-  align-items: center;
-  justify-content: left;
-}
-.event-container #scene #left-zone .list {
-  display: flex;
-  list-style: none;
-  align-content: stretch;
-  flex-direction: column;
-  flex-grow: 1;
-  margin: 0;
-  padding: 0;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] {
-  display: none;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ label {
-  display: block;
-  opacity: 0.5;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ label:first-letter {
-  text-transform: uppercase;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ label:hover {
-  opacity: 0.75;
-  cursor: pointer;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ label.label_birthdays:before {
-  content: " ";
-  display: block;
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  margin-left: 15px;
-  background-image: url("https://cdn-icons-png.flaticon.com/512/3761/3761633.png");
-  background-position: center;
-  background-size: 75% 75%;
-  background-repeat: no-repeat;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ label.label_gatherings:before {
-  content: " ";
-  display: block;
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  margin-left: 15px;
-  background-image: url("https://static.thenounproject.com/png/3692810-200.png");
-  background-position: center;
-  background-size: 75% 75%;
-  background-repeat: no-repeat;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ label.label_openMicNights:before {
-  content: " ";
-  display: block;
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  margin-left: 15px;
-  background-image: url("https://www.iconpacks.net/icons/1/free-microphone-icon-342-thumb.png");
-  background-position: center;
-  background-size: 75% 75%;
-  background-repeat: no-repeat;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ .content {
-  position: absolute;
-  left: 350px;
-  top: -400px;
-  width: 650px;
-  height: 400px;
-  -webkit-animation-duration: 0.75s;
-          animation-duration: 0.75s;
-  -webkit-animation-name: slideout;
-          animation-name: slideout;
-  -webkit-animation-timing-function: ease-out;
-          animation-timing-function: ease-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ .content.content_birthdays .picto {
-  height: 100px;
-  width: 100px;
-  background-image: url("https://cdn-icons-png.flaticon.com/512/3761/3761633.png");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ .content.content_birthdays h2 {
-  color: #d64541;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ .content.content_gatherings .picto {
-  height: 100px;
-  width: 100px;
-  background-image: url("https://static.thenounproject.com/png/3692810-200.png");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ .content.content_gatherings h2 {
-  color: #f5d76e;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ .content.content_openMicNights .picto {
-  height: 100px;
-  width: 100px;
-  background-image: url("https://www.iconpacks.net/icons/1/free-microphone-icon-342-thumb.png");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ .content.content_openMicNights h2 {
-  color: #00b16a;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ .content h2:first-letter {
-  text-transform: uppercase;
-}
-.event-container #scene #left-zone .list li.item input[type=radio] ~ .content p {
-  max-width: 50%;
-  text-align: center;
-}
-.event-container #scene #left-zone .list li.item input[type=radio]:checked ~ label {
-  opacity: 1;
-  -webkit-animation: all 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-          animation: all 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-}
-.event-container #scene #left-zone .list li.item input[type=radio]:checked ~ label.label_birthdays {
-  color: #d64541;
-  border-right: solid 4px #d64541;
-}
-.event-container #scene #left-zone .list li.item input[type=radio]:checked ~ label.label_gatherings {
-  color: #f5d76e;
-  border-right: solid 4px #f5d76e;
-}
-.event-container #scene #left-zone .list li.item input[type=radio]:checked ~ label.label_openMicNights {
-  color: #00b16a;
-  border-right: solid 4px #00b16a;
-}
-.event-container #scene #left-zone .list li.item input[type=radio]:checked ~ .content {
-  -webkit-animation-duration: 0.75s;
-          animation-duration: 0.75s;
-  -webkit-animation-name: slidein;
-          animation-name: slidein;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  -webkit-animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
-          animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
-}
-.event-container #scene #middle-border {
-  background-color: #eee;
-  height: 75%;
-  flex-grow: 1;
-  max-width: 2px;
-  z-index: 0;
-}
-.event-container #scene #right-zone {
-  background: #fff;
-  height: 100%;
-  flex-grow: 3;
 }
