@@ -37,8 +37,9 @@ $(document).ready(function () {
         const email = inputEmail.val()
         const phone = inputPhone.val()
         const msg = inputMsg.val()
-
-        if (name === "" || msg === "" || (email === "" && phone === "")) {
+        const isEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})|(\d{10,}))$/i.test(email);
+        const isPhoneNumber = /^\d{10}$/i.test(phone.trim());
+        if (name === "" || msg === "" || (isEmail===false && isPhoneNumber===false)) {
             if (toast.hasClass("active")) {
                 toast.removeClass("active");
             }
@@ -71,8 +72,8 @@ $(document).ready(function () {
         const name = inputName2.val()
         const email = inputEmail2.val()
         const ques = inputQuestion.val()
-
-        if (name === "" || ques === "" || email === "") {
+        const isEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})|(\d{10,}))$/i.test(email);
+        if (name === "" || ques === "" || isEmail===false) {
             if (toast2.hasClass("active")) {
                 toast2.removeClass("active");
             }
