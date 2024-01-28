@@ -141,6 +141,7 @@
 } */
 .event-img-container {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -196,7 +197,7 @@
 
 .desc {
   font-size: 1.1em;
-  line-height: 1.2;
+  line-height: 1.5;
   color: #fff;
   text-align: start;
   width: 75%;
@@ -366,11 +367,11 @@
   }
 
   .desc-h3 {
-    font-size: 1.4em;
+    font-size: 1.3em;
   }
 
   .desc {
-    font-size: 1.2em;
+    font-size: 1em;
   }
 }
 
@@ -445,11 +446,11 @@
   }
 
   .desc-h3 {
-    font-size: 2em;
+    font-size: 1.2em;
   }
 
   .desc {
-    font-size: 1.5em;
+    font-size: 1em;
   }
 
 }
@@ -544,11 +545,11 @@
 
   /* event part */
   .desc-h3 {
-    font-size: 1.7em;
+    font-size: 1.2em;
   }
 
   .desc {
-    font-size: 1.2em;
+    font-size: 1em;
   }
 
   /* Our Food Part */
