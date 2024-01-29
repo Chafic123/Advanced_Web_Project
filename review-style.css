@@ -1,6 +1,7 @@
 /* The main section of the page scluding the footer and navigation bar */
 .main-section {
   display: flex;
+  width: 100%;
 
 }
 
@@ -19,20 +20,14 @@
 /* the main container of the review section */
 .review-body {
   margin-left: 50px;
+  align-self: center;
 }
 
 /*Share your Experience */
 .title-text h1 {
   font-size: 4.9rem;
   margin: 50px 0px 5px -5px;
-}
-
-/* subtitle */
-.text {
-  margin: -5px 0px 30px 0px;
-  font-size: 20px;
-  font-family: Roboto;
-  color: #c94353;
+  align-items: center;
 }
 
 /* hide imamge for bigger screen */
