@@ -2,7 +2,7 @@
 .main-section {
   display: flex;
   width: 100%;
-
+  max-width: 100%;
 }
 
 /* Side Image/Patter */
@@ -21,6 +21,10 @@
 .review-body {
   margin-left: 50px;
   align-self: center;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /*Share your Experience */
@@ -41,15 +45,15 @@
   margin: 10px 0px 20px 0px;
   border-radius: 10px;
   box-shadow: 3px 3px 10px rgb(168, 168, 168);
-  max-width: 85%;
-
+  max-width: 80%;
+  min-width: 70%;
 }
 
 /* The form */
 .wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
 
 }
 
@@ -67,7 +71,7 @@
 .overflow {
   display: flex;
   flex-wrap: wrap;
-
+  flex-direction: column;
 }
 
 /* names and contact information containers */
@@ -161,6 +165,7 @@ input[type="text"],
 /*Radio button */
 .delivery-InHouse {
   display: flex;
+  flex-wrap: wrap;
 }
 
 /* In house spacing */
@@ -183,7 +188,7 @@ input[type="text"],
 .Experience {
   font-size: 19px;
   margin-top: 30px;
-
+  width: 80%;
 }
 
 /* Inputs inside that container */
@@ -445,9 +450,11 @@ input[type="text"],
 @media screen and (max-width: 950px) {
   .review-body {
     margin-left: 0px;
+    margin-right: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
 
   .Title {
@@ -456,13 +463,13 @@ input[type="text"],
     flex-wrap: wrap-reverse;
     align-items: center;
     justify-content: center;
-    max-width: 700px;
     margin-top: 20px;
     margin-left: 10px;
   }
 
   .title-text {
     width: 700px;
+    text-align: center;
   }
 
   .image {
@@ -574,7 +581,7 @@ input[type="text"],
   }
 
   .section #email-phone {
-    width: 250px;
+    width: 200px;
   }
 
   .title-img {
@@ -590,11 +597,19 @@ input[type="text"],
 
 /* Media query for screen sizes between 594px */
 @media screen and (max-width: 594px) {
-
+  .review-body{
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+  }
   /* Adjustments for image size and text width */
   .title-img img {
     width: 200px;
     height: 80px;
+  }
+
+  .Title{
+    align-self: center;
   }
 
   .title-text {
@@ -616,7 +631,9 @@ input[type="text"],
 
 /* Media query for screen sizes below 460px */
 @media screen and (max-width: 460px) {
-
+  .delivery-InHouse .service-type{
+    margin: 5px 0;
+  }
   /* Adjustments for image size and text width */
   .title-img img {
     width: 200px;
@@ -648,4 +665,8 @@ input[type="text"],
   #btn {
     margin-left: 10px;
   }
+  #first-name,
+.email-or-phone {
+  margin-right: 0;
+}
 }
