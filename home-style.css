@@ -1,5 +1,4 @@
 /*Home Page*/
-
 .home-body {
   display: flex;
   align-items: center;
@@ -7,6 +6,8 @@
   height: 100vh;
   flex-wrap: wrap;
   color: black;
+  background: url("luisa-brimble-aFzg83dvnAI-unsplash (1).jpg");
+  background-size: cover;
 }
 
 .home-wel {
@@ -17,19 +18,6 @@
   overflow: hidden;
   position: relative;
   background-color: #bac9a393;
-}
-
-
-#small img {
-  display: none;
-}
-
-.bg-image {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 120vh;
 }
 
 .main-logo {
@@ -67,13 +55,11 @@
 }
 
 .signing-options button:hover .sign-links {
-  /* background-color: #C8EFE5; */
   color: #F8EFE5;
   transition: all 0.5s ease;
 }
 
 .signing-options button:hover {
-  /* background-color: #C8EFE5; */
   border: 3px solid #CE5B68;
   background-color: #CE5B68;
   color: #F8EFE5;
@@ -81,13 +67,9 @@
 }
 
 @media screen and (max-width: 773px) {
-  #small {
-    display: block;
-    /* height: ; */
-  }
-
-  #big {
-    display: none;
+  .home-body{
+    background: url("mihai-moisa-Djtc1T38-GY-unsplash (1) (1).jpg");
+    background-size: cover;
   }
 
   .signing-options {
@@ -139,12 +121,9 @@
   }
 
   .signing-options button:hover {
-    /* background-color: #C8EFE5; */
     border: 3px solid #fad370;
     background-color: #fad370;
     color: #F8EFE5;
     transition: all 0.5s ease;
   }
-
-
 }

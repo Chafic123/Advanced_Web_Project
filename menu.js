@@ -14,7 +14,6 @@ class oItem {
 let total = 0;
 let menuitems = [];
 let ordery = JSON.parse(window.sessionStorage.getItem('order'));
-console.log(ordery)
 let orderedItems = new Array();
 // Checks if there is already thing in their cart
 if (ordery != null) {
@@ -41,10 +40,6 @@ let popUpMsg = document.getElementsByClassName("pop-up")[0];
 let loginBtn = document.getElementById("login-btn");
 let checkoutBtn = document.getElementsByClassName("checkout-btn")[0];
 
-//login button on pop up
-loginBtn.addEventListener("click", () => {
-    window.location.replace("sign-in.html", "_self");
-});
 //keys to be disabled
 // left: 37, up: 38, right: 39, down: 40,
 // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
@@ -129,7 +124,6 @@ window.addEventListener("scroll", function () {
     else {
         y = 0.05
     }
-    console.log(bottom)
     let sHeight = document.documentElement.scrollTop;
     if (sHeight == 0) {
         upDown[0].style.display = "none";
@@ -268,9 +262,7 @@ fetch('menu.json')
                         total += menuitems[i].findPrice(qt);
                         totalAmount.textContent = "$" + total.toFixed(2);
                         for (let j = 0; j < orderedItems.length; j++) {
-                            console.log("inLoop")
                             if (orderedItems[j].fname == fName) {
-                                console.log("in")
                                 inOrder = true;
                                 let newQt = parseInt(qt) + parseInt(orderedItems[j].quantity);
                                 orderedItems[j].quantity = newQt;
@@ -282,8 +274,6 @@ fetch('menu.json')
                             let orderedItem = new oItem(menuitems[i].fname, qt, menuitems[i].findPrice(qt), menuitems[i].image);
                             orderedItems.push(orderedItem);
                         }
-                        console.log(orderedItems)
-
                         window.sessionStorage.setItem('order', JSON.stringify(orderedItems))
                         window.sessionStorage.setItem('totalPrice', JSON.stringify(total))
                         addItems[i].parentElement.reset()

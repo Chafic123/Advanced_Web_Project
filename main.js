@@ -81,3 +81,64 @@ btnSignOut2.addEventListener("click", function () {
 //used for smooth transitions between pages
 const swup = new Swup();
 
+$(document).ready(function(){
+    let loginPopup = $(".l");
+    let signupPopup=$(".s")
+    let loginBtn = $(".login");
+    let signupBtn=$(".up");
+    let signinX = $(".signX");
+    let backdrop = $("#backdrop"); 
+    
+    // Show login popup and backdrop
+    loginBtn.on("click",function(){
+      signupPopup.hide();
+      loginPopup.show();
+      backdrop.show();
+    });
+  
+    signupBtn.on("click",function(){
+      loginPopup.hide();
+      signupPopup.show();
+      backdrop.show();
+    });
+
+    /*Function to Remove Error Message*/
+    function removeError(element) {
+        let parentElement = element.closest('.input-field');
+        parentElement.removeClass('error');
+        let alertMessage = parentElement.find('small');
+        alertMessage.text('');
+    }
+    
+    // Hide login popup and backdrop
+    signinX.click(function () {
+      loginPopup.hide();
+      signupPopup.hide();
+      backdrop.hide();
+      $("#sign-in-user").val("");
+      $("#sign-in-pass").val("");
+      $("#frst-name-Input").val("");
+      $("#lst-name-Input").val("");
+      $("#ContactInput").val("");
+      $("#bday").val("");
+      $("#password").val("");
+      $("#confirmPassword").val("");
+      $("#agree").prop("checked", false);
+      $(".policy .paragraph").show();
+      removeError($("#sign-in-user"));
+      removeError($("#sign-in-pass"));
+      removeError($("#frst-name-Input"));
+      removeError($("#lst-name-Input"));
+      removeError($("#ContactInput"));
+      removeError($("#bday"));
+      removeError($("#password"));
+      removeError($("#confirmPassword"));
+      $(".policy").removeClass("error");
+      $("#policyError").text("");
+    });
+
+    $(".togglePassword").on("click",function(){
+        // Toggle the eye icon class to switch between open and closed eye icons
+        $(this).toggleClass('far fa-eye far fa-eye-slash');
+    });
+})
