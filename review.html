@@ -145,14 +145,14 @@
                                 <section class="section contact-info">
                                     <h5> Contact Information</h5>
                                     <section class="information">
-                                        <!-- Email or phone number -->
+                                        <!-- Email number -->
                                         <section class="email-or-phone required-feedback">
                                             <div class="label other">
-                                                <label>Email or Phone</label>
+                                                <label>Email</label>
                                                 <span class="required">*</span>
                                             </div>
-                                            <input type="text" placeholder="Email or Phone" class="input other"
-                                                name="email" id="email-phone">
+                                            <input type="text" placeholder="Email" class="input other" name="email"
+                                                id="email-phone">
                                             <small>Error Message</small>
                                         </section>
                                     </section>
@@ -307,7 +307,7 @@
                             <section class="hidden Experience InHouse-Active">
                                 <!-- locations -->
                                 <select value="locations" id="Select">
-                                    <option class="options" value=""> Select Restaurant</option>
+                                    <option class="options" value="" disabled selected> Select Restaurant</option>
                                     <option class="options" value="5">Beirut</option>
                                     <option class="options" value="10">Tripoli</option>
                                     <option class="options" value="15">Tyre</option>
@@ -447,34 +447,34 @@
                         <p class="success"></p>
                     </form>
                 </div>
-                <!-- Pop-up when form is valid and submitted -->
-                <!-- pop-up -->
-                <div class="pop-up-container">
-                    <div class="pop-up">
-                        <button class="close-btn" id="close-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                                viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                <path
-                                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
-                            </svg>
-                        </button>
-                        <div class="header">
-                            <!-- Pop-up message-->
-                            <span class="title-pop" style="font-weight: bold;">Thank You!</span>
-                            <p class="message-pop">We hope to have provided you a wonderful experience and will improve
-                                in the
-                                future.</p>
-                            <button class="pop-btn confirm" id="confirm">Confirm</button>
-                        </div>
-                    </div>
-                </div>
         </main>
         <div class="image">
             <img src="Malaz Design/Malaz---Brand-Pattern-2.png">
         </div>
+        <!-- Pop-up when form is valid and submitted -->
+        <!-- pop-up -->
+        
     </section>
 
-
+    <div class="pop-up-container">
+        <div class="pop-up">
+            <button class="close-btn" id="close-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                    viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                    <path
+                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                </svg>
+            </button>
+            <div class="header">
+                <!-- Pop-up message-->
+                <span class="title-pop" style="font-weight: bold;">Thank You!</span>
+                <p class="message-pop">We hope to have provided you a wonderful experience and will improve
+                    in the
+                    future.</p>
+                <button class="pop-btn confirm" id="confirm">Confirm</button>
+            </div>
+        </div>
+    </div>
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-p1">

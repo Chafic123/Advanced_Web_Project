@@ -66,11 +66,6 @@ $(document).ready(function () {
     let yesAnswer = $("#Yes");
     let yesQuest = $(".Yes-Active");
     let noAnswer = $("#No");
-    let frstname = $("#firstname");
-    let lstname = $("#lastname");
-    let contactinfo = $("#email-phone");
-    // let bdayInput = $("#bday");
-    let orderType = $(".service-type");
 
     /* Shows delivery or house accroding to selection */
 
@@ -82,6 +77,7 @@ $(document).ready(function () {
         } else {
             deliveryInfo.addClass("hidden");
         }
+        $(".image").css({"height":"210vh"})
     });
 
     // In house Clicked 
@@ -90,6 +86,7 @@ $(document).ready(function () {
             inHouseInfo.removeClass("hidden");
             deliveryInfo.addClass("hidden");
         }
+        $(".image").css({"height":"210vh"})
     });
 
     /*shows question according to choice of yes or no */
@@ -207,6 +204,9 @@ $(document).ready(function () {
         if(validation==true){
             popUp()
         }
+        else{
+            window.scrollTo(0,0);
+        }
     });
 
 
@@ -301,15 +301,6 @@ $(document).ready(function () {
         } else {
             removeError(contactinfo);
         }
-
-        // Validation checks for birthday
-        // let bdayInput = $('#bday');
-        // if (!bdayInput.val().trim()) {
-        //     setError(bdayInput, 'Date cannot be empty');
-        //     isValid = false;
-        // } else {
-        //     removeError(bdayInput);
-        // }
 
         // Validation checks for delivery/in-house options
         let orderTypeElements = $('input[name="type-of-order"]');
