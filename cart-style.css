@@ -1,6 +1,7 @@
 /* Body */
 body>h1 {
     display: none;
+    font-size: 50px;
     margin: 1%;
     margin-top: 2%;
     text-align: center;
@@ -21,25 +22,28 @@ table {
     border-collapse: collapse;
     margin: 1%;
     box-shadow: 5px 5px 15px gray;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
 }
 
 th,
 td {
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    border-bottom: 1px solid gray;
     /* background-color: white; */
     width: 200px;
     padding: 2%;
     text-align: center;
 }
 
-.middle-box,
+/* .middle-box,
 #title-heading,
 #title-price,
 #item-name {
     border-left: none;
+    font-size: 20px;
+    font-weight: bold;
     border-right: none;
-}
+} */
 
 tr .row-box:first-child,
 #title-item {
@@ -69,10 +73,12 @@ tr .row-box:last-child,
 }
 
 .checkout-btn {
+    height: 50px;
     padding: 1.5% 2%;
     margin: 1%;
     background-color: white;
     border: 1px solid black;
+    width: 148px;
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -94,7 +100,11 @@ tr .row-box:last-child,
 
 input[type=number] {
     outline: none;
-    margin-left: 5px;
+    /* margin-left: 5px; */
+    color: black;
+    width: 59px;
+    height: 28px;
+    text-align: center;
     padding-left: 3px;
 }
 
@@ -109,11 +119,13 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .remove-btn {
-    padding: 5px 12px;
-    background-color: #104d40;
+    /* padding: 5px 12px; */
+    width: 100px;
+    height: 50px;
+    background-color: #ff0000;
     color: white;
     border: none;
-    border-radius: 12px;
+    border-radius: 9px;
 }
 
 .img-col {
@@ -186,7 +198,21 @@ input[type=number]::-webkit-inner-spin-button {
 .close-btn svg:hover {
     fill: #FAD370;
 }
-
+table{
+    width:100%;
+    box-shadow:none;
+    margin-bottom: 100px;
+}
+body{
+    background:white;
+}
+tr td:nth-child(2){
+    font-size:22px;
+    position:relative;
+    top:-40px;
+    font-weight:bold;
+    text-align:left;
+}
 /*media queries*/
 @media screen and (max-width: 570px) {
     .food-img {
@@ -204,10 +230,14 @@ input[type=number]::-webkit-inner-spin-button {
     }
 
     .remove-btn {
-        padding: 3px 8px;
-        background-color: #104d40;
-        color: white;
-        border: none;
-        border-radius: 12px;
+        width:70px;
+        height:35px;
     }
+    tr td:nth-child(2){
+    font-size:12px;
+    position:relative;
+    top:-20px;
+    font-weight:bold;
+    text-align:left;
+}
 }
