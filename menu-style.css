@@ -130,11 +130,10 @@
 }
 
 .section-title {
-    padding-bottom: 24px;
+    padding-top: 65px;
     margin-top: -65px;
     margin: 1%;
     font-size: 2em;
-    border-bottom: 2px solid black;
     text-align: center;
     font-weight: 700;
     width: 100%;
@@ -159,28 +158,22 @@
 .menu-items {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 85vw;
+
 }
-body{
-    background:white;
-}
+
 .menu-item {
-    /* margin: 30px 0; */
-    /* margin-right: 45px; */
-    background-color: #ffffff;
-    border: 1px solid black;
-    width: 260px;
-    margin: 8px;
-    /* height: 380px; */
+    margin: 30px 0;
+    margin-right: 45px;
+    background-color: #BAC9A3;
+    width: 230px;
+    height: 380px;
     padding: 15px;
     position: relative;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
     border-radius: 3px;
+
 }
 
 .img-menu-item {
@@ -189,8 +182,6 @@ body{
 }
 
 .menu-item-details {
-    width: 100%;
-    height: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -199,8 +190,6 @@ body{
 .menu-item-details>div {
     display: flex;
     align-items: center;
-    width: 55%;
-    justify-content: space-between;
 }
 
 .menu-item-name {
@@ -229,10 +218,8 @@ body{
 
 input[type=number] {
     outline: none;
-    /* margin-left: 5px; */
-    font-size: 1.1rem;
-    width: 60px;
-    text-align: center;
+    margin-left: 5px;
+    font-size: 1.1rem
 }
 
 input[type=number]::-webkit-inner-spin-button {
@@ -405,11 +392,7 @@ input[type=number]::-webkit-inner-spin-button {
     .menu-nav {
         display: none;
     }
-.menu-items{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
     .menu-nav-2 {
         display: block;
         align-items: center;
@@ -421,17 +404,7 @@ input[type=number]::-webkit-inner-spin-button {
         top: 0;
         z-index: 1;
     }
-    .nav-options-nav2 {
-        text-decoration: none;
-        color: black;
-        margin-left: 5px;
-        margin-bottom: 10px;
-        padding-top: 20px;
-    }
-    .nav-options-nav2 li{
-        margin-top: 5px;
-    }
-    
+
     .menu-nav-2 ul {
         list-style: none;
         display: flex;
@@ -472,7 +445,6 @@ input[type=number]::-webkit-inner-spin-button {
         padding: 15px;
         border-radius: 100%;
         margin-bottom: 8px;
-        
     }
 }
 
@@ -493,13 +465,7 @@ input[type=number]::-webkit-inner-spin-button {
     }
 
 }
-.menu-item h4{
-    font-size:20px;
-    height:50px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-} 
+
 @media screen and (max-width: 480px) {
     .subsection-title {
         scroll-margin-top: 50px;
