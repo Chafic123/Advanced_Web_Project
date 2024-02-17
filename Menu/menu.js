@@ -102,7 +102,7 @@ function popUp() {
 //to checkout 
 checkoutBtn.addEventListener("click", function () {
     if (window.sessionStorage.getItem("SignedIn") == "true") {
-        window.open("checkout.html", "_self");
+        window.open("../Checkout/checkout.php", "_self");
     }
     else {
         popUp()
