@@ -81,7 +81,7 @@
 
                 </div>
                 <!-- Go to contact us page -->
-                <button class="go-to-contactus"> <a href="contact.html">Contact us for more information </a></button>
+                <button class="go-to-contactus"> <a href="../Contact/contact.php">Contact us for more information </a></button>
             </div>
             <!-- Byblos -->
 
@@ -99,7 +99,7 @@
                 <!-- Map -->
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13211.648146110054!2d35.6519282!3d34.123001599999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f5ca814ab769b%3A0xbe47735b265d616e!2sByblos!5e0!3m2!1sen!2slb!4v1699819145682!5m2!1sen!2slb" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 <!-- Go to contact us page -->
-                <button class="go-to-contactus"> <a href="contact.html">Contact us for more information </a></button>
+                <button class="go-to-contactus"> <a href="../Contact/contact.php">Contact us for more information </a></button>
             </div>
             <!-- Batroun -->
 
@@ -117,7 +117,7 @@
                 <!-- Map -->
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13191.798112702681!2d35.664290400000006!3d34.2498315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f58b24cc6e709%3A0xfd68c47a5405dcad!2sBatroun!5e0!3m2!1sen!2slb!4v1699819207852!5m2!1sen!2slb" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 <!-- Go to contact us page -->
-                <button class="go-to-contactus"> <a href="contact.html">Contact us for more information </a></button>
+                <button class="go-to-contactus"> <a href="../Contact/contact.php">Contact us for more information </a></button>
             </div>
         </section>
 

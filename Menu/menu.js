@@ -1,35 +1,35 @@
-/*Class for ordered items*/
-class oItem {
-    constructor(fname, quantity, price, image) {
-        this.fname = fname;
-        this.price = price;
-        this.quantity = quantity;
-        this.image = image
-    }
-    findPrice(quantity) {
-        return this.price * quantity;
-    }
-}
-// Variable declaration
-let total = 0;
-let menuitems = [];
-let ordery = JSON.parse(window.sessionStorage.getItem('order'));
-let orderedItems = new Array();
-// Checks if there is already thing in their cart
-if (ordery != null) {
-    for (let q = 0; q < ordery.length; q++) {
-        orderedItems.push(ordery[q]);
-    }
-}
-else {
-    orderedItems = []
-}
-// If the the cafrt is not empty it will show the current total price
-let totalAmount = document.getElementsByClassName("total-price")[0];
-if (JSON.parse(window.sessionStorage.getItem('totalPrice')) != null) {
-    total += JSON.parse(window.sessionStorage.getItem('totalPrice'));
-    totalAmount.textContent = "$" + JSON.parse(window.sessionStorage.getItem('totalPrice')).toFixed(2);
-}
+// /*Class for ordered items*/
+// class oItem {
+//     constructor(fname, quantity, price, image) {
+//         this.fname = fname;
+//         this.price = price;
+//         this.quantity = quantity;
+//         this.image = image
+//     }
+//     findPrice(quantity) {
+//         return this.price * quantity;
+//     }
+// }
+// // Variable declaration
+// let total = 0;
+// let menuitems = [];
+// let ordery = JSON.parse(window.sessionStorage.getItem('order'));
+// let orderedItems = new Array();
+// // Checks if there is already thing in their cart
+// if (ordery != null) {
+//     for (let q = 0; q < ordery.length; q++) {
+//         orderedItems.push(ordery[q]);
+//     }
+// }
+// else {
+//     orderedItems = []
+// }
+// // If the the cafrt is not empty it will show the current total price
+// let totalAmount = document.getElementsByClassName("total-price")[0];
+// if (JSON.parse(window.sessionStorage.getItem('totalPrice')) != null) {
+//     total += JSON.parse(window.sessionStorage.getItem('totalPrice'));
+//     totalAmount.textContent = "$" + JSON.parse(window.sessionStorage.getItem('totalPrice')).toFixed(2);
+// }
 //More Variable declaration
 let bottom = document.documentElement.scrollHeight;
 let upDown = document.getElementsByClassName("up-down-btns");
@@ -162,127 +162,136 @@ $(document).ready(function () {
     $(".bev-section-nav").mouseleave(function () {
         $(".beverages-items-list").stop().slideToggle(700);
     });
+
+    // $.ajax({
+    //     method: 'GET',
+    //     url: 'menu-repository.php',
+    //     success: (data)=>{
+
+    //     }
+    // })
 })
-//retrieving data from json
-fetch('menu.json')
-    .then(response => response.json())
-    .then(data => {
-        data.menu.forEach(item => {
-            //setting up a section
-            let sectionElement = document.createElement("div");
-            sectionElement.classList.add("menu-sections");
-            let sectionTitle = document.createElement("h2");
-            sectionTitle.classList.add("section-title");
-            sectionTitle.id = item.id;
-            sectionTitle.textContent = item.sectionName;
-            sectionElement.appendChild(sectionTitle);
-            let content = document.createElement("div");
-            content.classList.add("menu-items");
-            item.items.forEach(item => {
-                //setting up the menu items
-                if (item.subName === undefined) {
-                    //if no subsections exist for this section
-                    let innerContent = document.createElement("div");
-                    innerContent.classList.add("menu-item");
-                    innerContent.innerHTML =
-                        `
-                    <img class="img-menu-item"src="${item.img}"">
-                    <div>
-                        <h4 class="menu-item-name">${item.itemName}</h4>
-                        <p class="menu-item-description"><b>Description:</b> ${item.description}</p>
-                        <p class="menu-item-price">Price: $${item.price.toFixed(2)}</p>
-                    </div>
-                    <form class="menu-item-details">
-                        <div>
-                            <label for="quantity" class="quantity-title">Quantity:</label>
-                            <input type="number" class="menu-item-quantity" min="0" max="10" placeholder="0">
-                        </div>
-                        <button class="add-btn">+</button>
-                    </form>
-                `
-                    let newDish = new oItem(item.itemName, 0, item.price, item.img)
-                    menuitems.push(newDish);
-                    window.sessionStorage.setItem('menu', JSON.stringify(menuitems))
-                    content.appendChild(innerContent);
-                }
-                else {
-                    //if subsections exist
-                    let category = document.createElement("div");
-                    category.classList.add("menu-items-with-categories");
-                    let subtitle = document.createElement("h3");
-                    subtitle.classList.add("subsection-title");
-                    subtitle.id = item.id;
-                    subtitle.textContent = item.subName
-                    category.appendChild(subtitle)
-                    let subsection = document.createElement("div");
-                    subsection.classList.add("menu-subsection");
-                    item.subItems.forEach(subItem => {
-                        let innerContent = document.createElement("div");
-                        innerContent.classList.add("menu-item");
-                        innerContent.innerHTML =
-                            `
-                        <img class="img-menu-item"src="${subItem.img}"">
-                        <div>
-                            <h4 class="menu-item-name">${subItem.itemName}</h4>
-                            <p class="menu-item-description"><b>Description:</b> ${subItem.description}</p>
-                            <p class="menu-item-price">Price: $${subItem.price.toFixed(2)}</p>
-                        </div>
-                        <form class="menu-item-details">
-                            <div>
-                                <label for="quantity" class="quantity-title">Quantity:</label>
-                                <input type="number" class="menu-item-quantity" min="0" max="10" placeholder="0">
-                            </div>
-                            <button class="add-btn">+</button>
-                        </form>
-                        `
-                        let newDish = new oItem(subItem.itemName, 0, subItem.price, subItem.img)
-                        menuitems.push(newDish);
-                        window.sessionStorage.setItem('menu', JSON.stringify(menuitems))
-                        subsection.appendChild(innerContent)
-                    })
-                    category.appendChild(subsection)
-                    content.appendChild(category)
-                }
-            })
-            sectionElement.appendChild(content)
-            menulist.appendChild(sectionElement);
-        });
+// //retrieving data from json
+// fetch('menu.json')
+//     .then(response => response.json())
+//     .then(data => {
+//         data.menu.forEach(item => {
+//             //setting up a section
+//             let sectionElement = document.createElement("div");
+//             sectionElement.classList.add("menu-sections");
+//             let sectionTitle = document.createElement("h2");
+//             sectionTitle.classList.add("section-title");
+//             sectionTitle.id = item.id;
+//             sectionTitle.textContent = item.sectionName;
+//             sectionElement.appendChild(sectionTitle);
+//             let content = document.createElement("div");
+//             content.classList.add("menu-items");
+//             item.items.forEach(item => {
+//                 //setting up the menu items
+//                 if (item.subName === undefined) {
+//                     //if no subsections exist for this section
+//                     let innerContent = document.createElement("div");
+//                     innerContent.classList.add("menu-item");
+//                     innerContent.innerHTML =
+//                         `
+//                     <img class="img-menu-item"src="${item.img}"">
+//                     <div>
+//                         <h4 class="menu-item-name">${item.itemName}</h4>
+//                         <p class="menu-item-description"><b>Description:</b> ${item.description}</p>
+//                         <p class="menu-item-price">Price: $${item.price.toFixed(2)}</p>
+//                     </div>
+//                     <form class="menu-item-details">
+//                         <div>
+//                             <label for="quantity" class="quantity-title">Quantity:</label>
+//                             <input type="number" class="menu-item-quantity" min="0" max="10" placeholder="0">
+//                         </div>
+//                         <button class="add-btn">+</button>
+//                     </form>
+//                 `
+//                     let newDish = new oItem(item.itemName, 0, item.price, item.img)
+//                     menuitems.push(newDish);
+//                     window.sessionStorage.setItem('menu', JSON.stringify(menuitems))
+//                     content.appendChild(innerContent);
+//                 }
+//                 else {
+//                     //if subsections exist
+//                     let category = document.createElement("div");
+//                     category.classList.add("menu-items-with-categories");
+//                     let subtitle = document.createElement("h3");
+//                     subtitle.classList.add("subsection-title");
+//                     subtitle.id = item.id;
+//                     subtitle.textContent = item.subName
+//                     category.appendChild(subtitle)
+//                     let subsection = document.createElement("div");
+//                     subsection.classList.add("menu-subsection");
+//                     item.subItems.forEach(subItem => {
+//                         let innerContent = document.createElement("div");
+//                         innerContent.classList.add("menu-item");
+//                         innerContent.innerHTML =
+//                             `
+//                         <img class="img-menu-item"src="${subItem.img}"">
+//                         <div>
+//                             <h4 class="menu-item-name">${subItem.itemName}</h4>
+//                             <p class="menu-item-description"><b>Description:</b> ${subItem.description}</p>
+//                             <p class="menu-item-price">Price: $${subItem.price.toFixed(2)}</p>
+//                         </div>
+//                         <form class="menu-item-details">
+//                             <div>
+//                                 <label for="quantity" class="quantity-title">Quantity:</label>
+//                                 <input type="number" class="menu-item-quantity" min="0" max="10" placeholder="0">
+//                             </div>
+//                             <button class="add-btn">+</button>
+//                         </form>
+//                         `
+//                         let newDish = new oItem(subItem.itemName, 0, subItem.price, subItem.img)
+//                         menuitems.push(newDish);
+//                         window.sessionStorage.setItem('menu', JSON.stringify(menuitems))
+//                         subsection.appendChild(innerContent)
+//                     })
+//                     category.appendChild(subsection)
+//                     content.appendChild(category)
+//                 }
+//             })
+//             sectionElement.appendChild(content)
+//             menulist.appendChild(sectionElement);
+//         });
 
-        bottom = document.documentElement.scrollHeight;
-        for (let i = 0; i < addItems.length; i++) {
-            //to check which items were added and add to the ordered list accordingly
-            addItems[i].addEventListener("click", function () {
-                event.preventDefault();
-                if (window.sessionStorage.getItem("SignedIn") == "true") {
+//         bottom = document.documentElement.scrollHeight;
+//         for (let i = 0; i < addItems.length; i++) {
+//             //to check which items were added and add to the ordered list accordingly
+//             addItems[i].addEventListener("click", function () {
+//                 event.preventDefault();
+//                 if (window.sessionStorage.getItem("SignedIn") == "true") {
 
-                    let fName = document.getElementsByClassName("menu-item-name")[i].textContent;
-                    let qt = document.getElementsByClassName("menu-item-quantity")[i].value;
-                    let inOrder = false;
-                    if (qt > 0) {
-                        total += menuitems[i].findPrice(qt);
-                        totalAmount.textContent = "$" + total.toFixed(2);
-                        for (let j = 0; j < orderedItems.length; j++) {
-                            if (orderedItems[j].fname == fName) {
-                                inOrder = true;
-                                let newQt = parseInt(qt) + parseInt(orderedItems[j].quantity);
-                                orderedItems[j].quantity = newQt;
-                                orderedItems[j].price = menuitems[i].findPrice(newQt);
-                                break
-                            }
-                        }
-                        if (inOrder == false) {
-                            let orderedItem = new oItem(menuitems[i].fname, qt, menuitems[i].findPrice(qt), menuitems[i].image);
-                            orderedItems.push(orderedItem);
-                        }
-                        window.sessionStorage.setItem('order', JSON.stringify(orderedItems))
-                        window.sessionStorage.setItem('totalPrice', JSON.stringify(total))
-                        addItems[i].parentElement.reset()
-                    }
-                }
-                else {
-                    popUp()
-                }
-            })
-        }
-    })
-    .catch(error => console.log('Error:', error));
+//                     let fName = document.getElementsByClassName("menu-item-name")[i].textContent;
+//                     let qt = document.getElementsByClassName("menu-item-quantity")[i].value;
+//                     let inOrder = false;
+//                     if (qt > 0) {
+//                         total += menuitems[i].findPrice(qt);
+//                         totalAmount.textContent = "$" + total.toFixed(2);
+//                         for (let j = 0; j < orderedItems.length; j++) {
+//                             if (orderedItems[j].fname == fName) {
+//                                 inOrder = true;
+//                                 let newQt = parseInt(qt) + parseInt(orderedItems[j].quantity);
+//                                 orderedItems[j].quantity = newQt;
+//                                 orderedItems[j].price = menuitems[i].findPrice(newQt);
+//                                 break
+//                             }
+//                         }
+//                         if (inOrder == false) {
+//                             let orderedItem = new oItem(menuitems[i].fname, qt, menuitems[i].findPrice(qt), menuitems[i].image);
+//                             orderedItems.push(orderedItem);
+//                         }
+//                         window.sessionStorage.setItem('order', JSON.stringify(orderedItems))
+//                         window.sessionStorage.setItem('totalPrice', JSON.stringify(total))
+//                         addItems[i].parentElement.reset()
+//                     }
+//                 }
+//                 else {
+//                     popUp()
+//                 }
+//             })
+//         }
+//     })
+//     .catch(error => console.log('Error:', error));
+

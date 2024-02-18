@@ -15,6 +15,7 @@
     <link href="https://fonts.cdnfonts.com/css/tw-cen-mt-std" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
@@ -116,6 +117,10 @@
             <!-- Actual Menu -->
             <div class="menu" id="menu">
                 <!-- Menu Items Will be Displayed Here -->
+                <?php
+                    require("menu-repository.php");
+                    generateItems();
+                ?>
             </div>
         </div>
         <!-- Up and Down Buttons -->
@@ -181,6 +186,7 @@
     <script src="../main.js"></script>
     <script src="menu.js"></script>
     <script src="../sign.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -4,6 +4,6 @@ $un='root';
 $p='';
 $db='advwebproject';
 
-$conn=new mysqli($server, $un, $p, $db);
+$conn= new mysqli($server, $un, $p, $db);
 
 ?>
