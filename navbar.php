@@ -3,7 +3,7 @@ function NavBar(){
 echo"
 <!-- Navigation Bar -->
     <nav class='nav-bar nav-1' id='nav-bar'>
-        <a href='../Home/index.php' class='nav-options logo'><img src='/Malaz Design/Nav  Bar Logo - Not Bold.png' alt='Logo'
+        <a href='../Home/index.php' class='nav-options logo'><img src='../Malaz Design/Nav  Bar Logo - Not Bold.png' alt='Logo'
                 class='logo-img'></a>
         <a href='../Home/index.php' class='nav-options'>Home</a>
         <a href='../About/about.php' class='nav-options'>About Us</a>
@@ -24,7 +24,7 @@ echo"
                 <li>
                     <div class='account-info_div'>
                         <h4 id='username-text'>Username</h4>
-                        <a href='cart.php' class='cart-btn'>
+                        <a href='../Cart/cart.php' class='cart-btn'>
                             <svg class='account-icons' class='cart-icon' xmlns='http://www.w3.org/2000/svg' height='1em'
                                 viewBox='0 0 576 512'>
                                 <path
@@ -39,7 +39,7 @@ echo"
     </nav>
     <!-- Smaller screen nav -->
     <nav class='nav-2'>
-        <a href='../Home/index.php' class='nav-options logo'><img src='Malaz Design/Nav  Bar Logo - Not Bold.png' alt='Logo'
+        <a href='../Home/index.php' class='nav-options logo'><img src='../Malaz Design/Nav  Bar Logo - Not Bold.png' alt='Logo'
                 class='logo-img'></a>
         <button class='drop-nav-bar'>
             <svg id='dropdown-menu' xmlns='http://www.w3.org/2000/svg' height='2em' viewBox='0 0 448 512'><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#fafafa}</style><path d='M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z'/></svg>
@@ -60,7 +60,7 @@ echo"
                 <li>
                     <div class='account-info_div'>
                         <h4 id='username-text2'>Username</h4>
-                        <a href='cart.php' class='cart-btn'>
+                        <a href='../Cart/cart.php' class='cart-btn'>
                             <svg class='account-icons' class='cart-icon' xmlns='http://www.w3.org/2000/svg' height='1em'
                                 viewBox='0 0 576 512'>
                                 <path
