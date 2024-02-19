@@ -7,8 +7,8 @@
     <title>Malaz</title>
     <link rel="icon" href="../Malaz Design/Malaz---icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../cart-style.css">
-    <link rel="stylesheet" href="sign-style.css">
+    <link rel="stylesheet" href="cart-style.css">
+    <link rel="stylesheet" href="../sign-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
