@@ -150,27 +150,31 @@ upDown[1].addEventListener("click", goDown)
 var menulist = document.getElementById("menu");
 //drop down for main and beverages subsections
 $(document).ready(function () {
-    $(".main-section-nav").mouseenter(function () {
-        $(".main-items-list").stop().slideToggle(700);
+    let curCate = 0;
+    $("#category-selector").on('change', function () {
+        curCate = $(this).val();
+        $.post('menu-repository.php', {
+            categoryDisplay: curCate
+        }).done( function (generateItems, status, xhr) {
+            if (status === "success") {
+                $('#menu').html(generateItems);
+            } else {
+                // Error handling: display error message
+                $('#menu').html("An error occurred. Please try again later.");
+            }
+        });
+        $(window).animate({ scrollTop: 0 }, "slow"); // You can adjust the speed with "slow", "medium", or "fast"
     });
-    $(".main-section-nav").mouseleave(function () {
-        $(".main-items-list").stop().slideToggle(700);
-    });
-    $(".bev-section-nav").mouseenter(function () {
-        $(".beverages-items-list").stop().slideToggle(700);
-    });
-    $(".bev-section-nav").mouseleave(function () {
-        $(".beverages-items-list").stop().slideToggle(700);
-    });
+    $('.add-btn').click((e)=>{
+        e.preventDefault()
+    })
 
-    // $.ajax({
-    //     method: 'GET',
-    //     url: 'menu-repository.php',
-    //     success: (data)=>{
+});
 
-    //     }
-    // })
-})
+
+
+
+
 // //retrieving data from json
 // fetch('menu.json')
 //     .then(response => response.json())
