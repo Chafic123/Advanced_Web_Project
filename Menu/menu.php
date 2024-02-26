@@ -1,7 +1,6 @@
-<?php
-include('../config.php');
+<?php session_start();
+$account = isset($_SESSION['account']) ? ($_SESSION['account']) : (3);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +23,7 @@ include('../config.php');
 
 <body>
     <?php
+    include('../config.php');
     require("../navbar.php");
     NavBar();
     require("../sign-forms.php");
@@ -37,27 +37,42 @@ include('../config.php');
         <div class="menu-main">
             <!-- Menu Navigation -->
             <nav class="menu-navigation" style="background-color: #CE5B68; width: 100%; padding: 15px;">
-                <div>
+                <!-- <div>
                     <img src="../Malaz Design/Icon Top.png" alt="" width="50px" height="50px">
                     <label for="Category" style="color: white;" class='categories'>Category:</label>
                     <select name="Category" id="category-selector" class='categories'>
                         <option value="0">All</option>
-                        <option value="1">Starters</option>
-                        <option value="2">Platters</option>
-                        <option value="3">Sandwiches</option>
-                        <option value="4">Burgers</option>
-                        <option value="5">Pasta</option>
-                        <option value="6">Pizza</option>
-                        <option value="7">Salads</option>
-                        <option value="8">Kids Meals</option>
-                        <option value="9">Desserts</option>
-                        <option value="10">Hot Beverages</option>
-                        <option value="11">Cold Beverages</option>
-                    </select>
-                </div>
+                        <?php
+                        $query = "SELECT * FROM categories";
+                        $result = $conn->query($query);
 
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<option value='{$row['CategoryID']}'>{$row['Name']}</option>";
+                        }
+                        $result->close();
+                        ?>
+                    </select>
+
+                </div> -->
+                <div class='category-div'>
+                    <button class="category-btn" value="0">All</button>
+                    <?php
+                    $query = "SELECT * FROM categories";
+                    $result = $conn->query($query);
+
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<button class='category-btn' value='{$row['CategoryID']}'>{$row['Name']}</button>";
+                    }
+                    $result->close();
+                    ?>
+                </div>
                 <!-- Cart button for bigger screens -->
                 <a href="../Cart/cart.php" id="cart-btn-menu">
+                    <div id='countOfItems'>
+                        <?php
+                        require("number_of_items.php");
+                        ?>
+                    </div>
                     <svg id="cart-icon-menu" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
                         <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
                     </svg>
@@ -67,7 +82,7 @@ include('../config.php');
             <div class="menu" id="menu">
                 <!-- Menu Items Will be Displayed Here -->
                 <?php
-                require("menu-repository.php");
+                require_once("menu-repository.php");
                 generateItems(0);
                 ?>
             </div>
@@ -81,7 +96,7 @@ include('../config.php');
                 </svg>
             </a>
             <!-- Up btn -->
-            <svg class="up-down-btns" id="up-btn" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+            <svg class="up-down-btns" id="up-btn" xmlns="http://www.w3.org/2000/svg" height="2.5em" viewBox="0 0 448 512">
                 <style>
                     svg {
                         fill: #ffffff
@@ -89,8 +104,9 @@ include('../config.php');
                 </style>
                 <path d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z" />
             </svg>
+
             <!-- Down Btn -->
-            <svg class="up-down-btns" id="down-btn" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+            <svg class="up-down-btns" id="down-btn" xmlns="http://www.w3.org/2000/svg" height="2.5em" viewBox="0 0 448 512">
                 <style>
                     svg {
                         fill: #ffffff
@@ -102,9 +118,9 @@ include('../config.php');
         <!-- Checkout -->
         <div class="checkout">
             <h2 class="total-title">Total:</h2>
-            <p class="total-price">
+            <p class="total-price" id="total-price">
                 <?php
-                calcTotal()
+                require_once('add_to_cart.php');
                 ?>
             </p>
             <button class="checkout-btn">
@@ -133,6 +149,9 @@ include('../config.php');
         </div>
     </div>
     <!--Script tags-->
+    <script>
+        let account = <?php echo $account ?>;
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
