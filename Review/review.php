@@ -7,7 +7,6 @@
     <title>Malaz</title>
     <link rel="icon" href="../Malaz Design/Malaz---icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="review-style.css">
     <link rel="stylesheet" href="../sign-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +14,7 @@
     <link href="https://fonts.cdnfonts.com/css/tw-cen-mt-std" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="review-style.css">
 </head>
 
 <body>
@@ -23,9 +23,14 @@
     NavBar();
     require("../sign-forms.php");
     signForms();
+    require('review-repository.php');
+    $accInfo=findAccountInfo();
+    $fname=$accInfo[0];
+    $lname=$accInfo[1];
+    $email=$accInfo[2];
     ?>
     <!-- Body -->
-    
+
     <!-- main -->
     <!-- Page title  -->
     <section class="main-section transition-fade">
@@ -44,7 +49,7 @@
             <div class="main-container">
                 <!-- General information  -->
                 <div class="wrapper">
-                    <form name="feedback-form">
+                    <form name="feedback-form" method="post" >
                         <!-- Full Name -->
                         <section class="general-information">
                             <section class="overflow">
@@ -57,7 +62,7 @@
                                                 <label for="firstname">First Name</label>
                                                 <span class="required">*</span>
                                             </div>
-                                            <input type="text" placeholder="Your Name" class="input" id="firstname" name="firstname">
+                                            <input type="text" placeholder="Your Name" class="input" id="firstname" name="firstname" value="<?php echo $fname; ?>">
                                             <small>Error Message</small>
                                         </section>
                                         <!-- last-name -->
@@ -66,7 +71,7 @@
                                                 <label>Last Name</label>
                                                 <span class="required">*</span>
                                             </div>
-                                            <input type="text" placeholder="Your Name" class="input other" id="lastname">
+                                            <input type="text" placeholder="Your Name" class="input other" id="lastname" name="lastname" value="<?php echo $lname; ?>">
                                             <small>Error Message</small>
                                         </section>
                                     </section>
@@ -80,7 +85,7 @@
                                                 <label>Email</label>
                                                 <span class="required">*</span>
                                             </div>
-                                            <input type="text" placeholder="Email" class="input other" name="email" id="email-phone">
+                                            <input type="text" placeholder="Email" class="input other" name="email" id="email-phone" value="<?php echo $email; ?>">
                                             <small>Error Message</small>
                                         </section>
                                     </section>
@@ -93,12 +98,12 @@
                             <section class="order-type required-feedback">
                                 <section class="delivery-InHouse">
                                     <div class="service-type delivery">
-                                        <input type="radio" name="type-of-order" value="Delivery" id="DeliveryRadio" class="type-check">
+                                        <input type="radio" name="type-of-order" value="0" id="DeliveryRadio" class="type-check">
                                         <label for="DeliveryRadio" class="order-name">Delivery</label>
                                     </div>
 
                                     <div class="service-type in-house">
-                                        <input type="radio" name="type-of-order" value="In-House" id="InHouseRadio" class="type-check">
+                                        <input type="radio" name="type-of-order" value="1" id="InHouseRadio" class="type-check">
                                         <label for="InHouseRadio" class="order-name"> In House</label>
                                     </div>
                                 </section>
@@ -199,48 +204,19 @@
                                 <!-- Extra Feedback - Recommended Changes -->
                                 <section class="extra-feedback">
                                     <label>What can we do to improve your experience?</label>
-                                    <textarea rows="5" cols="40" class="text-area" id="improve" placeholder=" Enter your text here"></textarea>
+                                    <textarea rows="5" cols="40" class="text-area" id="improve" placeholder=" Enter your text here" name="del-msg"></textarea>
                                 </section>
                             </section>
 
                             <!-- In House: if Active -->
                             <section class="hidden Experience InHouse-Active">
                                 <!-- locations -->
-                                <select value="locations" id="Select">
+                                <select value="locations" id="Select" name="location">
                                     <option class="options" value="" disabled selected> Select Restaurant</option>
-                                    <option class="options" value="5">Beirut</option>
-                                    <option class="options" value="10">Tripoli</option>
-                                    <option class="options" value="15">Tyre</option>
+                                    <option class="options" value="Beirut">Beirut</option>
+                                    <option class="options" value="Tripoli">Tripoli</option>
+                                    <option class="options" value="Tyre">Tyre</option>
                                 </select>
-                                <!-- Waiter Feedback -->
-                                <section class="Waiter">
-                                    <label>What was the name of the waiter that served you?</label>
-                                    <input type="text" id="waitername" placeholder=" Waiter Name">
-                                </section>
-                                <!-- Manager Feedback: if Visted -->
-                                <section class="Manager">
-                                    <div>
-                                        <div class="answer-options">
-                                            <label>Did the manager visit your table?</label>
-                                            <!-- Yes -->
-                                            <div class="options">
-                                                <input type="radio" name="Yes/No" value="Yes" id="Yes">
-                                                <label>Yes</label>
-                                                <!-- No -->
-                                                <input type="radio" name="Yes/No" value="No" id="No">
-                                                <label>No</label>
-                                            </div>
-                                        </div>
-
-                                        <!-- If yes: What is their name -->
-                                        <div class="hidden Yes-Active" id="managername">
-                                            <label>What was the name of the manager who visited your table?</label>
-                                            <input type="text" placeholder=" Manager Name ">
-
-                                        </div>
-
-                                    </div>
-                                </section>
                                 <!-- Rating- In Houuse -->
                                 <section class="rating">
                                     <!-- Service -->
@@ -315,12 +291,12 @@
                                 <!-- Extra Feedback - Recommended Changes -->
                                 <section class="extra-feedback">
                                     <label>What can we do to improve your experience?</label>
-                                    <textarea rows="5" cols="40" class="text-area" id="improve2" placeholder=" Enter your text here"></textarea>
+                                    <textarea rows="5" cols="40" class="text-area" id="improve2" placeholder=" Enter your text here" name="in-msg"></textarea>
                                 </section>
                             </section>
                         </section>
                         <!-- Submit Button -->
-                        <button type="submit" class="show-popup" id="btn">Submit</button>
+                        <button type="submit" class="show-popup" id="btn-review" onclick="<?php addReview() ?>">Submit</button>
                         <p class="success"></p>
                     </form>
                 </div>
@@ -328,20 +304,17 @@
         <div class="image">
             <img src="../Malaz Design/Malaz---Brand-Pattern-2.png">
         </div>
-        <!-- Pop-up when form is valid and submitted -->
-        <!-- pop-up -->
-
     </section>
 
-    <div class="pop-up-container">
+    <!-- <div class="pop-up-container">
         <div class="pop-up">
             <button class="close-btn" id="close-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
                     <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
                 </svg>
             </button>
             <div class="header">
-                <!-- Pop-up message-->
+                
                 <span class="title-pop" style="font-weight: bold;">Thank You!</span>
                 <p class="message-pop">We hope to have provided you a wonderful experience and will improve
                     in the
@@ -349,12 +322,13 @@
                 <button class="pop-btn confirm" id="confirm">Confirm</button>
             </div>
         </div>
-    </div>
+    </div> -->
     <?php
     require('../footer.php');
     Footer();
     ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/swup@4"></script>
     <script src="../main.js"></script>
     <script src="review.js"></script>
     <script src="../sign.js"></script>

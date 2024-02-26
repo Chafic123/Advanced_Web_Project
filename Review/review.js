@@ -1,61 +1,3 @@
-var keys = { 37: 1, 38: 1, 39: 1, 40: 1, 33: 1, 34: 1, 35: 1, 36: 1 };
-
-function preventDefaultt(e) {
-    e.preventDefault();
-}
-function preventDefaultForScrollKeys(e) {
-    if (keys[e.keyCode]) {
-        preventDefaultt(e);
-        return false;
-    }
-}
-
-// modern Chrome requires { passive: false } when adding event
-var supportsPassive = false;
-try {
-    window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
-        get: function () { supportsPassive = true; }
-    }));
-} catch (e) { }
-
-var wheelOpt = supportsPassive ? { passive: false } : false;
-var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
-
-// call this to Disable
-function disableScroll() {
-    window.addEventListener('DOMMouseScroll', preventDefaultt, false); // older FF
-    window.addEventListener(wheelEvent, preventDefaultt, wheelOpt); // modern desktop
-    window.addEventListener('touchmove', preventDefaultt, wheelOpt); // mobile
-    window.addEventListener('keydown', preventDefaultForScrollKeys, false);
-}
-
-// call this to Enable
-function enableScroll() {
-    window.removeEventListener('DOMMouseScroll', preventDefaultt, false);
-    window.removeEventListener(wheelEvent, preventDefaultt, wheelOpt);
-    window.removeEventListener('touchmove', preventDefaultt, wheelOpt);
-    window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
-}
-let popContainer = document.getElementsByClassName("pop-up-container")[0];
-let popUpMsg = document.getElementsByClassName("pop-up")[0];
-//pop up function
-function popUp() {
-    disableScroll();
-    popContainer.style.display = "flex";
-    popContainer.style.alignItems = "center";
-    popContainer.style.justifyContent = "center";
-    popUpMsg.style.display = "flex";
-    popUpMsg.style.flexDirection = "column";
-}
-
-//closing pop up
-let closePopUp = document.getElementById("close-btn");
-closePopUp.addEventListener("click", () => {
-    enableScroll();
-    popContainer.style.display = "none";
-    popUpMsg.style.display = "none";
-});
-
 $(document).ready(function () {
     /*declaration*/
     let form = $('form[name="feedback-form"]');
@@ -63,9 +5,6 @@ $(document).ready(function () {
     let inHouseRadio = $("#InHouseRadio");
     let deliveryInfo = $(".Delivery-Active");
     let inHouseInfo = $(".InHouse-Active");
-    let yesAnswer = $("#Yes");
-    let yesQuest = $(".Yes-Active");
-    let noAnswer = $("#No");
 
     /* Shows delivery or house accroding to selection */
 
@@ -89,36 +28,10 @@ $(document).ready(function () {
         $(".image").css({"height":"210vh"})
     });
 
-    /*shows question according to choice of yes or no */
-
-    // Yes
-    yesAnswer.change(function () {
-        if (yesAnswer.prop('checked')) {
-            yesQuest.removeClass("hidden");
-        }
-    });
-
-    //  No 
-
-    noAnswer.change(function () {
-        if (noAnswer.prop('checked')) {
-            yesQuest.addClass("hidden");
-        }
-    });
-
-
     /* Reset the ratings when another radio button (order type) is checked */
 
     // Delivery Checked
     deliveryRadio.click(function () {
-        $('#waitername').val(null);
-        yesAnswer.prop('checked', false);
-        if (!yesAnswer.prop('checked')) {
-            yesQuest.addClass("hidden");
-        }
-        noAnswer.prop('checked', false);
-        $('#improve2').val(null);
-        $('#Select').prop('selectedIndex', '');
 
         // Resetting the ratings
         $('[id^="star5-deliverytime"]').prop('checked', false);
@@ -194,42 +107,20 @@ $(document).ready(function () {
     // reseting form fuction after pop-up
     function resetForm() {
         $('body').removeClass('popup-open');
-        location.reload();
     }
 
 
-    $('form').submit(function (event) {
-        event.preventDefault();
+    $('form').submit(function (e) {
+        e.preventDefault();
         let validation=validateForm();
-        if(validation==true){
-            popUp()
+        if(validation===true){
+            resetForm()
+            $(this).unbind('submit').submit()
         }
         else{
             window.scrollTo(0,0);
         }
     });
-
-
-    // dismissing pop-up
-    function dismissPopup() {
-        $('body').removeClass('popup-open');
-        $('#overlay, #popup-container').hide();
-    }
-
-    // Adding click event to dismiss elements
-    $('.dismiss').click(dismissPopup);
-
-    // Confirming submission of form
-    function confirmPopup() {
-        resetForm();
-    }
-
-    // Adding click event to confirm elements
-    $('.confirm').click(confirmPopup);
-
-
-
-    $(document).on('click', '.confirm', confirmPopup);
 
     // Function to set an error message for a form element
     function setError(element, errorMessage) {
