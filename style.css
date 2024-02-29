@@ -11,6 +11,7 @@ html {
 }
 body{
     background-color: beige;
+    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -37,6 +38,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    margin: 0;
 }
 
 h1 {
@@ -119,34 +121,32 @@ button {
 }
 
 .account-icon {
-    background-color: #F8EFE5;
+    background-color: transparent;
     border-radius: 100%;
-    border: 1px solid black;
     position: absolute;
     right: 0;
+    top: 5px;
     padding: 0.5% 0.7%;
     margin: 0.5%;
-    width: 15px;
-    height: 20px;
+    width: 35px;
+    height: 35px;
 }
 
 .account-icons {
-    fill: black;
-    font-size: 1.5rem;
+    fill: white;
 }
+
 
 .account {
     list-style: none;
     position: absolute;
-    top: 52px;
-    right: 1.5%;
+    top: 99%;
+    right: 0;
     background-color: #F8EFE5;
-    font-size: 15px;
+    font-size: 0.65em;
     font-weight: 600;
-    width: 120px;
-    height: 75px;
-    /* margin-right: 0.01%; */
-    /* height: 15vh; */
+    width: 180px;
+    height: fit-content;
     z-index: 1;
     border: 1px solid gray;
 }
@@ -197,6 +197,11 @@ button {
 .signed-out li {
     padding-right: 2%;
     margin-bottom: 7px;
+    border-bottom: 1px solid black;
+}
+
+.signed-out li a{
+    font-size: 1.2em;
 }
 
 .signed-out li:nth-child(1) {
@@ -210,12 +215,27 @@ button {
 #username-text {
     cursor: context-menu;
 }
+ul.main-ul{
+    list-style: none;
+    
+}
+ul.main-ul li{
+    margin: 10px 5px;
+}
+.signing-btns {
+    text-decoration: none;
+    color: black;
+    padding-left: 10px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    padding: 5px 0;
+}
 
 .cart-icon {
     cursor: pointer;
 }
 
-#sign-out-btn:hover {
+#sign-out-btn:hover, .signing-btns:hover {
     color: #CE5B68;
 }
 
@@ -371,12 +391,12 @@ button {
         display: none;
         list-style: none;
         position: absolute;
-        top: 82%;
-        right: 1.5%;
+        top: 98%;
+        right: -1px;
         background-color: #F8EFE5;
         font-size: 15px;
         font-weight: 600;
-        width: 150px;
+        width: 220px;
         height: fit-content;
         z-index: 1;
         margin: 0.2%;
@@ -384,21 +404,26 @@ button {
     }
 
     .nav-items:first ul li{
-        margin: 5px 0;
+        margin: 7px 0;
     }
 
     .nav-2 li {
         list-style: none;
-
+        padding: 10px;
     }
 
-    .nav-options-nav2 {
+    .nav-options-nav2, .signing-btns {
         text-decoration: none;
         color: black;
-        margin-left: 5px;
-        margin-bottom: 10px;
-        font-size: 1.1rem;
-        padding: 3px 0;
+        padding-left: 10px;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+        padding: 5px 0;
+        
+    }
+
+    #last{
+        border-bottom: 1px solid gray;
     }
 
     .nav-options-nav2:hover {
