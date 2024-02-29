@@ -15,7 +15,6 @@ $account = isset($_SESSION['account']) ? ($_SESSION['account']) : (3);
     <link href="https://fonts.cdnfonts.com/css/tw-cen-mt-std" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../sign-style.css">
     <link rel="stylesheet" href="menu-style.css">
@@ -36,24 +35,7 @@ $account = isset($_SESSION['account']) ? ($_SESSION['account']) : (3);
         </div>
         <div class="menu-main">
             <!-- Menu Navigation -->
-            <nav class="menu-navigation" style="background-color: #CE5B68; width: 100%; padding: 15px;">
-                <!-- <div>
-                    <img src="../Malaz Design/Icon Top.png" alt="" width="50px" height="50px">
-                    <label for="Category" style="color: white;" class='categories'>Category:</label>
-                    <select name="Category" id="category-selector" class='categories'>
-                        <option value="0">All</option>
-                        <?php
-                        $query = "SELECT * FROM categories";
-                        $result = $conn->query($query);
-
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<option value='{$row['CategoryID']}'>{$row['Name']}</option>";
-                        }
-                        $result->close();
-                        ?>
-                    </select>
-
-                </div> -->
+            <nav class="menu-navigation">
                 <div class='category-div'>
                     <button class="category-btn" value="0">All</button>
                     <?php
@@ -96,7 +78,7 @@ $account = isset($_SESSION['account']) ? ($_SESSION['account']) : (3);
                 </svg>
             </a>
             <!-- Up btn -->
-            <svg class="up-down-btns" id="up-btn" xmlns="http://www.w3.org/2000/svg" height="2.5em" viewBox="0 0 448 512">
+            <svg class="up-down-btns" id="up-btn" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
                 <style>
                     svg {
                         fill: #ffffff
@@ -106,7 +88,7 @@ $account = isset($_SESSION['account']) ? ($_SESSION['account']) : (3);
             </svg>
 
             <!-- Down Btn -->
-            <svg class="up-down-btns" id="down-btn" xmlns="http://www.w3.org/2000/svg" height="2.5em" viewBox="0 0 448 512">
+            <svg class="up-down-btns" id="down-btn" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
                 <style>
                     svg {
                         fill: #ffffff
@@ -153,8 +135,6 @@ $account = isset($_SESSION['account']) ? ($_SESSION['account']) : (3);
         let account = <?php echo $account ?>;
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/swup@4"></script>
     <script src="../main.js"></script>
     <script src="menu.js"></script>
