@@ -1,39 +1,101 @@
 $(document).ready(function () {
+    let popContainer = document.getElementsByClassName("pop-up-container")[0];
+    let popUpMsg = document.getElementsByClassName("pop-up")[0];
+
+    //keys to be disabled
+    // left: 37, up: 38, right: 39, down: 40,
+    // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+    var keys = { 37: 1, 38: 1, 39: 1, 40: 1, 33: 1, 34: 1, 35: 1, 36: 1 };
+
+    //prevents the default of each key
+    function preventDefaultt(e) {
+        e.preventDefault();
+    }
+    function preventDefaultForScrollKeys(e) {
+        if (keys[e.keyCode]) {
+            preventDefaultt(e);
+            return false;
+        }
+    }
+
+    // modern Chrome requires { passive: false } when adding event
+    var supportsPassive = false;
+    try {
+        window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+            get: function () { supportsPassive = true; }
+        }));
+    } catch (e) { }
+
+    var wheelOpt = supportsPassive ? { passive: false } : false;
+    var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+
+    // call this to Disable
+    function disableScroll() {
+        window.addEventListener('DOMMouseScroll', preventDefaultt, false); // older FF
+        window.addEventListener(wheelEvent, preventDefaultt, wheelOpt); // modern desktop
+        window.addEventListener('touchmove', preventDefaultt, wheelOpt); // mobile
+        window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+    }
+
+    // call this to Enable
+    function enableScroll() {
+        window.removeEventListener('DOMMouseScroll', preventDefaultt, false);
+        window.removeEventListener(wheelEvent, preventDefaultt, wheelOpt);
+        window.removeEventListener('touchmove', preventDefaultt, wheelOpt);
+        window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+    }
+
+    function popUp() {
+        disableScroll();
+        popContainer.style.display = "flex";
+        popContainer.style.alignItems = "center";
+        popContainer.style.justifyContent = "center";
+        popUpMsg.style.display = "flex";
+        popUpMsg.style.flexDirection = "column";
+    }
+    //closes the pop-up
+    $("#close-btn").click(() => {
+        enableScroll();
+        popContainer.style.display = "none";
+        popUpMsg.style.display = "none";
+        resetForm(); //resets form
+    })
     /*declaration*/
     let form = $('form[name="feedback-form"]');
     let deliveryRadio = $("#DeliveryRadio");
     let inHouseRadio = $("#InHouseRadio");
-    let deliveryInfo = $(".Delivery-Active");
-    let inHouseInfo = $(".InHouse-Active");
-
-    /* Shows delivery or house accroding to selection */
-
-    // Delivery Clicked 
-    deliveryRadio.change(function () {
-        if (deliveryRadio.prop('checked')) {
-            deliveryInfo.removeClass("hidden");
-            inHouseInfo.addClass("hidden");
-        } else {
-            deliveryInfo.addClass("hidden");
-        }
-        $(".image").css({"height":"210vh"})
-    });
-
-    // In house Clicked 
-    inHouseRadio.change(function () {
-        if (inHouseRadio.prop('checked')) {
-            inHouseInfo.removeClass("hidden");
-            deliveryInfo.addClass("hidden");
-        }
-        $(".image").css({"height":"210vh"})
-    });
+    let deliveryInfo = $(".Delivery-Active:first");
+    let inHouseInfo = $(".InHouse-Active:first");
 
     /* Reset the ratings when another radio button (order type) is checked */
+    function inHouseRatingsReset() {
+        $('[id^="star5-service"]').prop('checked', false);
+        $('[id^="star4-service"]').prop('checked', false);
+        $('[id^="star3-service"]').prop('checked', false);
+        $('[id^="star2-service"]').prop('checked', false);
+        $('[id^="star1-service"]').prop('checked', false);
 
-    // Delivery Checked
-    deliveryRadio.click(function () {
+        $('[id^="star5-foodquality2"]').prop('checked', false);
+        $('[id^="star4--foodquality2]').prop('checked', false);
+        $('[id^="star3-foodquality2"]').prop('checked', false);
+        $('[id^="star2-foodquality2"]').prop('checked', false);
+        $('[id^="star1-foodquality2"]').prop('checked', false);
 
-        // Resetting the ratings
+
+        $('[id^="star5-cleanliness2"]').prop('checked', false);
+        $('[id^="star4-cleanliness2"]').prop('checked', false);
+        $('[id^="star3-cleanliness2"]').prop('checked', false);
+        $('[id^="star2-cleanliness2"]').prop('checked', false);
+        $('[id^="star1-cleanliness2"]').prop('checked', false);
+
+        $('[id^="star5-atmosphere"]').prop('checked', false);
+        $('[id^="star4-atmosphere"]').prop('checked', false);
+        $('[id^="star3-atmosphere"]').prop('checked', false);
+        $('[id^="star2-atmosphere"]').prop('checked', false);
+        $('[id^="star1-atmosphere"]').prop('checked', false);
+    }
+
+    function delReset() {
         $('[id^="star5-deliverytime"]').prop('checked', false);
         $('[id^="star4-deliverytime"]').prop('checked', false);
         $('[id^="star3-deliverytime"]').prop('checked', false);
@@ -64,63 +126,114 @@ $(document).ready(function () {
         $('[id^="star3-customerservice"]').prop('checked', false);
         $('[id^="star2-customerservice"]').prop('checked', false);
         $('[id^="star1-customerservice"]').prop('checked', false);
-
-
+    }
+    // Delivery Checked
+    deliveryRadio.click(function () {
+        // Resetting the ratings
+        delReset();
+        inHouseRatingsReset();
+        if (deliveryRadio.prop('checked')) {
+            deliveryInfo.removeClass("hidden");
+            inHouseInfo.addClass("hidden");
+        } else {
+            deliveryInfo.addClass("hidden");
+        }
+        $(".image").css({ "height": "210vh" })
     });
 
     // In House Checked
     inHouseRadio.click(function () {
         $('#improve').val(null);
-
         // Resetting the ratings
-        $('[id^="star5-service"]').prop('checked', false);
-        $('[id^="star4-service"]').prop('checked', false);
-        $('[id^="star3-service"]').prop('checked', false);
-        $('[id^="star2-service"]').prop('checked', false);
-        $('[id^="star1-service"]').prop('checked', false);
-
-        $('[id^="star5-foodquality2"]').prop('checked', false);
-        $('[id^="star4--foodquality2]').prop('checked', false);
-        $('[id^="star3-foodquality2"]').prop('checked', false);
-        $('[id^="star2-foodquality2"]').prop('checked', false);
-        $('[id^="star1-foodquality2"]').prop('checked', false);
-
-
-        $('[id^="star5-cleanliness2"]').prop('checked', false);
-        $('[id^="star4-cleanliness2"]').prop('checked', false);
-        $('[id^="star3-cleanliness2"]').prop('checked', false);
-        $('[id^="star2-cleanliness2"]').prop('checked', false);
-        $('[id^="star1-cleanliness2"]').prop('checked', false);
-
-        $('[id^="star5-atmosphere"]').prop('checked', false);
-        $('[id^="star4-atmosphere"]').prop('checked', false);
-        $('[id^="star3-atmosphere"]').prop('checked', false);
-        $('[id^="star2-atmosphere"]').prop('checked', false);
-        $('[id^="star1-atmosphere"]').prop('checked', false);
-
-
+        inHouseRatingsReset();
+        delReset();
+        if (inHouseRadio.prop('checked')) {
+            inHouseInfo.removeClass("hidden");
+            deliveryInfo.addClass("hidden");
+        }
+        $(".image").css({ "height": "210vh" })
     });
-
 
     /* Form Validation */
 
     // reseting form fuction after pop-up
     function resetForm() {
-        $('body').removeClass('popup-open');
+        window.scrollTo(0,0);
+        // $("#main").load(location.href + " #main>*");
+        $("#main").load("review.php");
     }
-
 
     $('form').submit(function (e) {
         e.preventDefault();
-        let validation=validateForm();
-        if(validation===true){
-            resetForm()
-            $(this).unbind('submit').submit()
-        }
-        else{
-            window.scrollTo(0,0);
+
+        // Call the validation function and store the result
+        let validation = validateForm();
+
+        if (validation === true) {
+            // Get form field values
+            let fname = $("#firstname").val().toString();
+            let lname = $("#lastname").val().toString();
+            let email = $("#email-phone").val().toString();
+            let service = $("input[name='type-of-order']:checked").val();
+            // Delivery service fields
+            let delF1 = $("input[name='rate-deliverytime']:checked").val();
+            let delF2 = $("input[name='rate-foodquality']:checked").val();
+            let delF3 = $("input[name='rate-cleanliness']:checked").val();
+            let delF4 = $("input[name='rate-packaging']:checked").val();
+            let delF5 = $("input[name='rate-customerservice']:checked").val();
+            let delMsg = $("#improve").val()?.toString();
+
+            // In-house service fields
+            let loc = $("#Select").val()?.toString();
+            let inF1 = $("input[name='rate-service']:checked").val();
+            let inF2 = $("input[name='rate-foodquality2']:checked").val();
+            let inF3 = $("input[name='rate-cleanliness2']:checked").val();
+            let inF4 = $("input[name='rate-atmosphere']:checked").val();
+            let inMsg = $("#improve2").val()?.toString();
+
+            if (delMsg === null) {
+                delMsg = ""; // Assign an empty string if message is empty
+            }
+            if (inMsg === null) {
+                inMsg = ""; // Assign an empty string if message is empty
+            }
+
+            // Send data using POST request
+            $.post('review-repository.php', {
+                firstname: fname,
+                lastname: lname,
+                email: email,
+                typeOfOrder: service,
+                // Delivery service data
+                ratedeliverytime: delF1,
+                ratefoodquality: delF2,
+                ratecleanliness: delF3,
+                ratepackaging: delF4,
+                ratecustomerservice: delF5,
+                delMsg: delMsg,
+                // In-house service data
+                location: loc,
+                rateservice: inF1,
+                ratefoodquality2: inF2,
+                ratecleanliness2: inF3,
+                rateatmosphere: inF4,
+                inMsg: inMsg
+            })
+                .done(function (response, status, xhr) {
+                    // Success handler
+                    console.log(response);
+                    popUp();
+                })
+                .fail(function (xhr, status, error) {
+                    // Error handler
+                    console.error("Error:", status, error);
+                });
+        } else {
+            // Scroll to the top of the page if validation fails
+            window.scrollTo(0, 0);
         }
     });
+
 
     // Function to set an error message for a form element
     function setError(element, errorMessage) {
@@ -205,7 +318,7 @@ $(document).ready(function () {
         }
 
         return isValid
-        
+
     }
 })
 

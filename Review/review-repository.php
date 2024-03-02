@@ -1,22 +1,22 @@
 <?php
 include('../config.php');
 
-$account = isset($_SESSION['account'])?($_SESSION['account']):(3);
+$account = isset($_SESSION['id'])?($_SESSION['id']):(3);
 
 function leaveAGuestReviewDelivery($email, $serviceType)
 {
     global $conn;
     // Check if the required POST variables are set
-    if (!isset($_POST['rate-deliverytime']) || !isset($_POST['rate-foodquality']) || !isset($_POST['rate-packaging']) || !isset($_POST['rate-customerservice'])) {
+    if (!isset($_POST['ratedeliverytime']) || !isset($_POST['ratefoodquality']) || !isset($_POST['ratepackaging']) || !isset($_POST['ratecustomerservice'])) {
         return false;
     }
     // Sanitize the input data
-    $field1 = intval($_POST['rate-deliverytime']);
-    $field2 = intval($_POST['rate-foodquality']);
-    $field3 = intval($_POST['rate-cleanliness']);
-    $field4 = intval($_POST['rate-packaging']);
-    $field5 = intval($_POST['rate-customerservice']);
-    $msg = isset($_POST['del-msg']) ? ($_POST['del-msg']) : (null);
+    $field1 = intval($_POST['ratedeliverytime']);
+    $field2 = intval($_POST['ratefoodquality']);
+    $field3 = intval($_POST['ratecleanliness']);
+    $field4 = intval($_POST['ratepackaging']);
+    $field5 = intval($_POST['ratecustomerservice']);
+    $msg = isset($_POST['delMsg']) ? ($_POST['delMsg']) : (null);
     $acNum = 3;
     $curDate = date('Y-m-d');
     // Prepare the SQL query
@@ -44,17 +44,17 @@ function leaveAGuestReviewHouse($email, $serviceType)
 {
     global $conn;
     // Check if the required POST variables are set
-    if (!isset($_POST['rate-service']) || !isset($_POST['rate-foodquality2']) || !isset($_POST['rate-cleanliness2']) || !isset($_POST['rate-atmosphere']) || !isset($_POST['location'])) {
+    if (!isset($_POST['rateservice']) || !isset($_POST['ratefoodquality2']) || !isset($_POST['ratecleanliness2']) || !isset($_POST['rateatmosphere']) || !isset($_POST['location'])) {
         return false;
     }
     // Sanitize the input data
-    $field1 = intval($_POST['rate-service']);
-    $field2 = intval($_POST['rate-foodquality2']);
-    $field3 = intval($_POST['rate-cleanliness2']);
-    $field4 = intval($_POST['rate-atmosphere']);
+    $field1 = intval($_POST['rateservice']);
+    $field2 = intval($_POST['ratefoodquality2']);
+    $field3 = intval($_POST['ratecleanliness2']);
+    $field4 = intval($_POST['rateatmosphere']);
     $location = mysqli_real_escape_string($conn, $_POST['location']);
     $acNum = 3;
-    $msg = isset($_POST['in-msg']) ? ($_POST['in-msg']) : (null);
+    $msg = isset($_POST['inMsg']) ? ($_POST['inMsg']) : (null);
     $curDate = date('Y-m-d');
     // Prepare the SQL query
     $sendReview = "INSERT INTO review (ReviewDate, AccountNum, GuestEmail, ServiceType, Field1, Field2, Field3, Field4, Location, Message) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -155,16 +155,16 @@ function leaveAnAccountReviewDelivery($serviceType)
     global $conn;
     global $account;
     // Check if the required POST variables are set
-    if (!isset($_POST['rate-deliverytime']) || !isset($_POST['rate-foodquality']) || !isset($_POST['rate-packaging']) || !isset($_POST['rate-customerservice'])) {
+    if (!isset($_POST['ratedeliverytime']) || !isset($_POST['ratefoodquality']) || !isset($_POST['ratepackaging']) || !isset($_POST['ratecustomerservice'])) {
         return false;
     }
     // Sanitize the input data
-    $field1 = intval($_POST['rate-deliverytime']);
-    $field2 = intval($_POST['rate-foodquality']);
-    $field3 = intval($_POST['rate-cleanliness']);
-    $field4 = intval($_POST['rate-packaging']);
-    $field5 = intval($_POST['rate-customerservice']);
-    $msg = isset($_POST['del-msg']) ? ($_POST['del-msg']) : (null);
+    $field1 = intval($_POST['ratedeliverytime']);
+    $field2 = intval($_POST['ratefoodquality']);
+    $field3 = intval($_POST['ratecleanliness']);
+    $field4 = intval($_POST['ratepackaging']);
+    $field5 = intval($_POST['ratecustomerservice']);
+    $msg = isset($_POST['delMsg']) ? ($_POST['delMsg']) : (null);
     $curDate = date('Y-m-d');
     $email='no_one';
     // Prepare the SQL query
@@ -193,16 +193,16 @@ function leaveAnAccountReviewHouse($serviceType)
     global $conn;
     global $account;
     // Check if the required POST variables are set
-    if (!isset($_POST['rate-service']) || !isset($_POST['rate-foodquality2']) || !isset($_POST['rate-cleanliness2']) || !isset($_POST['rate-atmosphere']) || !isset($_POST['location'])) {
+    if (!isset($_POST['rateservice']) || !isset($_POST['ratefoodquality2']) || !isset($_POST['ratecleanliness2']) || !isset($_POST['rateatmosphere']) || !isset($_POST['location'])) {
         return false;
     }
     // Sanitize the input data
-    $field1 = intval($_POST['rate-service']);
-    $field2 = intval($_POST['rate-foodquality2']);
-    $field3 = intval($_POST['rate-cleanliness2']);
-    $field4 = intval($_POST['rate-atmosphere']);
+    $field1 = intval($_POST['rateservice']);
+    $field2 = intval($_POST['ratefoodquality2']);
+    $field3 = intval($_POST['ratecleanliness2']);
+    $field4 = intval($_POST['rateatmosphere']);
     $location = mysqli_real_escape_string($conn, $_POST['location']);
-    $msg = isset($_POST['in-msg']) ? ($_POST['in-msg']) : (null);
+    $msg = isset($_POST['inMsg']) ? ($_POST['inMsg']) : (null);
     $curDate = date('Y-m-d');
     $email='no_one';
     // Prepare the SQL query
@@ -229,7 +229,7 @@ function leaveAnAccountReviewHouse($serviceType)
 function addReview()
 {
     global $account;
-    if (!isset($_POST['firstname']) || !isset($_POST['email']) || !isset($_POST['lastname']) || !isset($_POST['type-of-order'])) {
+    if (!isset($_POST['firstname']) || !isset($_POST['email']) || !isset($_POST['lastname']) || !isset($_POST['typeOfOrder'])) {
         // Handle the error
         return;
     }
@@ -237,7 +237,7 @@ function addReview()
     $email = $_POST['email'];
     $fname = $_POST['firstname'];
     $lname = $_POST['lastname'];
-    $serviceType = intval($_POST['type-of-order']);
+    $serviceType = intval($_POST['typeOfOrder']);
     if ($account != 3) {
         if($serviceType===0){
             leaveAnAccountReviewDelivery($serviceType);
@@ -262,3 +262,4 @@ function addReview()
         }
     }
 }
+addReview();

@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="review-style.css">
 </head>
 
-<body>
+<body id="main">
     <?php
     require("../navbar.php");
     NavBar();
@@ -85,7 +85,7 @@
                                                 <label>Email</label>
                                                 <span class="required">*</span>
                                             </div>
-                                            <input type="text" placeholder="Email" class="input other" name="email" id="email-phone" value="<?php echo $email; ?>">
+                                            <input type="email" placeholder="Email" class="input other" name="email" id="email-phone" value="<?php echo $email; ?>">
                                             <small>Error Message</small>
                                         </section>
                                     </section>
@@ -110,7 +110,7 @@
                                 <small id="order">Error Message</small>
                             </section>
                             <!-- Delivery if Active  -->
-                            <section class="hidden Experience Delivery-Active">
+                            <section class="hidden Experience Delivery-Active" id="#del">
                                 <!-- Rating - Delivery -->
                                 <section class="rating">
                                     <!-- Delivery Time -->
@@ -209,7 +209,7 @@
                             </section>
 
                             <!-- In House: if Active -->
-                            <section class="hidden Experience InHouse-Active">
+                            <section class="hidden Experience InHouse-Active" id="#in">
                                 <!-- locations -->
                                 <select value="locations" id="Select" name="location">
                                     <option class="options" value="" disabled selected> Select Restaurant</option>
@@ -224,15 +224,15 @@
                                         <label>Service</label>
                                         <!-- star rating -->
                                         <div class="rate">
-                                            <input type="radio" id="star5-service" name="rate-service" value="5" data-category="house" />
+                                            <input type="radio" id="star5-service" name="rate-service" class='service-house' value="5" data-category="house" />
                                             <label for="star5-service"></label>
-                                            <input type="radio" id="star4-service" name="rate-service" value="4" data-category="house" />
+                                            <input type="radio" id="star4-service" name="rate-service" class='service-house' value="4" data-category="house" />
                                             <label for="star4-service"></label>
-                                            <input type="radio" id="star3-service" name="rate-service" value="3" data-category="house" />
+                                            <input type="radio" id="star3-service" name="rate-service" class='service-house' value="3" data-category="house" />
                                             <label for="star3-service"></label>
-                                            <input type="radio" id="star2-service" name="rate-service" value="2" data-category="house" />
+                                            <input type="radio" id="star2-service" name="rate-service" class='service-house' value="2" data-category="house" />
                                             <label for="star2-service"></label>
-                                            <input type="radio" id="star1-service" name="rate-service" value="1" data-category="house" />
+                                            <input type="radio" id="star1-service" name="rate-service" class='service-house' value="1" data-category="house" />
                                             <label for="star1-service"></label>
                                         </div>
                                     </div>
@@ -296,7 +296,7 @@
                             </section>
                         </section>
                         <!-- Submit Button -->
-                        <button type="submit" class="show-popup" id="btn-review" onclick="<?php addReview() ?>">Submit</button>
+                        <button type="submit" class="show-popup" id="btn-review">Submit</button>
                         <p class="success"></p>
                     </form>
                 </div>
@@ -306,23 +306,17 @@
         </div>
     </section>
 
-    <!-- <div class="pop-up-container">
+    <div class="pop-up-container">
         <div class="pop-up">
             <button class="close-btn" id="close-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                     <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
                 </svg>
             </button>
-            <div class="header">
-                
-                <span class="title-pop" style="font-weight: bold;">Thank You!</span>
-                <p class="message-pop">We hope to have provided you a wonderful experience and will improve
-                    in the
-                    future.</p>
-                <button class="pop-btn confirm" id="confirm">Confirm</button>
-            </div>
+            <h2>Submitted</h2>
+            <p>Thank you for your feedback!</p>
         </div>
-    </div> -->
+    </div>
     <?php
     require('../footer.php');
     Footer();
@@ -330,7 +324,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://unpkg.com/swup@4"></script>
     <script src="../main.js"></script>
-    <script src="review.js"></script>
+    <script src="review.js" id="#src"></script>
     <script src="../sign.js"></script>
 </body>
 
