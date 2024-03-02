@@ -1,6 +1,6 @@
 <?php
 include '../config.php';
-$account = isset($_SESSION['account']) ? ($_SESSION['account']) : (3);
+$account = isset($_SESSION['id']) ? ($_SESSION['id']) : (3);
 
 function calcNumberOfItems()
 {

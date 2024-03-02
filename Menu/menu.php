@@ -1,5 +1,5 @@
 <?php session_start();
-$account = isset($_SESSION['account']) ? ($_SESSION['account']) : (3);
+$account = isset($_SESSION['id']) ? ($_SESSION['id']) : (3);
 ?>
 <!DOCTYPE html>
 <html lang="en">

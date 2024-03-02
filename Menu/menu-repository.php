@@ -1,6 +1,6 @@
 <?php
 include('../config.php');
-$account = isset($_SESSION['account'])?($_SESSION['account']):(3);
+$account = isset($_SESSION['id'])?($_SESSION['id']):(3);
 
 function getMenuItems()
 {
@@ -41,10 +41,7 @@ function getSpecifcCategory($displayCategory)
     return $result;
 }
 
-
-
 $displayCategory = isset($_POST['categoryDisplay']) ? (int)$_POST['categoryDisplay'] : 0;
-
 
 function generateItems($displayCategory)
 {

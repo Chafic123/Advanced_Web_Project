@@ -1,6 +1,6 @@
 <?php
 include('../config.php');
-$account = isset($_SESSION['account'])?($_SESSION['account']):(3);
+$account = isset($_SESSION['id'])?($_SESSION['id']):(3);
 
 function isItemInCart($item)
 {
@@ -85,14 +85,10 @@ function calcTotal()
     echo "$" . strval(number_format($total, 2, '.', ""));
 }
 
-
-
-
 if (isset($_POST['item_id']) && isset($_POST['quantity']) && $_POST['quantity'] > 0) {
     $item = intval($_POST['item_id']);
     $quantity = intval($_POST['quantity']);
-    addToCart($item, $quantity);
-    
+    addToCart($item, $quantity); 
 }
 
 calcTotal();
