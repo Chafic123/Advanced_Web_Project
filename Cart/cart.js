@@ -70,7 +70,7 @@ closePopUp.addEventListener("click", () => {
 //dynamically creating the rows in the table of ordered items
 for (let i = 0; i < ordered.length; i++) {
     let row = document.createElement("tr");
-    row.classList.add("tableBody-row")
+    row.classList.add("tableBody-row");
     row.innerHTML = 
     `
     <td class="row-box img-col"><img class="food-img" src='${ordered[i].image}'></td>
@@ -181,3 +181,36 @@ checkoutBtn.addEventListener("click", () => {
         window.open("../Checkout/checkout.php", "_self");
     }
 })
+
+//Update the price in a pop up message
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var updateButtons = document.querySelectorAll('.update-btn');
+    
+        updateButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var itemNum = button.getAttribute('data-itemnum');
+                var quantityInput = button.parentElement.parentElement.querySelector('.quantity-input');
+                var currentQuantity = quantityInput.value;
+    
+                var confirmed = window.confirm('Do you want to update the quantity?');
+    
+                if (confirmed) {
+                    // Redirect to the update_quantity.php page with parameters
+                    window.location.href = 'update_quantity.php?itemNum=' + itemNum + '&quantity=' + currentQuantity;
+                }
+            });
+        });
+    });
+
+
+    //confirm the delete
+    $(document).ready(function () {
+        $(".delete-link").on("click", function () {
+            var itemnum = $(this).data("ItemNum");
+            var confirmDelete = confirm("Are you sure you want to delete this item?");
+            if (confirmDelete) {
+                window.location.href = "Delete.php?itemNum=" + itemnum;
+            }
+        });
+    });
