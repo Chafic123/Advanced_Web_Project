@@ -84,27 +84,13 @@ $(document).ready(function () {
     // Swup instance (assuming Swup is already loaded as a separate script)
     const swup = new Swup();
 
-
     let loginPopup = $(".l");
-    let signupPopup = $(".s")
+    let signupPopup=$(".s");
     let loginBtn = $(".login");
-    let signupBtn = $(".up");
+    let signupBtn=$(".up");
     let signinX = $(".signX");
     let backdrop = $("#backdrop");
-
-    // Show login popup and backdrop
-    loginBtn.on("click", function () {
-        signupPopup.hide();
-        loginPopup.show();
-        backdrop.show();
-    });
-
-    signupBtn.on("click", function () {
-        loginPopup.hide();
-        signupPopup.show();
-        backdrop.show();
-    });
-
+    
     /*Function to Remove Error Message*/
     function removeError(element) {
         let parentElement = element.closest('.input-field');
@@ -112,37 +98,63 @@ $(document).ready(function () {
         let alertMessage = parentElement.find('small');
         alertMessage.text('');
     }
-
+    
+    // Show login popup and backdrop
+    loginBtn.on("click",function(){
+      signupPopup.hide();
+      loginPopup.show();
+      backdrop.show();
+      $("#sign-in-user").val("");
+      $("#sign-in-pass").val("");
+      $("#rem").prop("checked", false);
+      removeError($("#sign-in-user"));
+      removeError($("#sign-in-pass"));
+    });
+  
+    signupBtn.on("click",function(){
+      loginPopup.hide();
+      signupPopup.show();
+      backdrop.show();
+      $("#frst-name-Input").val("");
+      $("#lst-name-Input").val("");
+      $("#ContactInput").val("");
+      $("#bday").val("");
+      $("#password").val("");
+      $("#confirmPassword").val("");
+      removeError($("#frst-name-Input"));
+      removeError($("#lst-name-Input"));
+      removeError($("#ContactInput"));
+      removeError($("#bday"));
+      removeError($("#password"));
+      removeError($("#confirmPassword"));
+    });
+    
     // Hide login popup and backdrop
     signinX.click(function () {
-        loginPopup.hide();
-        signupPopup.hide();
-        backdrop.hide();
-        $("#sign-in-user").val("");
-        $("#sign-in-pass").val("");
-        $("#frst-name-Input").val("");
-        $("#lst-name-Input").val("");
-        $("#ContactInput").val("");
-        $("#bday").val("");
-        $("#password").val("");
-        $("#confirmPassword").val("");
-        $("#agree").prop("checked", false);
-        $(".policy .paragraph").show();
-        removeError($("#sign-in-user"));
-        removeError($("#sign-in-pass"));
-        removeError($("#frst-name-Input"));
-        removeError($("#lst-name-Input"));
-        removeError($("#ContactInput"));
-        removeError($("#bday"));
-        removeError($("#password"));
-        removeError($("#confirmPassword"));
-        $(".policy").removeClass("error");
-        $("#policyError").text("");
+      loginPopup.hide();
+      signupPopup.hide();
+      backdrop.hide();
+      $("#sign-in-user").val("");
+      $("#sign-in-pass").val("");
+      $("#frst-name-Input").val("");
+      $("#lst-name-Input").val("");
+      $("#ContactInput").val("");
+      $("#bday").val("");
+      $("#password").val("");
+      $("#confirmPassword").val("");
+      $("#rem").prop("checked", false);
+      removeError($("#sign-in-user"));
+      removeError($("#sign-in-pass"));
+      removeError($("#frst-name-Input"));
+      removeError($("#lst-name-Input"));
+      removeError($("#ContactInput"));
+      removeError($("#bday"));
+      removeError($("#password"));
+      removeError($("#confirmPassword"));
     });
 
-    $(".togglePassword").on("click", function () {
+    $(".togglePassword").on("click",function(){
         // Toggle the eye icon class to switch between open and closed eye icons
         $(this).toggleClass('far fa-eye far fa-eye-slash');
     });
-
 });

@@ -1,4 +1,7 @@
 <?php
+
+include 'config.php';
+
 function signForms(){
     echo "
     <!-- Sign in -->
@@ -10,33 +13,28 @@ function signForms(){
             <h1 class='sign-title'>
                 Log In
             </h1>
-            <!-- Username -->
-            <label class='sign-lbl' for='email'>Email</label>
-            <div class='input-field log-in-user'>
-                <input class='sign-in-input' type='email' id='sign-in-user' placeholder='Email' name='email' required>
-                <small>Error Message</small>
-            </div>
-            <!-- Password -->
-            <label class='sign-lbl' for='password'>Password</label>
-            <div class='input-field'>
-                <input class='sign-in-input sign-in-pass' type='password' name='password' placeholder='Password' id='sign-in-pass' required>
-                <i class='far fa-eye-slash togglePassword' id='pass1'></i>
-                <small>Error Message</small>
-            </div>
-            <!-- Submit Button -->
-            <button class='sign-btn-submit' id='sign-in-btn-submit'>Log In</button>
-            <div class='cons'>
-                <!-- No Account Button -->
-                <p class='sign-text'>Don't have an account? <a href='#' class='up link sign-up-link'>Sign Up</a></p>
-                <b class='sign-text'>or</b>
-                <p class='sign-text'>continue with</p>
-                <!-- Media -->
-                <div class='media'>
-                    <a href='https://www.facebook.com/login.php/' target='_blank' class='fa fa-facebook'></a>
-
-                    <a href='https://accounts.google.com/'  target='_blank'class='fa fa-google'></a>
+            <form action='' method='post' id='loginF'>
+                <!-- Email -->
+                <label class='sign-lbl' for='email'>Email</label>
+                <div class='input-field log-in-user'>
+                    <input class='sign-in-input' type='email' id='sign-in-user' placeholder='Email' name='email'>
+                    <small></small>
                 </div>
-            </div>   
+                <!-- Password -->
+                <label class='sign-lbl' for='password'>Password</label>
+                <div class='input-field'>
+                    <input class='sign-in-input sign-in-pass' type='password' name='password' placeholder='Password' id='sign-in-pass'>
+                    <i class='far fa-eye-slash togglePassword' id='pass1'></i>
+                    <small></small>
+                </div>
+                <div class='check'>
+                    <input type='checkbox' name='rem' id='rem'>
+                    <label for='rem'>Remember Me?</label>
+                </div>
+                
+                <!-- Submit Button -->
+                <button class='sign-btn-submit' id='sign-in-btn-submit'>Log In</button>
+            </form>
         </div>
     </div>
 
@@ -49,7 +47,7 @@ function signForms(){
             <h1 class='sign-title'>
                 Sign Up
             </h1>
-            <form class='forms'>
+            <form action='signup.php' method='post' class='forms' id='signupF'>
                 <section class='form-section'>
                     <div class='form-section-names'>
                         <!-- First Name  -->
@@ -104,8 +102,7 @@ function signForms(){
                                 <input type='password' placeholder='Password' class='sign-up-input' id='password' name='password'>
                                 <i class='far fa-eye-slash fa-sm togglePassword' id='pass2'></i>
                                 <small>Error Message</small>
-                            </div>
-                            
+                            </div>  
                         </div>
                         <!-- Confirm Password -->
                         <div class='input-field confirm-password'>
@@ -118,7 +115,6 @@ function signForms(){
                                 <i class='far fa-eye-slash fa-sm togglePassword' id='pass3'></i>
                                 <small>Error Message</small>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -126,18 +122,7 @@ function signForms(){
                 <div class='input-box button'>
                     <button type='submit' id='btn' class='sign-btn-submit'>Register Now</button>
                 </div>            
-            </form>
-            <div class='cons' id='sa'>
-                <!-- Already Have an Account -->
-                <p class='sign-text'>Already have an account? <a href='#' class='login link login-link'>Login</a></p>
-                <b class='sign-text'>or</b>
-                <p class='sign-text'>continue with</p>
-                <!-- Media -->
-                <div class='media'>
-                    <a href='https://www.facebook.com/login.php/' target='_blank' class='fa fa-facebook'></a>
-                    <a href='https://accounts.google.com/'  target='_blank' class='fa fa-google'></a>
-                </div>  
-            </div>                      
+            </form>                     
         </div>
     </div>
 

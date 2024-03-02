@@ -1,19 +1,17 @@
 $(document).ready(function () {
 
     /*Declarations */
-    let users = ["dana@gmail.com", "pass"];
     let email = $("#sign-in-user");
     let passin = $("#sign-in-pass");
-    let form = $("form");
     let frstname = $("#frst-name-Input");
     let lstname = $("#lst-name-Input");
     let contact = $("#ContactInput");
     let bday = $("#bday");
     let passup = $("#password");
     let confirmPass = $("#confirmPassword");
-    let showTerms = $("#agree");
-    let Agree = $(".policy .paragraph");
-    let submitBtn = $(".input-box button");
+    let loginPopup = $(".l");
+    let signupPopup=$(".s");
+    let backdrop = $("#backdrop");
 
     /*Function to Add Error Message*/
     function setError(element, errorMessage) {
@@ -31,72 +29,43 @@ $(document).ready(function () {
         alertMessage.text('');
     }
 
-    /*Click event handler for the Sign In button*/
-    $("#sign-in-btn-submit").click(function () {
-        // Check if the entered email matches the predefined email
-        if (email.val() == users[0]) {
-            removeError(email);
-        }
-        /*Check if both email and password match the predefined credentials*/
-        if (email.val() == users[0] && passin.val() == users[1]) {
-            removeError(passin);
-            removeError(email);
-            window.sessionStorage.setItem("SignedIn", "true");
-            window.history.go(-1);
-        } else {
-            // Check if the password length is less than 8 characters and not equal to the predefined password
-            if (passin.val().trim() === '') {
-                setError(passin, 'Please enter a password');
-                isValid = false;
-            } else if (passin.val().length < 8 && passin.val() != users[1]) {
-                setError(passin, "Invalid Password");
-            }
-            // Check if the entered email does not match the predefined email
-            if (email.val().trim() === '') {
-                setError(email, 'Please enter an email');
-                isValid = false;
-            } else if (email.val() != users[0]) {
-                setError(email, "Email not found");
-            }
-        }
-    });
-
-    $("#pass1").click(function(){
-        // Get the current type of the password input field
-        let type = $("#sign-in-pass").attr('type');
-
-        // Get the current type of the password input field
-        type = (type === 'password') ? 'text' : 'password';
-        $("#sign-in-pass").attr('type', type);
-    })
-
     /* Input Vaalidation Functions */
     function validateFirstName(frstname) {
         return /^[a-zA-Z]{1,10}$/i.test(frstname);
     }
-
+    
     function validateLastName(lstname) {
         return /^[a-zA-Z]{1,10}$/i.test(lstname);
     }
-
+    
     function validateEmail(contact) {
         let isEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(contact);
-
-        return isEmail || isPhoneNumber;
+        return isEmail;
     }
 
+    function validateBday(bday) {
+        let  today = new Date();
+        let bd = new Date(bday);
+        let currYear = today.getFullYear();
+        let bdYear = bd.getFullYear();
+        if(currYear-bdYear < 12){
+            return false;
+        }
+        return true;
+    }
+    
     function validatePass(passup) {
         return passup.length > 8;
     }
-
+    
     function validateConfPass(confirmPass) {
         return confirmPass.length > 8 && confirmPass === passup.val();
     }
-
+    
     /*Validation form */
     function validateForm() {
         let isValid = true;
-
+    
         if (frstname.val().trim() === '') {
             setError(frstname, 'Name cannot be empty');
             isValid = false;
@@ -106,7 +75,7 @@ $(document).ready(function () {
         } else {
             removeError(frstname);
         }
-
+    
         if (lstname.val().trim() === '') {
             setError(lstname, 'Name cannot be empty');
             isValid = false;
@@ -116,7 +85,7 @@ $(document).ready(function () {
         } else {
             removeError(lstname);
         }
-
+    
         if (contact.val().trim() === '') {
             setError(contact, 'Please enter an email');
             isValid = false;
@@ -126,14 +95,17 @@ $(document).ready(function () {
         } else {
             removeError(contact);
         }
-
+    
         if (!bday.val()) {
             setError(bday, 'Date cannot be empty');
+            isValid = false;
+        } else if(!validateBday(bday.val())){
+            setError(bday, 'Age restriction');
             isValid = false;
         } else {
             removeError(bday);
         }
-
+    
         if (passup.val().trim() === '') {
             setError(passup, 'Please enter a password');
             isValid = false;
@@ -143,7 +115,7 @@ $(document).ready(function () {
         } else {
             removeError(passup);
         }
-
+    
         if (confirmPass.val().trim() === '') {
             setError(confirmPass, 'Please confirm password');
             isValid = false;
@@ -155,17 +127,115 @@ $(document).ready(function () {
         }
 
         return isValid;
-    }
+    }    
 
-    /* Submit Form */
-    submitBtn.click(function (event) {
-        event.preventDefault();
+    /*Submit Sign In Form*/
+    $("#loginF").submit(function(e){
+        e.preventDefault();
+
+        // Check if the entered email is empty
+        if ((email.val().trim() === '' ||  email.val().trim() === '' && passin.val().trim() != '') && !validateEmail(email)) {
+            setError(email, 'Please enter a valid email');
+        }
+        else{
+            removeError(email);
+        }
+
+        // Check if the password empty
+        if ((passin.val().trim() === '' || passin.val().trim() === '' && email.val().trim() != '') && !validatePass(passin)) {
+            setError(passin, 'Please enter a password');
+        }
+        else{
+            removeError(passin);
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "../process_login.php",
+            method: 'POST',
+            dataType: "json",
+            data: $('#loginF').serialize(),
+            success: function(response){
+                if(response.success && response.message === "Login successful"){
+                    removeError(passin);
+                    removeError(email);
+                    email.val("");
+                    passin.val("");
+                    $("#rem").prop("checked", false);
+                    window.sessionStorage.setItem('SignedIn', 'true');
+                    
+                    window.location.reload();
+                    loginPopup.hide();
+                    backdrop.hide();
+                } else if (response.success && response.message === "is admin") {
+                    removeError(passin);
+                    removeError(email);
+                    $("#sign-in-user").val("");
+                    $("#sign-in-pass").val("");
+                    $("#rem").prop("checked", false);
+                    window.location.href = "../CMS/cms.php";
+                    loginPopup.hide();
+                    backdrop.hide();
+                }else{
+                    setError(passin, "Invalid email or password.");
+                }
+            },
+            error: function(error) {
+                // Log an error message if there's an issue fetching data
+                console.error('Error fetching data:', error);
+            }
+        });
+    });
+
+    /* Submit Sign Up Form */
+    $("#signupF").submit(function (e) {
+        e.preventDefault();
+
         let valid = validateForm();
         if (valid) {
-            window.sessionStorage.setItem("SignedIn", "true");
-            window.history.go(-1);
+            $.ajax({
+                type: "POST",
+                url: "../process_signup.php",
+                method: 'POST',
+                dataType: "json",
+                data: $('#signupF').serialize(),
+                success: function(response){
+                    if(response.success && response.message === "Login successful"){
+                        frstname.val("");
+                        lstname.val("");
+                        contact.val("");
+                        bday.val("");
+                        passup.val("");
+                        confirmPassUp.val("");
+                        window.sessionStorage.setItem('SignedIn', 'true');
+                        window.location.reload();
+                        signupPopup.hide();
+                        backdrop.hide();
+                    }else if (!response.success && response.message === "email error"){
+                        setError(contact,"Email already exists");
+                    }else{
+                        console.error(response.message);
+                    }
+                },
+                error: function(error) {
+                    // Log an error message if there's an issue fetching data
+                    console.error('Error fetching data:', error);
+                }
+            });
         }
+
+        
     });
+
+
+    $("#pass1").click(function(){
+        // Get the current type of the password input field
+        let type = $("#sign-in-pass").attr('type');
+
+        // Get the current type of the password input field
+        type = (type === 'password') ? 'text' : 'password';
+        $("#sign-in-pass").attr('type', type);
+    })
 
     $("#pass2").click(function(){
         // Get the current type of the password input field
@@ -184,4 +254,4 @@ $(document).ready(function () {
         type = (type === 'password') ? 'text' : 'password';
         $("#confirmPassword").attr('type', type);
     })
-});
+})

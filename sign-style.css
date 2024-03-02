@@ -29,7 +29,12 @@
     height: 610px;
 }
 
-form .form-section {
+#loginF{
+    display: flex;
+    flex-direction: column;
+}
+
+.forms .form-section {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -59,7 +64,11 @@ form .form-section {
 .sign-lbl {
     margin: 1%;
     font-size: 1.1rem;
-    margin-top: 10%;
+    margin-top: 7%;
+}
+
+.required{
+    color: red;
 }
 
 /* Input Fileds*/
@@ -102,6 +111,43 @@ form .form-section {
     margin: 15px  140px;
     cursor: pointer;
     color: black;
+}
+
+/*Checkbox*/
+.check {
+    display: flex;
+    align-items: center;
+    margin-left:10px;
+}
+
+#rem{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    margin-right:10px;
+}
+
+#rem:checked::before {
+    content: '✓';
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#rem:checked {
+    background-color: #c94353;
+    border-color: #c94353;
 }
 
 /* Submit Button */
@@ -194,17 +240,13 @@ form .form-section {
 /*Error*/
 .input-field small{
     display: flex;
+    color: red;
     margin: 5px 0;
     margin-left: 1.5%;
     height: 10px;
-    color: #ee0d0d;
     font-size: 14px;
     width: 168px;
     visibility: hidden;
-}
-
-.error small {
-    color: red;
 }
 
 .error small {

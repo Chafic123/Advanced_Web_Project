@@ -1,6 +1,30 @@
 <?php
-function NavBar(){
-echo"
+include "config.php";
+
+function getFirstName()
+{
+    global $conn;
+    if (isset($_SESSION['id'])) {
+        $account = $_SESSION['id'];
+        $query = "SELECT FirstName from account where AccountNum =?";
+        $stmt = $conn->prepare($query);
+        if (!$stmt) {
+            return;
+        }
+        $stmt->bind_param("i", $account);
+        $stmt->execute();
+        $stmt->bind_result($name);
+        $stmt->fetch();
+        $stmt->close();
+        echo $name;
+    }
+    echo "";
+}
+
+function NavBar()
+{
+    $account = isset($_SESSION['id'])?($_SESSION['id']):(3);
+    echo "
 <!-- Navigation Bar -->
     <nav class='nav-bar nav-1' id='nav-bar'>
         <a href='../Home/index.php' class='nav-options logo'><img src='../Malaz Design/Nav  Bar Logo - Not Bold.png' alt='Logo'
@@ -15,16 +39,17 @@ echo"
         </svg>
         <div class='account' id='account'>
             <ul class='main-ul'>";
-            if(!isset($_SESSION['account'])){
-                echo "
+    if ($account===3) {
+        echo "
                 <li><a href='#' class='login signing-btns'>Log In</a></li>
                 <li><a href='#' class='up signing-btns'>Sign Up</a></li>
                 ";
-            }
-            else{
-                echo "<li>
+    } else {
+        echo "<li>
                 <div class='account-info_div'>
-                    <h4 id='username-text'>Username</h4>
+                    <h4 id='username-text'>";
+        getFirstName();
+        echo "</h4>
                     <a href='../Cart/cart.php' class='cart-btn'>
                         <svg class='account-icons' class='cart-icon' xmlns='http://www.w3.org/2000/svg' height='1em'
                             viewBox='0 0 576 512'>
@@ -34,9 +59,9 @@ echo"
                     </a>
                 </div>
             </li>
-            <li><button id='sign-out-btn'>Sign Out</button></li>";
-            }
-            echo "
+            <li><button id='sign-out-btn' class='sign-out'>Sign Out</button></li>";
+    }
+    echo "
             </ul>
         </div>
     </nav>
@@ -54,16 +79,17 @@ echo"
                 <li class='nav-2-li'><a href='../Menu/menu.php' class='nav-options-nav2'>Menu</a></li>
                 <li class='nav-2-li'><a href='../Contact/contact.php' class='nav-options-nav2'>Contact Us</a></li>
                 <li id='last'><a href='../Review/review.php' class='nav-options-nav2'>Leave a review</a></li>";
-                if(!isset($_SESSION['account'])){
-                    echo "
+    if ($account===3) {
+        echo "
                     <li><a href='#' class='login signing-btns'>Log In</a></li>
                     <li><a href='#' class='up signing-btns'>Sign Up</a></li>
                     ";
-                }
-                else{
-                    echo "<li>
+    } else {
+        echo "<li>
                     <div class='account-info_div'>
-                        <h4 id='username-text2'>Username</h4>
+                        <h4 id='username-text2'>";
+        getFirstName();
+        echo "</h4>
                         <a href='../Cart/cart.php' class='cart-btn'>
                             <svg class='account-icons' class='cart-icon' xmlns='http://www.w3.org/2000/svg' height='1em'
                                 viewBox='0 0 576 512'>
@@ -73,14 +99,12 @@ echo"
                         </a>
                     </div>
                 </li>
-                <li><button id='sign-out-btn2'>Sign Out</button></li>";
-                }
-                
-                echo"
+                <li><button id='sign-out-btn2' class='sign-out'>Sign Out</button></li>";
+    }
+    echo "
             </ul>
             
         </div>
     </nav>
 ";
 }
-?>
