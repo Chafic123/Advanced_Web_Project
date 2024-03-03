@@ -67,6 +67,7 @@ function popUp() {
     popUpMsg.style.display = "flex";
     popUpMsg.style.flexDirection = "column";
 }
+
 //to checkout 
 checkoutBtn.addEventListener("click", function () {
     if (window.sessionStorage.getItem("SignedIn") == "true") {
@@ -116,7 +117,14 @@ closePopUp.addEventListener("click", () => {
     enableScroll();
     popContainer.style.display = "none";
     popUpMsg.style.display = "none";
-})
+});
+
+loginBtn.addEventListener("click", function(){
+    enableScroll();
+    popContainer.style.display = "none";
+    popUpMsg.style.display = "none";
+});
+
 upDown[0].addEventListener("click", goUp)
 upDown[1].addEventListener("click", goDown)
 

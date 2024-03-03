@@ -158,15 +158,13 @@ $(document).ready(function () {
         $(this).toggleClass('far fa-eye far fa-eye-slash');
     });
 
-    $(".sign-out").click(function (e) {
-        e.preventDefault()
+    $(".sign-out").click(function () {
         window.sessionStorage.setItem("SignedIn", "false");
         $.ajax({
             url: '../signout.php',
             method: 'POST',
             success: function (data) {
-                
-                window.reload();
+                window.reload(true);
             },
             error: function(error){
                 console.log(error)

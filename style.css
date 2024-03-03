@@ -234,7 +234,6 @@ ul.main-ul li{
 
 .cart-icon {
     cursor: pointer;
-    font-size: 2em;
     fill: black;
 }
 
@@ -341,6 +340,10 @@ ul.main-ul li{
 
 .social-media-icons:hover {
     fill: #fad370;
+}
+.cart-icon {
+    cursor: pointer;
+    fill: black;
 }
 
 
