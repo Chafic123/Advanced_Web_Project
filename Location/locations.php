@@ -1,3 +1,6 @@
+<?php 
+
+session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,15 +44,15 @@
                 <div class="list">
                     <div class="item">
                         <!-- Picture 1 -->
-                        <img src="../pexels-gül-ik-4009464.jpg">
+                        <img src="pexels-gül-ik-4009464.jpg">
                     </div>
                     <div class="item">
                         <!-- Picture 2 -->
-                        <img src="../christelle-hayek-VwxEMRuem0w-unsplash.jpg">
+                        <img src="christelle-hayek-VwxEMRuem0w-unsplash.jpg">
                     </div>
                     <div class="item">
                         <!-- Picture 3 -->
-                        <img src="../alex-harmuth-bOICdD-Gulk-unsplash.jpg">
+                        <img src="alex-harmuth-bOICdD-Gulk-unsplash.jpg">
                     </div>
                 </div>
                 <!-- Dots-->
