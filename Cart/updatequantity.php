@@ -1,8 +1,8 @@
 <?php
 include('../config.php');
-if (isset($_GET['itemNum']) && isset($_GET['quantity'])) {
-    $itemNum = $_GET['itemNum'];
-    $newQuantity = $_GET['quantity'];
+if (isset($POST['itemNum']) && isset($POST['quantity'])) {
+    $itemNum = $POST['itemNum'];
+    $newQuantity = $POST['quantity'];
 
     $updateQuery = "UPDATE cart SET Quantity = $newQuantity WHERE ItemNum = $itemNum AND AccountNum = $account";
     $updateResult = mysqli_query($conn, $updateQuery);
