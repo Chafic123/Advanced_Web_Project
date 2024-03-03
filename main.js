@@ -2,11 +2,11 @@ $(document).ready(function () {
 
     // Open account dropdown
     function displayAccountInfo() {
-        $("#account").css({position: 'absolute', right: '-220px'});
+        $("#account").css({ position: 'absolute', right: '-220px' });
         $("#account").animate({
             right: '0'
-        }, "slow", function(){
-            $("body").css({overflowX: 'hidden'})
+        }, "slow", function () {
+            $("body").css({ overflowX: 'hidden' })
         })
         $("#account").css({ display: "flex", flexDirection: "column" });
         $("#nav-bar").width("100%");
@@ -15,13 +15,13 @@ $(document).ready(function () {
     // Close account dropdown
     function closeAccountInfo() {
         $("#account").animate({
-          right: "-220px" // Move element 120px to the right
-        }, "slow", function() {
-            $("body").css({overflowX: 'hidden'});
-          // Callback function after animation completes
-          $("#account").hide();
+            right: "-220px" // Move element 120px to the right
+        }, "slow", function () {
+            $("body").css({ overflowX: 'hidden' });
+            // Callback function after animation completes
+            $("#account").hide();
         });
-      }      
+    }
 
     // Account dropdown for big screens
     $("#account-icon").click(function () {
@@ -38,28 +38,28 @@ $(document).ready(function () {
     let pressedDrop = false;
     $(".drop-nav-bar").click(function () {
         if (!pressedDrop) {
-            $(".nav-items").css({position: 'absolute', right: '-220px'});
+            $(".nav-items").css({ position: 'absolute', right: '-220px' });
             $(".nav-items").animate({
                 right: '0'
-            }, "slow", function(){
-                $("body").css({overflowX: 'hidden'})
+            }, "slow", function () {
+                $("body").css({ overflowX: 'hidden' })
             })
             $(".nav-items").css({ display: "flex", flexDirection: "column" });
             $(".nav-items").show();
             if (window.sessionStorage.getItem("SignedIn") === "true") {
                 $(".signed-out:last").hide();
                 $(".account-info:last").css({ display: "flex", flexDirection: "column" });
-                $("#username-text2").text(user[0]);
             }
             pressedDrop = true;
         } else {
+            $(".nav-items").css({ position: 'absolute', right: '0' });
             $(".nav-items").animate({
                 right: "-220px" // Move element 220px to the right
-              }, "slow", function() {
-                  $("body").css({overflowX: 'hidden'});
+            }, "slow", function () {
+                $("body").css({ overflowX: 'hidden' });
                 // Callback function after animation completes
                 $(".nav-items").hide();
-              });
+            });
             pressedDrop = false;
         }
     });
@@ -85,12 +85,12 @@ $(document).ready(function () {
     const swup = new Swup();
 
     let loginPopup = $(".l");
-    let signupPopup=$(".s");
+    let signupPopup = $(".s");
     let loginBtn = $(".login");
-    let signupBtn=$(".up");
+    let signupBtn = $(".up");
     let signinX = $(".signX");
     let backdrop = $("#backdrop");
-    
+
     /*Function to Remove Error Message*/
     function removeError(element) {
         let parentElement = element.closest('.input-field');
@@ -98,63 +98,80 @@ $(document).ready(function () {
         let alertMessage = parentElement.find('small');
         alertMessage.text('');
     }
-    
+
     // Show login popup and backdrop
-    loginBtn.on("click",function(){
-      signupPopup.hide();
-      loginPopup.show();
-      backdrop.show();
-      $("#sign-in-user").val("");
-      $("#sign-in-pass").val("");
-      $("#rem").prop("checked", false);
-      removeError($("#sign-in-user"));
-      removeError($("#sign-in-pass"));
-    });
-  
-    signupBtn.on("click",function(){
-      loginPopup.hide();
-      signupPopup.show();
-      backdrop.show();
-      $("#frst-name-Input").val("");
-      $("#lst-name-Input").val("");
-      $("#ContactInput").val("");
-      $("#bday").val("");
-      $("#password").val("");
-      $("#confirmPassword").val("");
-      removeError($("#frst-name-Input"));
-      removeError($("#lst-name-Input"));
-      removeError($("#ContactInput"));
-      removeError($("#bday"));
-      removeError($("#password"));
-      removeError($("#confirmPassword"));
-    });
-    
-    // Hide login popup and backdrop
-    signinX.click(function () {
-      loginPopup.hide();
-      signupPopup.hide();
-      backdrop.hide();
-      $("#sign-in-user").val("");
-      $("#sign-in-pass").val("");
-      $("#frst-name-Input").val("");
-      $("#lst-name-Input").val("");
-      $("#ContactInput").val("");
-      $("#bday").val("");
-      $("#password").val("");
-      $("#confirmPassword").val("");
-      $("#rem").prop("checked", false);
-      removeError($("#sign-in-user"));
-      removeError($("#sign-in-pass"));
-      removeError($("#frst-name-Input"));
-      removeError($("#lst-name-Input"));
-      removeError($("#ContactInput"));
-      removeError($("#bday"));
-      removeError($("#password"));
-      removeError($("#confirmPassword"));
+    loginBtn.on("click", function () {
+        signupPopup.hide();
+        loginPopup.show();
+        backdrop.show();
+        $("#sign-in-user").val("");
+        $("#sign-in-pass").val("");
+        $("#rem").prop("checked", false);
+        removeError($("#sign-in-user"));
+        removeError($("#sign-in-pass"));
     });
 
-    $(".togglePassword").on("click",function(){
+    signupBtn.on("click", function () {
+        loginPopup.hide();
+        signupPopup.show();
+        backdrop.show();
+        $("#frst-name-Input").val("");
+        $("#lst-name-Input").val("");
+        $("#ContactInput").val("");
+        $("#bday").val("");
+        $("#password").val("");
+        $("#confirmPassword").val("");
+        removeError($("#frst-name-Input"));
+        removeError($("#lst-name-Input"));
+        removeError($("#ContactInput"));
+        removeError($("#bday"));
+        removeError($("#password"));
+        removeError($("#confirmPassword"));
+    });
+
+    // Hide login popup and backdrop
+    signinX.click(function () {
+        loginPopup.hide();
+        signupPopup.hide();
+        backdrop.hide();
+        $("#sign-in-user").val("");
+        $("#sign-in-pass").val("");
+        $("#frst-name-Input").val("");
+        $("#lst-name-Input").val("");
+        $("#ContactInput").val("");
+        $("#bday").val("");
+        $("#password").val("");
+        $("#confirmPassword").val("");
+        $("#rem").prop("checked", false);
+        removeError($("#sign-in-user"));
+        removeError($("#sign-in-pass"));
+        removeError($("#frst-name-Input"));
+        removeError($("#lst-name-Input"));
+        removeError($("#ContactInput"));
+        removeError($("#bday"));
+        removeError($("#password"));
+        removeError($("#confirmPassword"));
+    });
+
+    $(".togglePassword").on("click", function () {
         // Toggle the eye icon class to switch between open and closed eye icons
         $(this).toggleClass('far fa-eye far fa-eye-slash');
     });
+
+    $(".sign-out").click(function (e) {
+        e.preventDefault()
+        window.sessionStorage.setItem("SignedIn", "false");
+        $.ajax({
+            url: '../signout.php',
+            method: 'POST',
+            success: function (data) {
+                
+                window.reload();
+            },
+            error: function(error){
+                console.log(error)
+            }
+        })
+    });
+
 });

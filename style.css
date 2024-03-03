@@ -177,7 +177,7 @@ button {
 .account-info_div {
     display: flex;
     justify-content: space-between;
-    width: 110px;
+    /* width: 110px; */
     align-items: center;
     border-bottom: 1px solid black;
     padding-bottom: 8px;
@@ -212,8 +212,9 @@ button {
     color: #CE5B68;
 }
 
-#username-text {
+#username-text, #username-text2 {
     cursor: context-menu;
+    font-size: 15px;
 }
 ul.main-ul{
     list-style: none;
@@ -233,9 +234,11 @@ ul.main-ul li{
 
 .cart-icon {
     cursor: pointer;
+    font-size: 2em;
+    fill: black;
 }
 
-#sign-out-btn:hover, .signing-btns:hover {
+#sign-out-btn:hover, #sign-out-btn2:hover, .signing-btns:hover {
     color: #CE5B68;
 }
 
@@ -250,6 +253,8 @@ ul.main-ul li{
     font-weight: 600;
     padding: 2px;
     margin: 5px;
+    text-align: center;
+    font-size: 15px;
 }
 
 #backdrop {
@@ -272,7 +277,9 @@ ul.main-ul li{
     margin-right: 20px;
   }
   
-
+  .cart-btn:hover svg {
+    fill: #CE5B68;
+}
 /*Footer*/
 .footer {
     background-color: #104d40;
@@ -434,9 +441,9 @@ ul.main-ul li{
         border-top: 1px solid black;
     }
 
-    .account-info_div {
+    /* .account-info_div {
         width: 135px;
-    }
+    } */
     .nav-2 .logo{
         width: 200px;
         max-height: 90px;
