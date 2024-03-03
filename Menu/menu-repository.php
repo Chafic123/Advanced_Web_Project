@@ -1,5 +1,8 @@
 <?php
 include('../config.php');
+if(session_status()!=2){
+    session_start();
+}
 $account = isset($_SESSION['id'])?($_SESSION['id']):(3);
 
 function getMenuItems()

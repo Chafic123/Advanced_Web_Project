@@ -215,9 +215,8 @@
     margin-bottom: var(--bs-card-title-spacer-y);
     color: var(--bs-card-title-color);
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
 }
-
 
 .menu-item-price {
     font-weight: bold;

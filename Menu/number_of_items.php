@@ -1,5 +1,8 @@
 <?php
 include '../config.php';
+if(session_status()!=2){
+    session_start();
+}
 $account = isset($_SESSION['id']) ? ($_SESSION['id']) : (3);
 
 function calcNumberOfItems()
@@ -15,11 +18,16 @@ function calcNumberOfItems()
         }
         $result = $stmt->get_result();
         $stmt->close();
-        echo $result->fetch_assoc()['SUM(Quantity)'];
+        $qt=$result->fetch_assoc()['SUM(Quantity)'];
+        if($qt>0){
+            echo $qt;
+        }
+        else{
+            echo strval(0);
+        }
     }
     else{
         echo strval(0);
     }
-    
 }
 calcNumberOfItems();

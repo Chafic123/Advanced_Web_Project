@@ -1,6 +1,4 @@
-<?php session_start();
-$account = isset($_SESSION['id']) ? ($_SESSION['id']) : (3);
-?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +25,7 @@ $account = isset($_SESSION['id']) ? ($_SESSION['id']) : (3);
     NavBar();
     require("../sign-forms.php");
     signForms();
+    $account = isset($_SESSION['id']) ? ($_SESSION['id']) : (3);
     ?>
     <!-- Body -->
     <main class="menu-body transition-fade">

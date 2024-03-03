@@ -1,5 +1,9 @@
 <?php
 include('../config.php');
+if(session_status()!=2){
+    session_start();
+}
+
 $account = isset($_SESSION['id'])?($_SESSION['id']):(3);
 
 function isItemInCart($item)
@@ -22,7 +26,7 @@ function addToCart($item, $quantity)
 {
     global $account;
     global $conn;
-    if ($account != null || $account!=3) {
+    if ($account!=3) {
         if (isItemInCart($item)) {
             $getCurQuantity = "SELECT Quantity FROM cart WHERE cart.AccountNum =? AND cart.ItemNum=?";
             $stmt1 = $conn->prepare($getCurQuantity);

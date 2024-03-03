@@ -89,9 +89,13 @@ window.addEventListener("scroll", function () {
     else if (bottom < 30000 && bottom >= 20000) {
         y = 0.06
     }
+    else if(bottom<3000){
+        y=0.65;
+    }
     else {
         y = 0.05
     }
+    
     let sHeight = document.documentElement.scrollTop;
     if (sHeight == 0) {
         upDown[0].style.display = "none";
@@ -116,25 +120,21 @@ closePopUp.addEventListener("click", () => {
 upDown[0].addEventListener("click", goUp)
 upDown[1].addEventListener("click", goDown)
 
-//drop down for main and beverages subsections
 $(document).ready(function () {
     let curCate = 0;
-
     $(".category-btn").on('click', function () {
         window.scrollTo(0, 0);
         curCate = $(this).val();
-        console.log($(this).val());
         $.post('menu-repository.php', {
             categoryDisplay: curCate
         }).done(function (generateItems, status, xhr) {
             if (status === "success") {
-                bottom = document.documentElement.scrollHeight;
                 $('#menu').html(generateItems);
-                $('form').submit(function (e) {
+                $('form.card').submit(function (e) {
                     e.preventDefault();
                     if (account !== 3) {
-                        let id = $(this).find("input[name='item_id']").val();
-                        let qt = $(this).find("input[name='quantity']").val();
+                        let id = parseInt($(this).find("input[name='item_id']").val());
+                        let qt = parseInt($(this).find("input[name='quantity']").val());
                         $.post('add_to_cart.php', {
                             item_id: id,
                             quantity: qt
@@ -167,7 +167,7 @@ $(document).ready(function () {
 
     });
 
-    $('form').submit(function (e) {
+    $('form.card').submit(function (e) {
         e.preventDefault();
         if (account !== 3) {
             let id = $(this).find("input[name='item_id']").val();
