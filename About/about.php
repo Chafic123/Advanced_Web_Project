@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,7 +112,7 @@
                 </div>
             </div>
             <br>
-            <a href="menu.html"><button id="visit-menu-btn">Visit Our Menu</button></a>
+            <a href="../Menu/menu.php"><button id="visit-menu-btn">Visit Our Menu</button></a>
         </div>
 
         <!-- Quality Assurance container -->
