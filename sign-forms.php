@@ -2,7 +2,8 @@
 
 include 'config.php';
 
-function signForms(){
+function signForms()
+{
     echo "
     <!-- Sign in -->
     <div class='l sign-body transition-fade' style='display: none;'>
@@ -35,6 +36,7 @@ function signForms(){
                 <!-- Submit Button -->
                 <button class='sign-btn-submit' id='sign-in-btn-submit'>Log In</button>
             </form>
+            <p class='sign-text' style='margin-top: 5px;'>Don't have an account? <a href='#' class='up link sign-up-link'>Sign Up</a></p>
         </div>
     </div>
 
@@ -122,7 +124,8 @@ function signForms(){
                 <div class='input-box button'>
                     <button type='submit' id='btn' class='sign-btn-submit'>Register Now</button>
                 </div>            
-            </form>                     
+            </form>
+            <p class='sign-text'>Already have an account? <a href='#' class='login link login-link'>Login</a></p>                
         </div>
     </div>
 
@@ -130,4 +133,3 @@ function signForms(){
     <div id='backdrop' style='display: none'></div>
     ";
 }
-?>
