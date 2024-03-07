@@ -204,7 +204,7 @@ $(document).ready(function () {
                         contact.val("");
                         bday.val("");
                         passup.val("");
-                        confirmPassUp.val("");
+                        confirmPass.val("");
                         window.sessionStorage.setItem('SignedIn', 'true');
                         location.reload(true);
                         signupPopup.hide();

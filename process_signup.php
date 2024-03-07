@@ -30,12 +30,12 @@ if (isset($email) && isset($bd) && isset($fn) && isset($ln) && isset($pass)){
     else{
         $query = $conn->prepare("INSERT INTO account (Email, Birthday, FirstName, LastName, Password, IsAdmin) VALUES (?, ?, ?, ?, ?, 0)");
         $query->bind_param("sssss", $email, $bd, $fn, $ln, $pass);
-        $query->execute();
-        $res = $query->get_result();
+        
+        // $res = $query->get_result();
     
-        if ($res) {
+        if ($query->execute()) {
+            $response['success'] = true;
             $response['message'] = "Signup successful";
-            $lres=true;
             $result=getAccountbyEmail($email);
             if ($result && ($result->num_rows > 0)) { 
                 while ($row = $result->fetch_assoc()) {
@@ -44,18 +44,14 @@ if (isset($email) && isset($bd) && isset($fn) && isset($ln) && isset($pass)){
             }  
             else{
                 $response['message']= "error";
+                $response['success'] = false;
             }
         }else {
             $response['message']= "error";
+            $response['success'] = false;
         }
     
         $query->close();
-    }
-
-    if ($lres){
-        $response['success'] = true;
-    }else{
-        $response['success'] = false;
     }
     
     echo json_encode($response);
