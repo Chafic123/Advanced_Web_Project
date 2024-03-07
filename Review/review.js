@@ -163,7 +163,7 @@ $(document).ready(function () {
         $("#main").load("review.php");
     }
 
-    $('form').submit(function (e) {
+    $('form.review-form').submit(function (e) {
         e.preventDefault();
 
         // Call the validation function and store the result

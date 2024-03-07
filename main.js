@@ -164,7 +164,7 @@ $(document).ready(function () {
             url: '../signout.php',
             method: 'POST',
             success: function (data) {
-                window.reload(true);
+                location.reload(true);
             },
             error: function(error){
                 console.log(error)

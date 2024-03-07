@@ -24,80 +24,20 @@ include('../config.php');
 
 <body>
     <?php
-    $defaultAccount=1;
+    $defaultAccount = 1;
     require("../navbar.php");
     NavBar();
     require("../sign-forms.php");
     signForms();
 
-    if(isset($_SESSION["account"])){
-        $account=$_SESSION["account"];
+    if (isset($_SESSION["id"])) {
+        $account = $_SESSION["id"];
     }
-    if($account!=3){
-        $account=$defaultAccount;
-    }
-    $server="localhost";
-    $username="root";
-    $password="";
-    $db_name="advwebproject";
+    // if($account!=3){
+    //     $account=$defaultAccount;
+    // }
 
-    $conn=mysqli_connect($server,$username,$password,$db_name);
-    if (!$conn) {
-        die("Connection failed: ". mysqli_connect_error());
-    }
-    $query="SELECT menuitem.ItemNum , menuitem.ItemName, menuitem.Photo, cart.Quantity, menuitem.Price
-    From cart
-    INNER JOIN menuitem ON cart.ItemNum = menuitem.ItemNum
-    WHERE cart.AccountNum = $account";
-    $result=mysqli_query($conn,$query);
-    if (!$result) {
-        die("Query failed: ". mysqli_error($conn));
-    }
-    
-    if ($result->num_rows > 0) {
-        // Display the cart items in a table
-        echo "<table>";
-        echo "<thead>";
-        echo "<tr>";
-        echo "<th>Image</th>";
-        echo "<th>Item Name</th>";
-        echo "<th>Quantity</th>";
-        echo "<th>Price</th>";
-        echo "</tr>";
-        echo "</thead>";
-        echo "<tbody>";
-
-        // while ($row = mysqli_fetch_assoc($result)) {
-        //     echo "<tr data-itemnum='" . $row['ItemNum'] . "' data-price='" . $row['Price'] . "'>";
-        //     echo "<td><img src='" . $row['Photo'] . "' alt='" . $row['ItemName'] . "' style='width: 50px; height: 50px;'></td>";
-        //     echo "<td>" . $row['ItemName'] . "</td>";
-        //     echo "<td><input type='number' name='quantity' class='quantity-input' value='" . $row['Quantity'] . "' min='1'></td>";
-        //     echo "<td class='price'>$" . $row['Price'] * $row['Quantity'] . "</td>";
-        //     echo "<a href='delete.php?Id=" . $row["ItemNum"] . "'>Delete</a>";
-        //     echo "</tr>";
-        // }
-
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr data-itemnum='" . $row['ItemNum'] . "' data-price='" . $row['Price'] . "'>";
-            echo "<td><img src='" . $row['Photo'] . "' alt='" . $row['ItemName'] . "' style='width: 50px; height: 50px;'></td>";
-            echo "<td>" . $row['ItemName'] . "</td>";
-            echo "<td>";
-            echo "<input type='number' name='quantity' class='quantity-input' value='" . $row['Quantity'] . "' min='1'>";
-            echo "</td>";
-            echo "<td class='price'>$" . $row['Price'] * $row['Quantity'] . "</td>";
-            echo "<td>";
-            echo "<button class='update-btn' data-itemnum='" . $row['ItemNum'] . "'>Update </button> | ";
-            echo "<a class='delete-link' href='delete.php?itemNum=" . $row['ItemNum'] . "'>Delete</a>";
-            echo "</td>";
-            echo "</tr>";
-        } 
-    mysqli_close($conn);
-        echo "</tbody>";
-        echo "</table>";
-    } else {
-        echo "<p>Your cart is empty.</p>";
-    }
-    ?>  
+    ?>
     <!-- Body -->
     <!-- main -->
     <h1>Cart:</h1>
@@ -116,7 +56,63 @@ include('../config.php');
                 <td id="title-empty"></td>
             </thead>
             <tbody id="cart-items-body">
+                <?php
+                 $query = "SELECT menuitem.ItemNum , menuitem.ItemName, menuitem.Photo, cart.Quantity, menuitem.Price
+                 From cart
+                 INNER JOIN menuitem ON cart.ItemNum = menuitem.ItemNum
+                 WHERE cart.AccountNum = ?";
+             
+                 $stmt = $conn->prepare($query);
+                 if (!$stmt) {
+                     return false;
+                 }
+                 $stmt->bind_param("i", $account);
+                 $stmt->execute();
+                 $result = $stmt->get_result();
+                 $stmt->close();
+                if ($result->num_rows > 0) {
+                    // Display the cart items in a table
+                    echo "<table>";
+                    echo "<thead>";
+                    echo "<tr>";
+                    echo "<th>Image</th>";
+                    echo "<th>Item Name</th>";
+                    echo "<th>Quantity</th>";
+                    echo "<th>Price</th>";
+                    echo "</tr>";
+                    echo "</thead>";
+                    echo "<tbody>";
 
+                    // while ($row = mysqli_fetch_assoc($result)) {
+                    //     echo "<tr data-itemnum='" . $row['ItemNum'] . "' data-price='" . $row['Price'] . "'>";
+                    //     echo "<td><img src='" . $row['Photo'] . "' alt='" . $row['ItemName'] . "' style='width: 50px; height: 50px;'></td>";
+                    //     echo "<td>" . $row['ItemName'] . "</td>";
+                    //     echo "<td><input type='number' name='quantity' class='quantity-input' value='" . $row['Quantity'] . "' min='1'></td>";
+                    //     echo "<td class='price'>$" . $row['Price'] * $row['Quantity'] . "</td>";
+                    //     echo "<a href='delete.php?Id=" . $row["ItemNum"] . "'>Delete</a>";
+                    //     echo "</tr>";
+                    // }
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr data-itemnum='" . $row['ItemNum'] . "' data-price='" . $row['Price'] . "'>";
+                        echo "<td><img src='" . $row['Photo'] . "' alt='" . $row['ItemName'] . "' style='width: 50px; height: 50px;'></td>";
+                        echo "<td>" . $row['ItemName'] . "</td>";
+                        echo "<td>";
+                        echo "<input type='number' name='quantity' class='quantity-input' value='" . $row['Quantity'] . "' min='1'>";
+                        echo "</td>";
+                        echo "<td class='price'>$" . $row['Price'] * $row['Quantity'] . "</td>";
+                        echo "<td>";
+                        echo "<button class='update-btn' data-itemnum='" . $row['ItemNum'] . "'>Update </button> | ";
+                        echo "<a class='delete-link' href='delete.php?itemNum=" . $row['ItemNum'] . "'>Delete</a>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    echo "</tbody>";
+                    echo "</table>";
+                } else {
+                    echo "<p>Your cart is empty.</p>";
+                }
+                ?>
             </tbody>
         </table>
         <!-- displays total when there are items in the cart -->
@@ -126,8 +122,8 @@ include('../config.php');
             </b>
             <p class="price-total">
                 <?php include("../Menu/add_to_cart.php");
-            calcTotal();
-            ?>
+                calcTotal();
+                ?>
             </p>
             <button class="checkout-btn">
                 <svg id="checkout-icon" title="Checkout" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" style="fill:black;"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -157,7 +153,9 @@ include('../config.php');
             </div>
         </div>
     </div>
-    <script>let account=<?php echo $account?></script>
+    <script>
+        let account = <?php echo $account ?>
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://unpkg.com/swup@4"></script>
     <script src="../main.js"></script>
