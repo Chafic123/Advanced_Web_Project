@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +53,7 @@
                     <p class="contact-p address p">Hamra, Main Road, Beirut, Lebanon</p>
                 </section>
             </div>
-            <form class="contact-form" method="post" action="process_contact_forms.php">
+            <form class="contact-form" method="post" id="contact-msg">
                 <input type="name" name="name" class="contact-form-in in1" placeholder="Name" required>
                 <input type="email" name="email" class="contact-form-in in2" placeholder="Email" required>
                 <input type="text" name="subject" class="contact-form-in in3" placeholder="Subject">
@@ -178,12 +178,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="ask-a-question">
+                <form class="ask-a-question" id='contact-question' method="post">
                     <h1 id="ask-h1">Ask A Different Question</h1>
 
-                    <input type="name2" placeholder="Name" class="question-in input1">
-                    <input type="email2" placeholder="Email" class="question-in input2">
-                    <input type="question" placeholder="Type your question here..." class="question-in input3">
+                    <input type="name2" placeholder="Name" class="question-in input1" name="name">
+                    <input type="email2" placeholder="Email" class="question-in input2" name="email">
+                    <input type="question" placeholder="Type your question here..." class="question-in input3" name="question">
                     <button class="submitBtn">
                         Submit
                         <svg fill="white" viewBox="0 0 448 512" height="1em" class="arrow">
@@ -191,7 +191,7 @@
                             </path>
                         </svg>
                     </button>
-                </div>
+                </form>
             </div>
         </div>
         <div class="toast-container">

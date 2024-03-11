@@ -32,14 +32,15 @@ $(document).ready(function () {
     let noInput = $(".no-input")
 
 
-    btnSend.on("click", () => {
+    btnSend.on("click", (e) => {
+        e.preventDefault()
         const name = inputName.val()
         const email = inputEmail.val()
         const phone = inputPhone.val()
         const msg = inputMsg.val()
         const isEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})|(\d{10,}))$/i.test(email);
         const isPhoneNumber = /^\d{10}$/i.test(phone.trim());
-        if (name === "" || msg === "" || (isEmail===false && isPhoneNumber===false)) {
+        if (name === "" || msg === "" || (isEmail === false && isPhoneNumber === false)) {
             if (toast.hasClass("active")) {
                 toast.removeClass("active");
             }
@@ -47,15 +48,23 @@ $(document).ready(function () {
             setTimeout(() => { noInput.removeClass("active"); }, 5800);
         } else {
             console.log(name)
-            // inputName.val("");
-            // inputEmail.val("");
-            // inputPhone.val("");
-            // inputMsg.val("");
-            if (noInput.hasClass("active")) {
-                noInput.removeClass("active");
-            }
-            toast.addClass("active");
-            setTimeout(() => { toast.removeClass("active"); }, 5800);
+            $.ajax({
+                method: "POST",
+                url: "process_contact_msg.php",
+                data: $("#contact-msg").serialize(),
+                success: function (data) {
+                    inputName.val("");
+                    inputEmail.val("");
+                    inputPhone.val("");
+                    inputMsg.val("");
+                    if (noInput.hasClass("active")) {
+                        noInput.removeClass("active");
+                    }
+                    toast.addClass("active");
+                    setTimeout(() => { toast.removeClass("active"); }, 5800);
+                }
+            })
+
         }
     });
 
@@ -68,12 +77,13 @@ $(document).ready(function () {
     let toast2 = $(".toast-container2");
     let noInput2 = $(".no-input2")
 
-    btnSubmit.on("click", () => {
+    btnSubmit.on("click", (e) => {
+        e.preventDefault();
         const name = inputName2.val()
         const email = inputEmail2.val()
         const ques = inputQuestion.val()
         const isEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})|(\d{10,}))$/i.test(email);
-        if (name === "" || ques === "" || isEmail===false) {
+        if (name === "" || ques === "" || isEmail === false) {
             if (toast2.hasClass("active")) {
                 toast2.removeClass("active");
             }
@@ -81,14 +91,23 @@ $(document).ready(function () {
             setTimeout(() => { noInput2.removeClass("active"); }, 5800);
         }
         else {
-            inputName2.val("");
-            inputEmail2.val("");
-            inputQuestion.val("")
-            if (noInput2.hasClass("active")) {
-                noInput2.removeClass("active");
-            }
-            toast2.addClass("active");
-            setTimeout(() => { toast2.removeClass("active"); }, 5800);
+            $.ajax({
+                method: "POST",
+                url: "process_contact_msg.php",
+                data: $("#contact-question").serialize(),
+                success: function (data) {
+                    inputName2.val("");
+                    inputEmail2.val("");
+                    inputQuestion.val("")
+                    if (noInput2.hasClass("active")) {
+                        noInput2.removeClass("active");
+                    }
+                    toast2.addClass("active");
+                    setTimeout(() => { toast2.removeClass("active"); }, 5800);
+                }
+            })
+
+
         }
     });
     //Button to close notification
