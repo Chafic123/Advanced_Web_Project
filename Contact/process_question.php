@@ -5,6 +5,7 @@ if ($_POST["message"]) {
     $email = $_POST['email'];
     $headers = "From: $email \r\n";
     $headers .= "Return-Path: $email \r\n";
+    $headers.='X-Mailer: PHP/' . phpversion();
     ini_set("smtp_server", "smtp.gmail.com");
     ini_set("smtp_port", "587");
     if (mail(
