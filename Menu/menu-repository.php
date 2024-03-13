@@ -70,6 +70,7 @@ function generateItems($displayCategory)
                         <input type='number' name='quantity' placeholder='0' class='quantity-input'/>
                         <button type='submit' class='btn btn-secondary add-btn'>+</button>
                     </div>
+                    <div class='success-msg'>Successfully Added!</div>
                     </div>
                 </form>
                 ";
@@ -90,15 +91,16 @@ function generateItems($displayCategory)
             <form class='card' style='width: 18rem;' method='post'>
                 <img src='" . $item['Photo'] . "' class='card-img-top' alt='" . $item['ItemName'] . "'>
                 <div class='card-body'>
-                <h6 class='card-title'>" . $item['ItemName'] . "</h6>
-                <p class='card-text menu-item-description'>" . $item['Description'] . "</p>
-                <p class='card-text'>$" . strval(number_format($item['Price'], 2, '.', "")) . "</p>
-                <div class='quantity-div'>
-                    <input type='hidden' name='item_id' value='".$item['ItemNum']."'>
-                    <label for='quantity'>Quantity:</label>
-                    <input type='number' name='quantity' placeholder='0' class='quantity-input'/>
-                    <button type='submit' class='btn btn-secondary add-btn'>+</button>
-                </div>
+                    <h6 class='card-title'>" . $item['ItemName'] . "</h6>
+                    <p class='card-text menu-item-description'>" . $item['Description'] . "</p>
+                    <p class='card-text'>$" . strval(number_format($item['Price'], 2, '.', "")) . "</p>
+                    <div class='quantity-div'>
+                        <input type='hidden' name='item_id' value='".$item['ItemNum']."'>
+                        <label for='quantity'>Quantity:</label>
+                        <input type='number' name='quantity' placeholder='0' class='quantity-input'/>
+                        <button type='submit' class='btn btn-secondary add-btn'>+</button>
+                    </div>
+                    <div class='success-msg'>Successfully Added!</div>
                 </div>
             </form>
             ";

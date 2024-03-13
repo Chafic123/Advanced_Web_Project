@@ -90,13 +90,13 @@ window.addEventListener("scroll", function () {
     else if (bottom < 30000 && bottom >= 20000) {
         y = 0.06
     }
-    else if(bottom<3000){
-        y=0.65;
+    else if (bottom < 3000) {
+        y = 0.65;
     }
     else {
         y = 0.05
     }
-    
+
     let sHeight = document.documentElement.scrollTop;
     if (sHeight == 0) {
         upDown[0].style.display = "none";
@@ -119,7 +119,7 @@ closePopUp.addEventListener("click", () => {
     popUpMsg.style.display = "none";
 });
 
-loginBtn.addEventListener("click", function(){
+loginBtn.addEventListener("click", function () {
     enableScroll();
     popContainer.style.display = "none";
     popUpMsg.style.display = "none";
@@ -150,6 +150,11 @@ $(document).ready(function () {
                     if (account !== 3) {
                         let id = parseInt($(this).find("input[name='item_id']").val());
                         let qt = parseInt($(this).find("input[name='quantity']").val());
+                        let success = $(this).find(".success-msg");
+                        success.show()
+                        setTimeout(function () {
+                            success.hide()
+                        }, 10000); // 10000 milliseconds = 10 seconds
                         $.post('add_to_cart.php', {
                             item_id: id,
                             quantity: qt
@@ -172,7 +177,7 @@ $(document).ready(function () {
                     else {
                         popUp();
                     }
-            
+
                 });
             } else {
                 // Error handling: display error message
@@ -187,6 +192,11 @@ $(document).ready(function () {
         if (account !== 3) {
             let id = $(this).find("input[name='item_id']").val();
             let qt = $(this).find("input[name='quantity']").val();
+            let success = $(this).find(".success-msg");
+            success.show()
+            setTimeout(function () {
+                success.hide()
+            }, 10000); // 10000 milliseconds = 10 seconds
             $.post('add_to_cart.php', {
                 item_id: id,
                 quantity: qt

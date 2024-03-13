@@ -250,6 +250,9 @@ input[type=number]::-webkit-inner-spin-button {
     opacity: 1;
 
 }
+.success-msg{
+    display: none;
+}
 
 .add-btn {
     padding: 3% 6%;
