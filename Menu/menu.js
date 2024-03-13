@@ -129,6 +129,13 @@ upDown[0].addEventListener("click", goUp)
 upDown[1].addEventListener("click", goDown)
 
 $(document).ready(function () {
+    $.post('number_of_items.php').done(function (response, status, xhr) {
+        if (status === "success") {
+            $(".countOfItems").html(response);
+        } else {
+            console.error("Error getting number of items:", xhr.statusText);
+        }
+    });
     let curCate = 0;
     $(".category-btn").on('click', function () {
         window.scrollTo(0, 0);
@@ -151,7 +158,7 @@ $(document).ready(function () {
                                 $("#total-price").text(response);
                                 $.post('number_of_items.php').done(function (response, status, xhr) {
                                     if (status === "success") {
-                                        $("#countOfItems").html(response);
+                                        $(".countOfItems").html(response);
                                     } else {
                                         console.error("Error getting number of items:", xhr.statusText);
                                     }
@@ -188,7 +195,7 @@ $(document).ready(function () {
                     $("#total-price").text(response);
                     $.post('number_of_items.php').done(function (response, status, xhr) {
                         if (status === "success") {
-                            $("#countOfItems").html(response);
+                            $(".countOfItems").html(response);
                         } else {
                             console.error("Error getting number of items:", xhr.statusText);
                         }

@@ -102,7 +102,7 @@
 #cart-icon-menu:hover {
     fill: #FAD370;
 }
-#countOfItems{
+.countOfItems{
     position: absolute;
     border-radius: 100%;
     padding: 1px 5px;

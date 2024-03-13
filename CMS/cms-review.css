@@ -1,0 +1,7 @@
+.filtering-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+    justify-content: center;
+}
