@@ -69,8 +69,8 @@
         <!-- Up and Down Buttons -->
         <div class="up-down">
             <!-- Cart is only displayed here on smaller screens -->
-            <a href="../Cart/cart.php" class="small-cart" style="position: relative;">
-                <div class='countOfItems'>
+            <a href="../Cart/cart.php" class="small-cart">
+                <div class='countOfItems' id="second-count">
                     
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" style="fill: white;" viewBox="0 0 576 512">

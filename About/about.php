@@ -104,7 +104,7 @@
         <!-- Our Food container -->
         <div class="our-food-container fade-in">
             <h2 id="h1-our-food">Our Food</h2>
-            <marquee behavior="" direction="left">Unleash your taste buds on a world tour from your table! Authentic Lebanese & international flavors await at Malaz Restaurant.</marquee>
+            <marquee behavior="" direction="left" style="margin-bottom: 10px;">Unleash your taste buds on a world tour from your table! Authentic Lebanese & international flavors await at Malaz Restaurant.</marquee>
             <div id="our-food-img-cont">
                 <img id="our-food-img" src="https://embed.widencdn.net/img/beef/sr17je3ewf/1120x560px/thai-burger-horizontal.tif?keep=c&u=7fueml">
                 <div class="in-text">
