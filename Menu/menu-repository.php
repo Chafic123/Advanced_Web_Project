@@ -4,7 +4,7 @@ if(session_status()!=2){
     session_start();
 }
 $account = isset($_SESSION['id'])?($_SESSION['id']):(3);
-
+//gets all menu items from the db
 function getMenuItems()
 {
     global $conn;
@@ -16,7 +16,7 @@ function getMenuItems()
     }
     return $items;
 }
-
+//gets all categories
 function getCategories()
 {
     global $conn;
@@ -28,14 +28,14 @@ function getCategories()
     }
     return $categories;
 }
-
+//gets all the menu items within a certain category
 function getSpecificMenuItems($displayCategory)
 {
     global $conn;
     $query = "SELECT * from menuitem where Category='$displayCategory' and isActive=1";
     return $conn->query($query);
 }
-
+//gets the category after the user selects a certain one
 function getSpecifcCategory($displayCategory)
 {
     global $conn;
@@ -43,9 +43,10 @@ function getSpecifcCategory($displayCategory)
     $result = $conn->query($query);
     return $result;
 }
-
+//variable to store the category selected by the user
 $displayCategory = isset($_POST['categoryDisplay']) ? (int)$_POST['categoryDisplay'] : 0;
 
+//generates the menu items and the category title accroding to user selection
 function generateItems($displayCategory)
 {
     if ($displayCategory === 0) {
@@ -67,7 +68,7 @@ function generateItems($displayCategory)
                     <div class='quantity-div'>
                         <input type='hidden' name='item_id' value='".$item['ItemNum']."'>
                         <label for='quantity'>Quantity:</label>
-                        <input type='number' name='quantity' placeholder='0' class='quantity-input'/>
+                        <input type='number' name='quantity' placeholder='0' class='quantity-input' min='0' max='20'/>
                         <button type='submit' class='btn btn-secondary add-btn'>+</button>
                     </div>
                     <div class='success-msg'>Successfully Added!</div>
@@ -97,7 +98,7 @@ function generateItems($displayCategory)
                     <div class='quantity-div'>
                         <input type='hidden' name='item_id' value='".$item['ItemNum']."'>
                         <label for='quantity'>Quantity:</label>
-                        <input type='number' name='quantity' placeholder='0' class='quantity-input'/>
+                        <input type='number' name='quantity' placeholder='0' class='quantity-input' min='0' max='20'/>
                         <button type='submit' class='btn btn-secondary add-btn'>+</button>
                     </div>
                     <div class='success-msg'>Successfully Added!</div>

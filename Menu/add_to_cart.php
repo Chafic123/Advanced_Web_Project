@@ -3,9 +3,9 @@ include('../config.php');
 if(session_status()!=2){
     session_start();
 }
-
+//gets the account number (if no account it give them the account 3 which is just used as a foreign key in the review table so for guest reviewers)
 $account = isset($_SESSION['id'])?($_SESSION['id']):(3);
-
+//used to check if the item is already in the cart
 function isItemInCart($item)
 {
     global $account;
@@ -21,7 +21,7 @@ function isItemInCart($item)
     $stmt->close();
     return $result->num_rows > 0;
 }
-
+//adds the item to cart or just increase its quantity in the cart depending if its already there or not
 function addToCart($item, $quantity)
 {
     global $account;
@@ -65,7 +65,7 @@ function addToCart($item, $quantity)
         }
     }
 }
-
+//used to calculate the total price of the order
 function calcTotal()
 {
     global $conn;
@@ -88,7 +88,7 @@ function calcTotal()
     // Format and return the total price
     echo "$" . strval(number_format($total, 2, '.', ""));
 }
-
+//this occurs when the user presses the add button on any menu item
 if (isset($_POST['item_id']) && isset($_POST['quantity']) && $_POST['quantity'] > 0) {
     $item = intval($_POST['item_id']);
     $quantity = intval($_POST['quantity']);

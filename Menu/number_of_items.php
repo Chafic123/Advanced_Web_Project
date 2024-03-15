@@ -4,7 +4,7 @@ if(session_status()!=2){
     session_start();
 }
 $account = isset($_SESSION['id']) ? ($_SESSION['id']) : (3);
-
+//calculates the total number of items placed in the cart by the user
 function calcNumberOfItems()
 {
     global $conn;
