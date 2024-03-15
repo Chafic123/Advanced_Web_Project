@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malaz</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="cms-review.css">
     <link rel="icon" href="../Malaz Design/Malaz---icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="cms.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/tw-cen-mt-std" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
@@ -43,81 +47,35 @@
                 <option value='4'>Packaging</option>;
                 <option value='5'>Customer Service</option>;
             </select>
+            <small class="error" style="display:none;" id="rce">Please Select a Rating Order!</small>
         </div>
         <div>
             <label for="orderOfRating">Order From:</label>
-            <select class="form-select" aria-label="Default select example" name="orderOfRating">
+            <select class="form-select" aria-label="Default select example" name="orderOfRating" id="order-rate">
                 <option value="" disabled selected>Select Order</option>
                 <option value="1">Best to Worst</option>
                 <option value="2">Worst to Best</option>
             </select>
+            <small class="error" style="display:none;" id="roe">Please Select Rating Category!</small>
         </div>
-        <button type="submit" class="btn btn-primary">Show</button>
+        <button type="reset" class="btn btn-primary" id="reset">Reset</button>
     </form>
     <div>
         <table class='table' id='review-table'>
-            <thead>
-                <tr>
-                <th scope="col">Date</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Delivery Time</th>
-                    <th scope="col">Food Quality</th>
-                    <th scope="col">Cleanliness</th>
-                    <th scope="col">Packaging</th>
-                    <th scope="col">Customer Service</th>
-                    <th scope="col">Message</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $st=0;
-                $query="SELECT * from review where ServiceType=?";
-                $stmt=$conn->prepare($query);
-                if(!$stmt){
-                    return false;
-                }
-                $stmt->bind_param("i", $st);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $stmt->close();
-                while($row=$result->fetch_assoc()){
-                    echo"<tr>";
-                    if($row["AccountNum"]==3){
-                        echo"<td>".$row["ReviewDate"]."</td>";
-                        echo"<td>".$row["GuestEmail"]."</td>";
-                        echo"<td>".$row["Field1"]."</td>";
-                        echo"<td>".$row["Field2"]."</td>";
-                        echo"<td>".$row["Field3"]."</td>";
-                        echo"<td>".$row["Field4"]."</td>";
-                        echo"<td>".$row["Field5"]."</td>";
-                        echo"<td>".$row["Message"]."</td>";
-                    }
-                    else{
-                        $accNum=$row["AccountNum"];
-                        $accEmail="SELECT Email from account where AccountNum LIKE ?";
-                        $stmt=$conn->prepare($accEmail);
-                        if(!$stmt){
-                            return false;
-                        }
-                        $stmt->bind_param("i", $accNum);
-                        $stmt->execute();
-                        $email = $stmt->get_result();
-                        $stmt->close();
-                        echo"<td>".$row["ReviewDate"]."</td>";
-                        echo"<td>".$email->fetch_assoc()["Email"]."</td>";
-                        echo"<td>".$row["Field1"]."</td>";
-                        echo"<td>".$row["Field2"]."</td>";
-                        echo"<td>".$row["Field3"]."</td>";
-                        echo"<td>".$row["Field4"]."</td>";
-                        echo"<td>".$row["Field5"]."</td>";
-                        echo"<td>".$row["Message"]."</td>";
-                    }
-
-                    echo"</tr>";
-                }
-                ?>
-            </tbody>
-        
+            <?php
+            $st=0;
+            $query="SELECT * from review where ServiceType=?";
+            $stmt=$conn->prepare($query);
+            if(!$stmt){
+                return false;
+            }
+            $stmt->bind_param("i", $st);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+            require('cms-review-table.php');
+            DeliveryTable($result);
+            ?>
         </table>
         
     </div>

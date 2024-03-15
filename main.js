@@ -164,7 +164,8 @@ $(document).ready(function () {
             url: '../signout.php',
             method: 'POST',
             success: function (data) {
-                location.reload(true);
+                window.location.href = '../Home/index.php';
+                window.reload(true);
             },
             error: function(error){
                 console.log(error)
