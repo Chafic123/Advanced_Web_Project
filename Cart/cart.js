@@ -1,10 +1,12 @@
-$(document).ready(function () {
+$(document).ready(function() {
+    let checkoutBtn = $(".checkout-btn").eq(0);
+    let popContainer = $(".pop-up-container").eq(0);
+    let popUpMsg = $(".pop-up").eq(0);
     var keys = { 37: 1, 38: 1, 39: 1, 40: 1, 33: 1, 34: 1, 35: 1, 36: 1 };
 
     function preventDefaultt(e) {
         e.preventDefault();
     }
-
     function preventDefaultForScrollKeys(e) {
         if (keys[e.keyCode]) {
             preventDefaultt(e);
@@ -18,17 +20,19 @@ $(document).ready(function () {
             get: function () { supportsPassive = true; }
         }));
     } catch (e) { }
-
+    
     var wheelOpt = supportsPassive ? { passive: false } : false;
     var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
-
+    
+    // call this to Disable
     function disableScroll() {
-        window.addEventListener('DOMMouseScroll', preventDefaultt, false);
-        window.addEventListener(wheelEvent, preventDefaultt, wheelOpt);
-        window.addEventListener('touchmove', preventDefaultt, wheelOpt);
+        window.addEventListener('DOMMouseScroll', preventDefaultt, false); // older FF
+        window.addEventListener(wheelEvent, preventDefaultt, wheelOpt); // modern desktop
+        window.addEventListener('touchmove', preventDefaultt, wheelOpt); // mobile
         window.addEventListener('keydown', preventDefaultForScrollKeys, false);
     }
-
+    
+    // call this to Enable
     function enableScroll() {
         window.removeEventListener('DOMMouseScroll', preventDefaultt, false);
         window.removeEventListener(wheelEvent, preventDefaultt, wheelOpt);
@@ -36,8 +40,7 @@ $(document).ready(function () {
         window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
     }
 
-    let popContainer = $(".pop-up-container").eq(0);
-    let popUpMsg = $(".pop-up").eq(0);
+    // Popup
 
     function popUp() {
         disableScroll();
@@ -51,138 +54,83 @@ $(document).ready(function () {
             flexDirection: "column"
         });
     }
-
     let closePopUp = $("#close-btn");
+    
+    checkoutBtn.on("click", function () {
+        if (window.sessionStorage.getItem("SignedIn") == "true") {
+            window.open("../Checkout/checkout.php", "_self");
+        } else {
+            popUp();
+        }
+    });
+    
+    // Closes the pop-up
     closePopUp.on("click", function () {
         enableScroll();
         popContainer.css("display", "none");
         popUpMsg.css("display", "none");
     });
+//update ajax
+    // $(document).ready(function() {
+    //     $(".update-btn").on("click", function() {
+    //         let $row = $(this).closest("tr");
+    //         let itemId = $row.data("itemnum");
+    //         let accountNum = $row.data("accountnum");
+    //         let newQuantity = $row.find(".quantity-input").val();
+    
+    //         $.ajax({
+    //             type: "GET",
+    //             url: "updatequantity.php",
+    //             data: { itemNum: itemId, quantity: newQuantity, accountNum: accountNum },
+    //             success: function(response) {
+    //                 let newPrice = parseFloat(response); 
+    //                 $row.find(".price").text(newPrice.toFixed(2)); 
+    //             },
+    //             error: function(error) {
+    //                 console.error("Error updating item quantity:", error);
+    //             }
+    //         });
+    //     });
+    // });
+    
+    //delete ajax
 
-    // removing items
-    let removeBtn = $(".remove-btn");
-    removeBtn.on("click", function () {
+    $(".delete-link").on("click", function (e) {
+        e.preventDefault();
+    
+        let itemId = $(this).closest("tr").data("itemnum");
+        let accountNum = $(this).closest("tr").data("accountnum");
+    
         popUp();
-        let yesBtn = $("#yes");
-        yesBtn.on("click", function () {
-            location.reload();
-        });
-        $("#no").on("click", function () {
+    
+        $("#yes").on("click", function () {
             enableScroll();
+            popContainer.css("display", "none");
+            popUpMsg.css("display", "none");
+            $.ajax({
+                type: "GET",
+                url: "delete.php",
+                data: { itemNum: itemId, accountNum: accountNum },
+                success: function() {
+                    $('tr[data-itemnum="' + itemId + '"][data-accountnum="' + accountNum + '"]').remove();
+                    window.location.reload(true);
+                    if($("#cart-table tbody tr").length === 0) {
+
+                        $("#cart-table").after("<p>Your cart is empty.</p>");
+                        $("#cart-table").remove(); 
+                    }
+                },
+                error: function (error) {
+                    console.error("Error deleting item:", error);
+                }
+            });
+            
+        });
+    
+        $("#no").on("click", function () {
             popContainer.css("display", "none");
             popUpMsg.css("display", "none");
         });
     });
-
-    // determines the page display depending on whether the cart is empty or not
-    $(window).on("load", function () {
-        let tableBody = $("#cart-items-body");
-        let emptyCart = $("#empty-cart");
-        let totalDiv = $("#total-div");
-        if (tableBody.children().length === 0) {
-            tableBody.parent().css("display", "none");
-            totalDiv.css("display", "none");
-            emptyCart.css("display", "flex");
-            $("body > h1").css("display", "none");
-        } else {
-            tableBody.parent().css("display", "table");
-            totalDiv.css({
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "flex-end"
-            });
-            emptyCart.css("display", "none");
-            $("body > h1").css("display", "block");
-        }
-    });
-
-    // checkout button
-    let checkoutBtn = $(".checkout-btn").eq(0);
-    checkoutBtn.on("click", function () {
-        if (account!=3) {
-            window.open("../Checkout/checkout.php", "_self");
-        }
-    });
-
-    // Update the price in a pop-up message
-    // $(document).on('DOMContentLoaded', function () {
-    //     var updateButtons = $('.update-btn');
-
-    //     updateButtons.on('click', function () {
-    //         var itemNum = $(this).data('itemnum');
-    //         var quantityInput = $(this).closest("tr").find('.quantity-input');
-    //         var currentQuantity = quantityInput.val();
-
-    //         var confirmed = window.confirm('Do you want to update the quantity?');
-
-    //         if (confirmed) {
-    //             window.location.href = 'update_quantity.php?itemNum=' + itemNum + '&quantity=' + currentQuantity;
-    //         }
-    //     });
-    // });
-    $(document).on('DOMContentLoaded', function () {
-        var updateButtons = $('.update-btn');
-    
-        updateButtons.on('click', function () {
-            var itemNum = $(this).data('itemnum');
-            var quantityInput = $(this).closest("tr").find('.quantity-input');
-            var currentQuantity = quantityInput.val();
-    
-            var confirmed = window.confirm('Do you want to update the quantity?');
-    
-            if (confirmed) {
-                var newQuantity = prompt('Enter the new quantity:', currentQuantity);
-                if (newQuantity !== null && newQuantity !== '' && newQuantity !== currentQuantity) {
-                    $.ajax({
-                        type: 'POST',
-                        url: 'update_quantity.php',
-                        data: { itemNum: itemNum, quantity: newQuantity },
-                        success: function (response) {
-                            if (response.status === 'success') {
-                                console.log('Quantity updated successfully');
-                            } else {
-                                console.error('Error:', response.message);
-                            }
-                        },
-                        error: function ( status, error) {
-                            console.error(' Error:', status, error);
-                        }
-                    });
-                }
-            }
-        });
-    });
-    
-
-
-
-    $(".delete-link").on("click", function (e) {
-        e.preventDefault(); 
-    
-        var itemnum = $(this).data("ItemNum");
-        var confirmDelete = confirm("Are you sure you want to delete this item?");
-        
-        if (confirmDelete) {
-           
-            $.ajax({
-                type: 'POST', 
-                url: 'Delete.php',
-                data: { itemNum: itemnum },
-                success: function (response) {
-                    if (response.status === 'success') {
-                       
-                        var deletedRow = $('[data-ItemNum="' + itemnum + '"]').closest('tr');
-                        deletedRow.remove();
-                    } else {
-                        
-                        console.error('Error:', response.message);
-                    }
-                },
-                error: function (status, error) {
-                    console.error('Error:', status, error);
-                }
-            });
-        }
-    });
-   
 });
+// });
