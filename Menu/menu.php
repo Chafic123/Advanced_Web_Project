@@ -52,7 +52,7 @@ if(session_status()!=2){
                     ?>
                 </div>
                 <!-- Cart button for bigger screens -->
-                <a href="../Cart/cart.php" id="cart-btn-menu">
+                <a id="cart-btn-menu" class="cart-btns">
                     <div class='countOfItems'>
                         
                     </div>
@@ -73,7 +73,7 @@ if(session_status()!=2){
         <!-- Up and Down Buttons -->
         <div class="up-down">
             <!-- Cart is only displayed here on smaller screens -->
-            <a href="../Cart/cart.php" class="small-cart">
+            <a class="small-cart cart-btns">
                 <div class='countOfItems' id="second-count">
                     
                 </div>

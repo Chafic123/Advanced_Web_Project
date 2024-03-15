@@ -137,6 +137,15 @@ $(document).ready(function () {
             console.error("Error getting number of items:", xhr.statusText);
         }
     });
+    //opens cart if logged in
+    $(".cart-btns").click(function(){
+        if (account != 3) {
+            window.open("../Cart/cart.php", "_self");
+        }
+        else {
+            popUp()
+        }
+    })
     let curCate = 0;
     //when they decide to change the category they want to view
     $(".category-btn").on('click', function () {
