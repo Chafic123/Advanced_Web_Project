@@ -4,7 +4,7 @@ if(session_status()!=2){
     session_start();
 }
 $account = isset($_SESSION['id'])?($_SESSION['id']):(3);
-
+//leaves a review as a guest for delivery
 function leaveAGuestReviewDelivery($email, $serviceType)
 {
     global $conn;
@@ -41,7 +41,7 @@ function leaveAGuestReviewDelivery($email, $serviceType)
     // Return true if the query was successful
     return true;
 }
-
+//leaves a review as a guest for someone who went to a restaurant branch
 function leaveAGuestReviewHouse($email, $serviceType)
 {
     global $conn;
@@ -49,7 +49,6 @@ function leaveAGuestReviewHouse($email, $serviceType)
     if (!isset($_POST['rateservice']) || !isset($_POST['ratefoodquality2']) || !isset($_POST['ratecleanliness2']) || !isset($_POST['rateatmosphere']) || !isset($_POST['location'])) {
         return false;
     }
-    // Sanitize the input data
     $field1 = intval($_POST['rateservice']);
     $field2 = intval($_POST['ratefoodquality2']);
     $field3 = intval($_POST['ratecleanliness2']);
@@ -78,7 +77,7 @@ function leaveAGuestReviewHouse($email, $serviceType)
     // Return true if the query was successful
     return true;
 }
-
+//creates a new guest reviewer
 function newGuest($fname, $lname, $email)
 {
     global $conn;
@@ -98,7 +97,6 @@ function newGuest($fname, $lname, $email)
     // Execute the query
     $result = $stmt->execute();
     if (!$result) {
-        // Handle the error
         return false;
     }
     // Close the statement
@@ -106,7 +104,7 @@ function newGuest($fname, $lname, $email)
     // Return true if the query was successful
     return true;
 }
-
+// checks if this guest reviewer already exists
 function findGuest($email)
 {
     global $conn;
@@ -116,7 +114,6 @@ function findGuest($email)
     $query = "SELECT * FROM guestreviewer WHERE Email = ?";
     $stmt = $conn->prepare($query);
     if (!$stmt) {
-        // Handle the error
         return false;
     }
     // Bind the parameter to the query
@@ -130,7 +127,7 @@ function findGuest($email)
     // Return true if the guest was found
     return mysqli_num_rows($result) > 0;
 }
-
+//gets the account of the person reviewing
 function findAccountInfo()
 {
     global $account;
@@ -151,7 +148,7 @@ function findAccountInfo()
     }
     return ['', '', ''];
 }
-
+//leaving a review for delivery when someone already has an account
 function leaveAnAccountReviewDelivery($serviceType)
 {
     global $conn;
@@ -189,7 +186,7 @@ function leaveAnAccountReviewDelivery($serviceType)
     // Return true if the query was successful
     return true;
 }
-
+//leaving a review for in house when someone already has an account
 function leaveAnAccountReviewHouse($serviceType)
 {
     global $conn;
@@ -227,20 +224,19 @@ function leaveAnAccountReviewHouse($serviceType)
     // Return true if the query was successful
     return true;
 }
-
+//adds the review to the database
 function addReview()
 {
     global $account;
     if (!isset($_POST['firstname']) || !isset($_POST['email']) || !isset($_POST['lastname']) || !isset($_POST['typeOfOrder'])) {
-        // Handle the error
         return;
     }
-
     $email = $_POST['email'];
     $fname = $_POST['firstname'];
     $lname = $_POST['lastname'];
     $serviceType = intval($_POST['typeOfOrder']);
     if ($account != 3) {
+        //if its someone with an account (account 3 is for guestreviewers);
         if($serviceType===0){
             leaveAnAccountReviewDelivery($serviceType);
         }
@@ -249,12 +245,14 @@ function addReview()
         }
     } else {
         if (findGuest($email)) {
+            //if the guest reviewer already exists
             if ($serviceType === 0) {
                 leaveAGuestReviewDelivery($email, $serviceType);
             } else if ($serviceType === 1) {
                 leaveAGuestReviewHouse($email, $serviceType);
             }
         } else {
+            //creates new guest reviewer before leaving the review
             newGuest($fname, $lname, $email);
             if ($serviceType === 0) {
                 leaveAGuestReviewDelivery($email, $serviceType);

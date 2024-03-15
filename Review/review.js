@@ -29,7 +29,7 @@ $(document).ready(function () {
     var wheelOpt = supportsPassive ? { passive: false } : false;
     var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
 
-    // call this to Disable
+    // call this to Disable scrolling
     function disableScroll() {
         window.addEventListener('DOMMouseScroll', preventDefaultt, false); // older FF
         window.addEventListener(wheelEvent, preventDefaultt, wheelOpt); // modern desktop
@@ -37,14 +37,14 @@ $(document).ready(function () {
         window.addEventListener('keydown', preventDefaultForScrollKeys, false);
     }
 
-    // call this to Enable
+    // call this to Enable scrolling
     function enableScroll() {
         window.removeEventListener('DOMMouseScroll', preventDefaultt, false);
         window.removeEventListener(wheelEvent, preventDefaultt, wheelOpt);
         window.removeEventListener('touchmove', preventDefaultt, wheelOpt);
         window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
     }
-
+    //opens popup
     function popUp() {
         disableScroll();
         popContainer.style.display = "flex";
@@ -61,13 +61,13 @@ $(document).ready(function () {
         resetForm(); //resets form
     })
     /*declaration*/
-    let form = $('form[name="feedback-form"]');
     let deliveryRadio = $("#DeliveryRadio");
     let inHouseRadio = $("#InHouseRadio");
     let deliveryInfo = $(".Delivery-Active:first");
     let inHouseInfo = $(".InHouse-Active:first");
 
     /* Reset the ratings when another radio button (order type) is checked */
+    //resets the in house ratings
     function inHouseRatingsReset() {
         $('[id^="star5-service"]').prop('checked', false);
         $('[id^="star4-service"]').prop('checked', false);
@@ -94,7 +94,7 @@ $(document).ready(function () {
         $('[id^="star2-atmosphere"]').prop('checked', false);
         $('[id^="star1-atmosphere"]').prop('checked', false);
     }
-
+    //resets the delete ratings
     function delReset() {
         $('[id^="star5-deliverytime"]').prop('checked', false);
         $('[id^="star4-deliverytime"]').prop('checked', false);
@@ -158,17 +158,16 @@ $(document).ready(function () {
 
     // reseting form fuction after pop-up
     function resetForm() {
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
         // $("#main").load(location.href + " #main>*");
         $("#main").load("review.php");
     }
-
+    
+    //handles submission of form
     $('form.review-form').submit(function (e) {
         e.preventDefault();
-
         // Call the validation function and store the result
         let validation = validateForm();
-
         if (validation === true) {
             // Get form field values
             let fname = $("#firstname").val().toString();
@@ -233,7 +232,6 @@ $(document).ready(function () {
             window.scrollTo(0, 0);
         }
     });
-
 
     // Function to set an error message for a form element
     function setError(element, errorMessage) {
@@ -316,9 +314,7 @@ $(document).ready(function () {
                 removeError($(this));
             });
         }
-
         return isValid
-
     }
 })
 
