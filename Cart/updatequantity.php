@@ -1,22 +1,30 @@
 <?php
 include('../config.php');
-if (isset($POST['itemNum']) && isset($POST['quantity'])) {
-    $itemNum = $POST['itemNum'];
-    $newQuantity = $POST['quantity'];
 
-    $updateQuery = "UPDATE cart SET Quantity = $newQuantity WHERE ItemNum = $itemNum AND AccountNum = $account";
-    $updateResult = mysqli_query($conn, $updateQuery);
+$itemNum = isset($_POST['itemNum']) ? intval($_POST['itemNum']) : 0;
+$newQuantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 0;
+$AccountNum=isset($_POST['AccountNum'])?intval($_POST['AccountNum']):0;
 
-    if ($updateResult) {
-        // Redirect back to the cart page after updating
-        header("Location: cart.php");
-        exit();
-    } else {
-        die("Update query failed: " . mysqli_error($conn));
-    }
-} else {
-    // Redirect to the cart page if 'itemNum' or 'quantity' is not set
-    header("Location: cart.php");
-    exit();
+if ($itemNum <= 0 || $newQuantity <= 0) {
+    echo "Invalid input.";
+    exit;
 }
+$updateQuery = "UPDATE cart SET Quantity = ? WHERE ItemNum = ? AND AccountNum = ? ";
+$updateStatement = mysqli_prepare($conn, $updateQuery);
+
+if (!$updateStatement) {
+    echo "Update query preparation failed: " . mysqli_error($conn);
+    exit;
+}
+mysqli_stmt_bind_param($updateStatement, "iii", $newQuantity, $itemNum,$AccountNum);
+$updateResult = mysqli_stmt_execute($updateStatement);
+
+if ($updateResult) {
+    header("Location: cart.php");
+    exit;
+} else {
+    echo "Update query failed: " . mysqli_error($conn);
+}
+mysqli_stmt_close($updateStatement);
+mysqli_close($conn);
 ?>

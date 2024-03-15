@@ -1,6 +1,12 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap'); 
 /* Body */
+body{
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+}
 body>h1 {
-    display: none;
+    /* display: none; */
     font-size: 50px;
     margin: 1%;
     margin-top: 2%;
@@ -17,8 +23,9 @@ body>h1 {
 }
 
 /* Items table */
+
 table {
-    display: none;
+    /* display: none; */
     border-collapse: collapse;
     margin: 1%;
     box-shadow: 5px 5px 15px gray;
@@ -50,7 +57,25 @@ tr .row-box:last-child,
 #title-empty {
     border-left: none;
 }
-
+.delete-link i{
+    color: black;
+    background: none;
+    cursor: pointer;
+}
+.update-btn{
+    margin-left: 5px;
+    color: rgb(19, 18, 18);
+    background-color: white;
+    padding: 5px 10px;
+    border:none;
+}
+.update-btn:hover {
+    transform: translateX(10%);
+    border-radius:5px;
+    transition: .3s linear ;
+    background-color: #debb61;
+    color: blue;
+}
 /* Total amount */
 #total-div {
     position: absolute;
@@ -67,7 +92,15 @@ tr .row-box:last-child,
     margin: 10px;
     font-size: 1.3rem;
 }
-
+.total-title,
+.total-price {
+    padding: 2% 1%;
+    align-self: center;
+}
+.checkout{
+    display:flex;
+    text-align: right;
+}
 .checkout-btn {
     height: 35px;
     padding: 10px 7px;
@@ -80,7 +113,6 @@ tr .row-box:last-child,
     align-items: center;
     justify-content: center;
 }
-
 #checkout-icon {
     font-size: 1rem;
     margin-right: 5px;
@@ -126,12 +158,8 @@ input[type="number"]::-webkit-inner-spin-button,
     height: 150px;
 }
 
-.remove-btn {
+.delete-link i{
     color: rgb(6, 6, 6);
-    width: 30px;
-    height: 30px;
-    border: none;
-    outline: none;
     background: none;
 }
 

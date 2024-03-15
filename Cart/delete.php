@@ -1,22 +1,29 @@
 <?php
-include('../config.php');
-if (isset($_GET['itemNum'])) {
-    $itemNum = $_GET['itemNum'];
+session_start();
+include("config.php");
 
-    // Prepare and execute the delete query
-    $deleteQuery = "DELETE FROM cart WHERE ItemNum = $itemNum AND AccountNum = $account";
-    $deleteResult = mysqli_query($conn, $deleteQuery);
+if(isset($_GET['itemNum']) && isset($_GET['accountNum'])) {
+    $itemNum = intval($_GET['itemNum']);
+    $accountNum = intval($_GET['accountNum']);
 
-    if ($deleteResult) {
-        // Redirect back to the cart page after deletion
-        header("Location: cart.php");
-        exit();
-    } else {
-        die("Delete query failed: " . mysqli_error($conn));
+    $conn = mysqli_connect("localhost", "root", "", "advwebproject"); 
+
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
     }
+
+    $stmt = $conn->prepare("DELETE FROM cart WHERE ItemNum = ? AND AccountNum = ?");
+    $stmt->bind_param("ii", $itemNum, $accountNum);
+
+    if ($stmt->execute()) {
+        echo "Item deleted successfully";
+    } else {
+        echo "Error deleting item: " . $conn->error;
+    }
+
+    $stmt->close();
+    $conn->close();
 } else {
-    // Redirect to the cart page if 'itemNum' is not set
-    header("Location: cart.php");
-    exit();
+    echo "ItemNum and AccountNum required";
 }
 ?>
