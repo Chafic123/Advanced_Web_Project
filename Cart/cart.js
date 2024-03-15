@@ -1,6 +1,6 @@
 $(document).ready(function() {
     let checkoutBtn = $(".checkout-btn").eq(0);
-    let popContainer = $(".pop-up-container").eq(0);
+    let popContainer = $(".pop-up-container1").eq(0);
     let popUpMsg = $(".pop-up").eq(0);
     var keys = { 37: 1, 38: 1, 39: 1, 40: 1, 33: 1, 34: 1, 35: 1, 36: 1 };
 
@@ -42,7 +42,7 @@ $(document).ready(function() {
 
     // Popup
 
-    function popUp() {
+    function popUp1() {
         disableScroll();
         popContainer.css({
             display: "flex",
@@ -60,7 +60,7 @@ $(document).ready(function() {
         if (window.sessionStorage.getItem("SignedIn") == "true") {
             window.open("../Checkout/checkout.php", "_self");
         } else {
-            popUp();
+            alert("Please login first");
         }
     });
     
@@ -101,7 +101,7 @@ $(document).ready(function() {
         let itemId = $(this).closest("tr").data("itemnum");
         let accountNum = $(this).closest("tr").data("accountnum");
     
-        popUp();
+        popUp1();
     
         $("#yes").on("click", function () {
             enableScroll();
@@ -133,4 +133,4 @@ $(document).ready(function() {
         });
     });
 });
-// });
+

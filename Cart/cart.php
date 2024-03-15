@@ -2,7 +2,6 @@
 session_start();
 include('../config.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,8 +10,8 @@ include('../config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malaz</title>
     <link rel="icon" href="../Malaz Design/Malaz---icon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="cart-style.css">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="cart-style.css">
     <link rel="stylesheet" href="../sign-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,16 +23,19 @@ include('../config.php');
 
 <body>
     <?php
+    $defaultAccount=1;
     require("../navbar.php");
     NavBar();
     require("../sign-forms.php");
     signForms();
+    $account = $defaultAccount;
     if(isset($_SESSION["account"])){
         $account=$_SESSION["account"];
     }
-    else{
-        $account=3;
+    if($account!=3){
+        $account=$defaultAccount;
     }
+
     $query="SELECT menuitem.ItemNum , menuitem.ItemName, menuitem.Photo, cart.Quantity, menuitem.Price,AccountNum
     From cart
     INNER JOIN menuitem ON cart.ItemNum = menuitem.ItemNum
@@ -83,7 +85,7 @@ include('../config.php');
         echo "</tbody>";
         echo "</table>";
     } else {
-        echo "<p>Your cart is empty.</p>";
+        echo "<p class='empty_cart'>Your cart is empty</p>";
     }
     ?>
    
@@ -125,8 +127,8 @@ include('../config.php');
     Footer();
     ?>
     
-    <!-- Pop Up -->
-    <div class="pop-up-container">
+    <!-- Pop Up1 -->
+    <div class="pop-up-container1">
         <div class="pop-up">
             <button class="close-btn" id="close-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
@@ -138,6 +140,18 @@ include('../config.php');
                 <button id="yes">Yes</button>
                 <button id="no">No</button>
             </div>
+        </div>
+    </div>
+    <div class="pop-up-container2">
+        <div class="pop-up">
+            <button class="close-btn" id="close-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                    <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                </svg>
+            </button>
+            <h2>Login</h2>
+            <p>Please Login to Continue</p>
+            <button id="login-btn" class="login">Login</button>
         </div>
     </div>
     <script>let account=<?php echo $account?></script>
