@@ -154,7 +154,7 @@ $(document).ready(function () {
         }
 
         // Check if the user has made an error
-        if(hasMadeError=true){
+        if(hasMadeError){
             return;
         }
 
