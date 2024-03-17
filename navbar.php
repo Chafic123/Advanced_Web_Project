@@ -1,6 +1,6 @@
 <?php
 include "config.php";
-if(session_status()!=2){
+if (session_status() != 2) {
     session_start();
 }
 function getFirstName()
@@ -10,9 +10,6 @@ function getFirstName()
         $account = $_SESSION['id'];
         $query = "SELECT FirstName from account where AccountNum =?";
         $stmt = $conn->prepare($query);
-        if (!$stmt) {
-            return;
-        }
         $stmt->bind_param("i", $account);
         $stmt->execute();
         $stmt->bind_result($name);
@@ -25,7 +22,7 @@ function getFirstName()
 
 function NavBar()
 {
-    $account = isset($_SESSION['id'])?($_SESSION['id']):(3);
+    $account = isset($_SESSION['id']) ? ($_SESSION['id']) : (3);
     echo "
 <!-- Navigation Bar -->
     <nav class='nav-bar nav-1' id='nav-bar'>
@@ -41,7 +38,7 @@ function NavBar()
         </svg>
         <div class='account' id='account'>
             <ul class='main-ul'>";
-    if ($account===3) {
+    if ($account === 3) {
         echo "
                 <li><a href='#' class='login signing-btns'>Log In</a></li>
                 <li><a href='#' class='up signing-btns'>Sign Up</a></li>
@@ -81,7 +78,7 @@ function NavBar()
                 <li class='nav-2-li'><a href='../Menu/menu.php' class='nav-options-nav2'>Menu</a></li>
                 <li class='nav-2-li'><a href='../Contact/contact.php' class='nav-options-nav2'>Contact Us</a></li>
                 <li id='last'><a href='../Review/review.php' class='nav-options-nav2'>Leave a review</a></li>";
-    if ($account===3) {
+    if ($account === 3) {
         echo "
                     <li><a href='#' class='login signing-btns'>Log In</a></li>
                     <li><a href='#' class='up signing-btns'>Sign Up</a></li>

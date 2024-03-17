@@ -6,7 +6,6 @@ $(document).ready(function () {
 
     btnLocation.on("click", () => {
         window.location.href = "../Location/locations.php";
-        console.log('done')
     })
     //toggle the FAQ's
     let questionDiv = $(".question-div");
