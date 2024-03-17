@@ -178,8 +178,8 @@ $(document).ready(function () {
                 } else if (response.success && response.message === "is admin") {
                     removeError(passin);
                     removeError(email);
-                    $("#sign-in-user").val("");
-                    $("#sign-in-pass").val("");
+                    email.val("");
+                    passin.val("");
                     $("#rem").prop("checked", false);
                     window.location.href = "../CMS/cms.php";
                     loginPopup.hide();
