@@ -133,20 +133,29 @@ $(document).ready(function () {
     $("#loginF").submit(function (e) {
         e.preventDefault();
 
-        // Check if the entered email is empty
-        if ((email.val().trim() === '' || email.val().trim() === '' && passin.val().trim() != '') && !validateEmail(email)) {
+        let hasMadeError = false;
+
+        // Check if the email is empty
+        if (email.val().trim() === '' && !validateEmail(email)) {
             setError(email, 'Please enter a valid email');
+            hasMadeError=true;
         }
         else {
             removeError(email);
         }
 
-        // Check if the password empty
-        if ((passin.val().trim() === '' || passin.val().trim() === '' && email.val().trim() != '') && !validatePass(passin)) {
+        // Check if the password is empty
+        if (passin.val().trim() === '' && !validatePass(passin)) {
             setError(passin, 'Please enter a password');
+            hasMadeError=true;
         }
         else {
             removeError(passin);
+        }
+
+        // Check if the user has made an error
+        if(hasMadeError=true){
+            return;
         }
 
         $.ajax({
