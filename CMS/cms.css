@@ -4,32 +4,39 @@
     font-family: 'Roboto', sans-serif;
 }
 
-#nav{
-  background-color: #104d40;
-  height: 60px;
+.navbar {
+    background-color: #104d40;
+    color: white;
 }
 
-#logo{
-    height: 50px;
-    width: 100px;
-    /* margin-top: 3%;
-    padding: 1.5%;
-    padding-right: 2%;
-    margin-left: 6.5px; */
+.navbar a,
+.nav-link,
+.dropdown {
+    color: white;
 }
 
-#navbarItem li{
-    margin: 0 5px;
-}
-
-#navbarItem li a{
-    color: #F8EFE5;
-    font-weight: 400;
-    font-size: large;
-    margin-left: -10px;
-}
-
-
-#navbarItem li a:hover {
+.navbar a:hover {
     color: #fad370;
+}
+
+.dropdown a,
+.dropdown-toggle {
+    color: white;
+    -bs-navbar-active-color: rgba(255, 255, 255, 1);
+    --bs-nav-link-hover-color: rgba(255, 255, 255, 1);
+    --bs-nav-link-disabled-color: rgba(255, 255, 255, 1);
+    --bs-navbar-active-color: rgba(255, 255, 255, 1);
+}
+
+.dropdown-menu {
+    background-color: #F8EFE5;
+}
+
+.dropdown-menu a {
+    color: black;
+}
+
+.dropdown-menu a:hover {
+    background-color: #F8EFE5;
+    color: #CE5B68;
 }
