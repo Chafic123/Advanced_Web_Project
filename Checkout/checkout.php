@@ -1,4 +1,10 @@
-<?php session_start();?>
+<?php session_start();
+
+    require("../sign-forms.php");
+    signForms();
+    $account = isset($_SESSION['id']) ? ($_SESSION['id']) : (3);
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,24 +93,26 @@
                         </div> -->
                         <div class="payment-element">
                             <label for="" class="payment-lbl">Card Number:</label>
-                            <input type="text" name="" id="" placeholder="0000 0000 0000 0000"
-                                class="card-related-inputs">
+                            <input type="text" name="cart_number" class="payment-lbl" placeholder="0000 0000 0000 0000" class="card-related-inputs">
                         </div>
                         <div class="final-payment-elements">
                             <div class="payment-element">
                                 <label for="" class="payment-lbl">Expiration Date:</label>
-                                <input type="text" name="" id="expiration" placeholder="dd/mm/yyyy"
-                                    class="card-related-inputs">
+                                <input type="text" name="expiration" class="expiration" placeholder="dd/mm/yyyy" class="card-related-inputs">
                             </div>
                             <div class="payment-element">
                                 <label for="" class="payment-lbl">CVV:</label>
-                                <input type="text" name="" id="" placeholder="***" class="card-related-inputs">
+                                <input type="text" name="cvv" class="payment-lbl" placeholder="***" class="card-related-inputs">
                             </div>
 
                         </div>
                         <div class="total-div">
                             <h3 class="total-title">Total:</h3>
-                            <p class="total-price">$0.00</p>
+                            <p class="total-price">
+                        <?php 
+                        require_once('../Cart/add_to_cart.php');
+                        calcTotal($account);?>
+            </p>
                         </div>
 
                     </div>

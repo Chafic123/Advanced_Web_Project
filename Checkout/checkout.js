@@ -32,9 +32,6 @@ $(document).ready(function () {
 
     let totalP = JSON.parse(window.sessionStorage.getItem('totalPrice'))
     // Calculate the total price
-
-    // Display the total price
-    $('.total-price').first().text('$' + totalP.toFixed(2));
     // Function to validate and add red border to bottom
     function validateAndHighlight(input) {
         let isValid = true;
@@ -73,7 +70,7 @@ $(document).ready(function () {
         }
     });
 
-    // Show the pop-up if the form is valid
+
 
     // Close the pop-up when the close button is clicked
     $('#close-btn').click(function () {
@@ -81,4 +78,17 @@ $(document).ready(function () {
         $('#popup-container').addClass('hidden');
         $('body').css('overflow', 'auto'); // Allow scrolling again
     });
+
+    $('#paymentMethod').change(function () {
+        if ($(this).val() === 'Cash on Delivery') {
+            $('.payment-lbl').css("display", "none");
+        } else {
+            $('.payment-lbl').css("display", "flex");
+        }
+    });
+
 });
+
+
+
+
