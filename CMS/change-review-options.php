@@ -1,7 +1,7 @@
 <?php
 echo"<option value='' disabled selected>Select Rating Category</option>";
-if (isset($_GET['typeOfService'])){
-    $type=$_GET['typeOfService'];
+if (isset($_POST['typeOfService'])){
+    $type=$_POST['typeOfService'];
     if($type==1){
         echo "<option value='0'>All</option>";
         echo "<option value='1'>Service</option>";

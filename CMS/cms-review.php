@@ -52,7 +52,7 @@
         <div>
             <label for="orderOfRating">Order From:</label>
             <select class="form-select" aria-label="Default select example" name="orderOfRating" id="order-rate">
-                <option value="" disabled selected>Select Order</option>
+                <option value="0" disabled selected>Select Order</option>
                 <option value="1">Best to Worst</option>
                 <option value="2">Worst to Best</option>
             </select>
