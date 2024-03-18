@@ -25,6 +25,7 @@ main h4{
     align-self: flex-start;
     margin-left: 10px;
 }
+
 #back-div h3{
     padding-left: 6px;
 }
@@ -251,6 +252,7 @@ color: #ce5b68;
     background-color: #00af00;
     color: beige;
     font-size: 1.1em;
+    padding: 5px ;
 }
 #order:hover{
     background-color: #ffffff;
@@ -260,8 +262,6 @@ color: #ce5b68;
 .invalid-input {
     border: 1px solid red;
 }
-
-
 
   .section-title{
     color: #104d40;
