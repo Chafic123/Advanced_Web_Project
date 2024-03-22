@@ -295,10 +295,10 @@ $(document).ready(function () {
         // Validation checks for email/phone
         let contactinfo = $('#email-phone');
         if (contactinfo.val().trim() === '') {
-            setError(contactinfo, 'Please enter either a mobile number or an email');
+            setError(contactinfo, 'Please enter an email');
             isValid = false;
         } else if (!validateEmailOrPhoneNumber(contactinfo.val().trim())) {
-            setError(contactinfo, 'Enter a valid mobile number or email');
+            setError(contactinfo, 'Enter a valid email');
             isValid = false;
         } else {
             removeError(contactinfo);

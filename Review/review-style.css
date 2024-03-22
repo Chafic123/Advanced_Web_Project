@@ -92,7 +92,7 @@ h5 {
 }
 
 /* inputs */
-input[type="text"],
+.required-feedback input[type="text"],
 .input {
   padding: 10px;
   background-color: transparent;
@@ -122,11 +122,6 @@ input[type="text"],
 }
 
 
-/* Spaces Between inputs */
-/* #last-name, .email, .birthday{
-    margin-left: 50px;
-
-} */
 #first-name,
 .email-or-phone {
   margin-right: 50px;
@@ -218,9 +213,6 @@ input[type="text"],
   display: flex;
   flex-direction: column;
   margin: 20px 0px;
-
-
-
 }
 
 .extra-feedback label {
@@ -347,29 +339,10 @@ input[type="text"],
 .required-feedback small {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 5px;
-  color: #ee0d0d;
-  visibility: hidden;
-}
-
-.error small {
-  border: 1px red solid;
-  background-color: rgba(248, 224, 224, 0.822);
-  color: red solid;
-  padding: 10px;
   margin-top: 10px;
+  color: red;
+  visibility: hidden;
   font-size: 15px;
-}
-
-.error.order-type small {
-  border: 1px red solid;
-  padding: 10px;
-  font-size: 15px;
-  width: 240px;
-}
-
-.required-feedback.error small {
-  visibility: visible;
 }
 
 /* Styles for the pop-up container */
