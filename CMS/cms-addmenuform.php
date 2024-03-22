@@ -2,6 +2,7 @@
 if(session_status()!=2){
     session_start();
 }
+if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +27,7 @@ if(session_status()!=2){
     
     <div class="container pt-5">
     <h2 class="my-4">Add Menu Item</h2>
-        <form action="cms-addmenu.php" method="post">
+        <form action="cms-addmenu.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" class="form-control" id="name" name="name" required>
@@ -62,3 +63,8 @@ if(session_status()!=2){
 </body>
 
 </html>
+<?php
+}else{
+    header("Location: ../Home/index.php");
+}
+?>

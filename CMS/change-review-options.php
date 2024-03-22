@@ -1,4 +1,8 @@
 <?php
+if(session_status()!=2){
+    session_start();
+}
+if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
 echo"<option value='' disabled selected>Select Rating Category</option>";
 if (isset($_POST['typeOfService'])){
     $type=$_POST['typeOfService'];
@@ -17,4 +21,7 @@ if (isset($_POST['typeOfService'])){
         echo "<option value='4'>Packaging</option>";
         echo "<option value='5'>Customer Service</option>";
     }
+}
+}else{
+    header("Location: ../Home/index.php");
 }

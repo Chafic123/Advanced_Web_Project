@@ -24,6 +24,7 @@ if (isset($email) && isset($pass)){
         while ($row = $result->fetch_assoc()) {
             if($row['IsAdmin']==1){
                 $response['message']= "is admin";
+                $_SESSION["admin"] =true;
             }
             else{
                 $response['message'] = "Login successful";

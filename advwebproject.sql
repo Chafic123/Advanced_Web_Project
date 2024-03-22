@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `advwebproject`
 --
+CREATE DATABASE advwebproject;
+USE advwebproject;
 
 -- --------------------------------------------------------
 
@@ -48,7 +50,8 @@ INSERT INTO `account` (`AccountNum`, `Email`, `Phone`, `Birthday`, `FirstName`, 
 (1, 'danadabdoub@gmail.com', '76058707', '2004-10-31', 'Dana', 'Dabdoub', 'password1', 'Random Street, Beirut', 'Beirut', 0),
 (2, 'ChaficAchour@gmail.com', '81657588', '2004-04-10', 'Chafic', 'Achour', 'Chafic', 'Chehim', 'Beirut', 0),
 (3, '', '', '0000-00-00', '', '', '', '', '', 0),
-(4, 'admin@gmail.com', '', '0000-00-00', 'Admin', '', 'password', '', '', 1);
+(4, 'admin@gmail.com', '', '0000-00-00', 'Admin', '', 'password', '', '', 1),
+(5, 'mirnaelkhatib@gmail.com', '76732944', '2004-03-13', 'Mirna', 'El Khatib', 'mirna1', 'Saida', 'Saida', 1);
 
 -- --------------------------------------------------------
 

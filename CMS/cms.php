@@ -2,6 +2,7 @@
 if(session_status()!=2){
     session_start();
 }
+if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,3 +32,8 @@ if(session_status()!=2){
 </body>
 
 </html>
+<?php
+}else{
+    header("Location: ../Home/index.php");
+}
+?>

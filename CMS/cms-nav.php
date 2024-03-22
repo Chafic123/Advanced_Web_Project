@@ -1,4 +1,8 @@
 <?php
+if(session_status()!=2){
+    session_start();
+}
+if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
 echo '<!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
@@ -27,4 +31,9 @@ echo '<!-- Navigation Bar -->
             </div>
         </div>
     </nav>';
+?>
+<?php
+}else{
+    header("Location: ../Home/index.php");
+}
 ?>
