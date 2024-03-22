@@ -1,6 +1,6 @@
 <?php
 echo '<!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="cms.php">Dashboard</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,11 +16,14 @@ echo '<!-- Navigation Bar -->
                             Menu
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Add to Menu</a></li>
-                            <li><a class="dropdown-item" href="#">Edit Menu</a></li>
+                            <li><a class="dropdown-item" href="cms-addmenuform.php">Add to Menu</a></li>
+                            <li><a class="dropdown-item" href="cms-viewmenu.php">View Menu</a></li>
                         </ul>
                     </li>
                 </ul>
+                <div class="d-flex">
+                    <button id="sign-out-btn2" class="sign-out btn btn-outline-light">Sign Out</button>
+                </div>
             </div>
         </div>
     </nav>';
