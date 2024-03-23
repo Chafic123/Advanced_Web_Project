@@ -158,19 +158,9 @@ $(document).ready(function () {
         $(this).toggleClass('far fa-eye far fa-eye-slash');
     });
 
-    $(".sign-out").click(function () {
-        window.sessionStorage.setItem("SignedIn", "false");
-        $.ajax({
-            url: '../signout.php',
-            method: 'POST',
-            success: function (data) {
-                window.location.href = '../Home/index.php';
-                window.reload(true);
-            },
-            error: function(error){
-                console.log(error)
-            }
-        })
+    $(".sign-out").on("click",function () {
+        if(window.sessionStorage.getItem("SignedIn")){
+            window.sessionStorage.setItem("SignedIn", "false");
+        } 
     });
-
 });

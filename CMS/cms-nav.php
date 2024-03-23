@@ -1,5 +1,5 @@
 <?php
-if(session_status()!=2){
+if (session_status() != 2) {
     session_start();
 }
 if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
@@ -25,9 +25,9 @@ echo '<!-- Navigation Bar -->
                         </ul>
                     </li>
                 </ul>
-                <div class="d-flex">
-                    <button id="sign-out-btn2" class="sign-out btn btn-outline-light">Sign Out</button>
-                </div>
+                <form action="../signout.php" method="post" class="d-flex">
+                    <button id="sign-out-btn2" class="sign-out btn btn-outline-light" name="signout">Sign Out</button>
+                </form>
             </div>
         </div>
     </nav>';
