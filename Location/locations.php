@@ -31,7 +31,7 @@ session_start();?>
     <!-- main -->
     <main class="locations-body transition-fade">
         <div class="beginning">
-            <div class="info">
+            <div class="infor">
                 <!-- Welcome Info for Locations page -->
                 <h2 class="title">Visit Our Locations</h2>
                 <p>Welcome to Malaz, where culinary delights meet simplicity. Nestled in the diverse cities of Lebanon, our restaurant offers a cozy escape for those seeking exceptional flavors.
@@ -128,6 +128,7 @@ session_start();?>
     require('../footer.php');
     Footer();
     ?>
+    <script src="https://unpkg.com/swup@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>

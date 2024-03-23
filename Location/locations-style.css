@@ -12,7 +12,7 @@
 }
 
 /* Styling for the information section */
-.info {
+.infor {
     margin-left: 10%;
     display: flex;
     flex-direction: column;
@@ -29,12 +29,12 @@
 }
 
 /* Styling for paragraphs in the info section */
-.info p {
+.infor p {
     font-size: 18px;
 }
 
 /* Styling for buttons in the info section */
-.info button {
+.infor button {
     margin-top: 5%;
     margin-left: -5px;
     padding: 2%;
@@ -47,13 +47,13 @@
 }
 
 /* Styling for links inside buttons */
-.info button a {
+.infor button a {
     text-decoration: none;
     color: #f6f6f6;
 }
 
 /* Hover effect for buttons */
-.info button:hover {
+.infor button:hover {
     background-color: #cd4252;
 }
 
@@ -210,7 +210,7 @@
     .beginning {
         margin-bottom: 100px;
     }
-    .info {
+    .infor {
         margin-top: -100px;
         margin-left: 5%;
         max-width: 40%;
@@ -238,20 +238,20 @@
     .slider{
         display: none;
     }
-    .info {
+    .infor {
         margin-top: 40px;
         max-width: 800px;
     }
-    .info h2{
+    .infor h2{
         margin-left: -10px;
         font-size:  90px;
     }
    
-    .info p{
+    .infor p{
         margin: 10px 0px;
         font-size: 20px;
     }
-    .info button{
+    .infor button{
         margin-top: 2%;
         margin-left: -10px;
         padding: 2%;
@@ -272,20 +272,20 @@
     .slider{
         display: none;
     }
-    .info {
+    .infor {
         margin-top: 40px;
         max-width: 700px;
     }
-    .info h2{
+    .infor h2{
         margin-left: -10px;
         font-size:  90px;
     }
    
-    .info p{
+    .infor p{
         margin: 10px 0px;
         font-size: 20px;
     }
-    .info button{
+    .infor button{
         margin-top: 2%;
         margin-left: -10px;
         padding: 2%;
@@ -306,23 +306,23 @@
     .slider{
         display: none;
     }
-    .info {
+    .infor {
         display: flex;
         justify-content: center;
         align-content: center;
         margin-top: 40px;
         max-width: 700px;
     }
-    .info h2{
+    .infor h2{
         margin-left: -10px;
         font-size:  70px;
     }
    
-    .info p{
+    .infor p{
         margin: 10px 0px;
         font-size: 20px;
     }
-    .info button{
+    .infor button{
         margin-top: 2%;
         margin-left: -10px;
         padding: 2%;
@@ -343,20 +343,20 @@
     .slider{
         display: none;
     }
-    .info {
+    .infor {
         margin-top: 40px;
         max-width: 700px;
     }
-    .info h2{
+    .infor h2{
         margin-left: -10px;
         font-size:  60px;
     }
    
-    .info p{
+    .infor p{
         margin: 10px 0px;
         font-size: 20px;
     }
-    .info button{
+    .infor button{
         margin-top: 2%;
         margin-left: -10px;
         padding: 2%;
@@ -380,7 +380,7 @@
     .slider{
         display: none;
     }
-    .info {
+    .infor {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -389,16 +389,16 @@
         max-width: 700px;
         text-align: center;
     }
-    .info h2{
+    .infor h2{
         margin-left: -10px;
         font-size:  50px;
     }
    
-    .info p{
+    .infor p{
         margin: 10px 0px;
         font-size: 20px;
     }
-    .info button{
+    .infor button{
         margin-top: 2%;
         margin-left: -10px;
         padding: 2%;
