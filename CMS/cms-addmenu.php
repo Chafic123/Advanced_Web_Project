@@ -23,7 +23,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         //Check if item already found
         $query = "SELECT * FROM menuitem where ItemName LIKE ?";
         $stmt=$conn->prepare($query);
-        $stmt->bind_param("i", $name);
+        $stmt->bind_param("s", $name);
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
@@ -61,29 +61,25 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
             if (move_uploaded_file($photoTmpName, $targetFile)) {
                 // Insert image data into database
                 $sql = "INSERT INTO menuitem (ItemName, Category, Description, Price, Photo, IsActive) VALUES ('$name', '$catID', '$descr', '$price', '$photoName', 1)";
-                if ($conn->query($sql) === true) {
-                    $_SESSION["message"] = array(
-                        "text" => "Image uploaded successfully.",
-                        "timestamp" => time() // Store the current timestamp
-                    );
-                } else {
+                if (!$conn->query($sql) === true) {
                     $_SESSION["message"] = array(
                         "text" => "Error: " . $sql . "<br>" . $conn->error,
                         "timestamp" => time() // Store the current timestamp
                     );
-                
                 }
             } else {
                 $_SESSION["message"] = array(
                     "text" => "Error uploading image.",
                     "timestamp" => time() // Store the current timestamp
                 );                
-            }
-                
-            // Redirect to cms-viewmenu.php
-            header("Location: cms-viewmenu.php");
-            exit();
+            }            
         }   
+
+        $conn->close();
+
+        // Redirect to cms-viewmenu.php
+        header("Location: cms-viewmenu.php");
+        exit();
     }
 }else{
     header("Location: ../Home/index.php");

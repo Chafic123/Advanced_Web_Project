@@ -20,32 +20,16 @@ $(document).ready(function(){
                 $("#ratings-cat").html(data);
             }
         })
-
+        
         reviewtable();
     });
 
     $("#ratings-cat").change(function(){
-        if($("#orderOfRating")===null){
-            $("#rce").show();
-        }
-        else{
-            $("#rce").hide();
-            $("#roe").hide();
-
-            reviewtable();
-        }
+        reviewtable();
     });
 
     $("#order-rate").change(function(){
-        if($("#ratings-cat")===null){
-            $("#roe").show();
-        }
-        else{
-            $("#rce").hide();
-            $("#roe").hide();
-
-            reviewtable();
-        }
+        reviewtable();
     });
 
     $("#reset").click(function(){

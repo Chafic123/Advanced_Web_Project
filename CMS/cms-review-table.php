@@ -10,7 +10,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         echo'
         <thead>
             <tr>
-            <th scope="col">Date</th>
+                <th scope="col">Date</th>
                 <th scope="col">Email</th>
                 <th scope="col">Delivery Time</th>
                 <th scope="col">Food Quality</th>
@@ -37,9 +37,6 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
                 $accNum=$row["AccountNum"];
                 $accEmail="SELECT Email from account where AccountNum LIKE ?";
                 $stmt=$conn->prepare($accEmail);
-                if(!$stmt){
-                    return false;
-                }
                 $stmt->bind_param("i", $accNum);
                 $stmt->execute();
                 $email = $stmt->get_result();
@@ -91,9 +88,6 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
                 $accNum=$row["AccountNum"];
                 $accEmail="SELECT Email from account where AccountNum LIKE ?";
                 $stmt=$conn->prepare($accEmail);
-                if(!$stmt){
-                    return false;
-                }
                 $stmt->bind_param("i", $accNum);
                 $stmt->execute();
                 $email = $stmt->get_result();
@@ -167,7 +161,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         else{
             echo"No Reviews!";
         }
-    }            
+    }    
 }else{
     header("Location: ../Home/index.php");
 }

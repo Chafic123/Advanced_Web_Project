@@ -9,7 +9,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
     $id=$_GET['id'];
     $query="Select Photo From menuitem where ItemNum= ?";
     $stmt=$conn->prepare($query);
-    $stmt->bind_param("s", $id);
+    $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
     $stmt->close();
@@ -29,18 +29,20 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
     $stmt->bind_param("i", $id);
     if ($stmt->execute()){
         $stmt->close();
+
         $sql="Delete from menuitem where ItemNum=?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
-
         if ($stmt->execute()){
             header("Location:cms-viewmenu.php");
         }
+        
+        $stmt->close();
     }
     else{
         echo $conn->error;
     }
-
+    $conn->close();
 }else{
     header("Location: ../Home/index.php");
 }

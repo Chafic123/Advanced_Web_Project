@@ -33,8 +33,9 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="form-group">
-                <label for="email">Category:</label>
-                <select id="category" class="form-select" name="category">
+                <label for="category">Category:</label>
+                <select class="form-select category" name="category">
+                    <option value="" disabled selected>Select Category</option>
                     <!-- Categories will be populated dynamically using jQuery -->
                 </select>
             </div>
