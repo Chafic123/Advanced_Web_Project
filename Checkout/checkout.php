@@ -92,16 +92,35 @@ include('../config.php');
                         </div>
                         <div class="payment-element c">
                             <label for="" class="payment-lbl">Card Number:</label>
-                            <input type="text" name="cart_number" class="payment-lbl" placeholder="0000 0000 0000 0000" >
+                            <input type="text" name="cart_number" class="payment-lbl" pattern="[0-9]*" placeholder="0000 0000 0000 0000" maxlength="16">
                         </div>
                         <div class="final-payment-elements c">
                             <div class="payment-element">
                                 <label for="" class="payment-lbl">Expiration Date:</label>
-                                <input type="text" name="expiration" class="expiration" placeholder="dd/mm/yyyy" >
+                                <input type="date" name="expiration" class="expiration" placeholder="dd/mm/yyyy" >
                             </div>
-                            <div class="payment-element">
+                            <script>
+     //expiration
+    $(document).ready(function() {
+        $('#expiration').change(function() {
+            var expirationDate = $(this).val();
+            $.ajax({
+                url: 'set_expiration.php', 
+                method: 'POST',
+                data: { expirationDate: expirationDate },
+                success: function(response) {
+                    console.log(response); 
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText); 
+                }
+            });
+        });
+    });
+</script>
+       <div class="payment-element">
                                 <label for="" class="payment-lbl">CVV:</label>
-                                <input type="text" name="cvv" class="payment-lbl" placeholder="***" min="1" max="3">
+                                <input type="text" name="cvv" class="payment-lbl" placeholder="***" pattern="[0-9]*" minlength="1" maxlength="3">
                             </div>
 
                         </div>
@@ -117,8 +136,20 @@ include('../config.php');
                     </div>
 
                 </div>
+                <script>
+    function clearInputs() {
+        // Clear CVV input
+        $('.payment-lbl').val('');
+
+        // Clear expiration date input
+        $('.expiration').val('');
+        //clear payment method
+        $('#payment-method').val('');
+    }
+</script>
                 <?php
-                echo '<input name="order" id="order" type="submit" value="Order Now" data-account="'.$account.'">';
+                echo '<input name="order" id="order" type="submit" value="Order Now" onclick="clearInputs()" data-account="'.$account.'">';
+
                 ?>
             </div>
 

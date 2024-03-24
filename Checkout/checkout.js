@@ -33,7 +33,7 @@ $(document).ready(function () {
                     id:id,
                 },
                 success: function(response) {
-                    $(".total-price").html('$0.00');
+                    // $(".total-price").html('$0.00');
                     popUp();
                 },
                 error: function(xhr, status, error) {
