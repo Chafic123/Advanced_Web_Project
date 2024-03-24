@@ -64,51 +64,56 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
     <!-- edit popup -->
     <div class="modal fade" id="edit" tabindex="-1" style="top:10%;">
         <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="edit-label">Edit Menu Item</h5>
-                <button class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form action="edit-menu.php" method="post"enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="name">Number:</label>
-                        <input type="text" class="form-control-plaintext" id="id" name="id" readonly>
-                    </div>
-                    <hr>
-                    <h6>Please fill at least one of the following fields to edit data.</h6>
-                    <hr>
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="category">Category:</label>
-                        <select class="form-select category" name="category">
-                            <option value="" disabled selected>Select Category</option>
-                            <!-- Categories will be populated dynamically using jQuery -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="bio">Description:</label>
-                        <textarea class="form-control" id="descr" name="descr"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price:</label>
-                        <input type="number" step="0.01" class="form-control" id="price" name="price">
-                    </div>
-                    <div class="form-group">
-                        <label for="photo">Photo:</label>
-                        <input type="file" class="form-control" id="photo" name="photo">
-                    </div>
-            </div>
-            <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" name="edit">Edit Item</button>
-                    <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                </form>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit-label">Edit Menu Item</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="edit-menu.php" method="post"enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="name">Number:</label>
+                            <input type="text" class="form-control-plaintext" id="id" name="id" readonly>
+                        </div>
+                        <hr>
+                        <h6>Please fill at least one of the following fields to edit data.</h6>
+                        <hr>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category:</label>
+                            <select class="form-select category" name="category">
+                                <option value="" disabled selected>Select Category</option>
+                                <!-- Categories will be populated dynamically using jQuery -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bio">Description:</label>
+                            <textarea class="form-control" id="descr" name="descr"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price:</label>
+                            <input type="number" step="0.01" class="form-control" id="price" name="price">
+                        </div>
+                        <div class="form-group">
+                            <label for="photo">Photo:</label>
+                            <input type="file" class="form-control" id="photo" name="photo">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="edit">Edit Item</button>
+                        <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+
+    <?php
+    include "cms-footer.php";
+    ?>
 
     <script src="https://unpkg.com/swup@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

@@ -82,6 +82,10 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         </table>
         
     </div>
+
+    <?php
+    include "cms-footer.php";
+    ?>
     
     <script src="https://unpkg.com/swup@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
