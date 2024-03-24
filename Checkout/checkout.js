@@ -19,18 +19,16 @@ $(document).ready(function () {
     }
 
     // Closing pop up
-    let closePopUp = $("#close-btn");
-    closePopUp.on("click", () => {
-        popContainer.css("display", "none");
-        popUpMsg.css("display", "none");
-        window.location.href = "menu.html";
-        //resets the order and price
-        window.sessionStorage.removeItem('totalPrice');
-        window.sessionStorage.removeItem('order');
-    });
+    // let closePopUp = $("#close-btn");
+    // closePopUp.on("click", () => {
+    //     popContainer.css("display", "none");
+    //     popUpMsg.css("display", "none");
+    //     window.location.href = "menu.html";
+    //     //resets the order and price
+    //     window.sessionStorage.removeItem('totalPrice');
+    //     window.sessionStorage.removeItem('order');
+    // });
 
-
-    let totalP = JSON.parse(window.sessionStorage.getItem('totalPrice'))
     // Calculate the total price
     // Function to validate and add red border to bottom
     function validateAndHighlight(input) {
@@ -69,8 +67,9 @@ $(document).ready(function () {
             popUp()
         }
     });
+//selected city
 
-
+$("#city").val(city).toString();
 
     // Close the pop-up when the close button is clicked
     $('#close-btn').click(function () {
@@ -79,15 +78,80 @@ $(document).ready(function () {
         $('body').css('overflow', 'auto'); // Allow scrolling again
     });
 
-    $('#paymentMethod').change(function () {
+
+
+    $('#payment-method').change(function () {
         if ($(this).val() === 'Cash on Delivery') {
-            $('.payment-lbl').css("display", "none");
+            $('.c').hide(); 
         } else {
-            $('.payment-lbl').css("display", "flex");
+            // Show the card number and CVV
+            $('.c').show();
         }
     });
+ 
+}); 
+function preventDefaultt(e) {
+    e.preventDefault();
+}
+function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+        preventDefaultt(e);
+        return false;
+    }
+}
+var supportsPassive = false;
+try {
+    window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+        get: function () { supportsPassive = true; }
+    }));
+} catch (e) { }
 
+var wheelOpt = supportsPassive ? { passive: false } : false;
+var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+
+function disableScroll() {
+    window.addEventListener('DOMMouseScroll', preventDefaultt, false); // older FF
+    window.addEventListener(wheelEvent, preventDefaultt, wheelOpt); // modern desktop
+    window.addEventListener('touchmove', preventDefaultt, wheelOpt); // mobile
+    window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+}
+function enableScroll() {
+    window.removeEventListener('DOMMouseScroll', preventDefaultt, false);
+    window.removeEventListener(wheelEvent, preventDefaultt, wheelOpt);
+    window.removeEventListener('touchmove', preventDefaultt, wheelOpt);
+    window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+}
+//show the popUP
+let popContainer = $(".pop-up-container").eq(0);
+let popUpMsg = $(".pop-up").eq(0);
+
+function popUp() {
+    popContainer.css({
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    });
+    popUpMsg.css({
+        display: "flex",
+        flexDirection: "column"
+    });
+    $("body").css("overflow", "hidden")
+}
+
+$(document).ready(function() {
+    enableScroll();
+    let closePopUp = $("#close-btn");
+    closePopUp.on("click", function () {
+        popContainer.css("display", "none");
+        popUpMsg.css("display", "none");
+    });
+    $('#order').click(function(e) {
+        e.preventDefault(); 
+        popUp();
+    });
 });
+
+
 
 
 
