@@ -1,33 +1,49 @@
 $(document).ready(function () {
-    let valid = true
-    // Function to show the pop-up
-    let popContainer = $(".pop-up-container").eq(0);
-    let popUpMsg = $(".pop-up").eq(0);
 
-    // Pop up function
-    function popUp() {
-        popContainer.css({
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-        });
-        popUpMsg.css({
-            display: "flex",
-            flexDirection: "column"
-        });
-        $("body").css("overflow", "hidden")
-    }
+    // Apply validation on form submission
+    // $('#order').click(function (event) {
+    //     preventDefaultt(event);
+    //     var isValid = true;
 
-    // Closing pop up
-    // let closePopUp = $("#close-btn");
-    // closePopUp.on("click", () => {
-    //     popContainer.css("display", "none");
-    //     popUpMsg.css("display", "none");
-    //     window.location.href = "menu.html";
-    //     //resets the order and price
-    //     window.sessionStorage.removeItem('totalPrice');
-    //     window.sessionStorage.removeItem('order');
+    //     $('.required').each(function () {
+    //         isValid = validateAndHighlight($(this)) && isValid;
+    //     });
+    //     if (!isValid) {
+    //         valid = false;
+    //     }
+    //     else{
+    //         popUp();
+            // var fullname = $('#fullname').val();
+            // var phone = $('#phone').val();
+            // var address = $('#address').val();
+            // var city = $('#city').val();
+            // let fname=fullname.split(' ');
+            // let f=fname[0];
+            // let lname=fname[1];
+            // let id=$('#order').data('account');
+            // $.ajax({
+            //     type: 'POST',
+            //     url: 'checkout-order.php',
+            //     data: {
+            //         fname: f,
+            //         lname:lname,
+            //         phone: phone,
+            //         address: address,
+            //         city: city,
+            //         id:id,
+            //     },
+            //     success: function(response) {
+            //         popUp();
+            //         console.log(response);
+            //     },
+            //     error: function(xhr, status, error) {
+            //         console.error(xhr.responseText);
+            //     }
+            // });
+    //     }
     // });
+
+    let valid = true
 
     // Calculate the total price
     // Function to validate and add red border to bottom
@@ -39,8 +55,11 @@ $(document).ready(function () {
             isValid = parts.length >= 2;
         } else if (input.attr('name') === 'phone') {
             isValid = /^\+\d+$/.test(input.val().trim());
-        } else {
-            isValid = input.val().trim() !== '';
+        // } else if($("#payment-method").val()=""){
+        //     isValid=false;
+        // 
+        }else{
+            isValid = input.val().trim() !== '' && $("#payment-method").val().trim() !== '';
         }
 
         input.css('border-bottom', isValid ? '1px solid black' : '1px solid red');
@@ -52,23 +71,8 @@ $(document).ready(function () {
         validateAndHighlight($(this));
     });
 
-    // Apply validation on form submission
-    $('form').submit(function (event) {
-        var isValid = true;
-
-        $('.required').each(function () {
-            isValid = validateAndHighlight($(this)) && isValid;
-        });
-        event.preventDefault(); // Prevent the form from submitting in case of errors
-        if (!isValid) {
-            valid = false;
-        }
-        else{
-            popUp()
-        }
-    });
+    
 //selected city
-
 $("#city").val(city).toString();
 
     // Close the pop-up when the close button is clicked
@@ -89,7 +93,7 @@ $("#city").val(city).toString();
         }
     });
  
-}); 
+
 function preventDefaultt(e) {
     e.preventDefault();
 }
@@ -138,20 +142,14 @@ function popUp() {
     $("body").css("overflow", "hidden")
 }
 
-$(document).ready(function() {
     enableScroll();
     let closePopUp = $("#close-btn");
     closePopUp.on("click", function () {
         popContainer.css("display", "none");
         popUpMsg.css("display", "none");
     });
-    $('#order').click(function(e) {
-        e.preventDefault(); 
-        popUp();
-    });
-});
 
-
+}); 
 
 
 

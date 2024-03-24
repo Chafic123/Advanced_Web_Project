@@ -82,7 +82,8 @@ include('../config.php');
             <h2 class='total-title'>Total:</h2>
             <p class='total-price' id='total-price'>";
             require_once('add_to_cart.php');
-            calcTotal($account);
+            $total=calcTotal($account);
+            echo "$" . strval(number_format($total, 2, '.', ""));
             echo "  
             </p>
             <button class='checkout-btn'>

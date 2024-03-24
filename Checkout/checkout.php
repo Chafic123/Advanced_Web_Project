@@ -1,81 +1,13 @@
 
-<?php session_start();
+<?php 
 
-    require("../sign-forms.php");
-    include('../config.php');
-    signForms();
-    $account = isset($_SESSION['id']) ? ($_SESSION['id']) : (3);
-
-    
-
-    $accInfo=findAccountInfo();
-    $fname=$accInfo[0];
-    $lname=$accInfo[1];
-    $Add=$accInfo[2];
-    $phone=$accInfo[3];
-    $city=$accInfo[4];
-    function findAccountInfo()
-    {
-        global $account;
-        global $conn;
-        if ($account != 3) {
-            $query = "SELECT * FROM account WHERE AccountNum = ?";
-            $stmt = $conn->prepare($query);
-            if (!$stmt) {
-                return false;
-            }
-
-            $stmt->bind_param("i", $account);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $stmt->close();
-    
-            $accInfo = mysqli_fetch_array($result);
-            return [$accInfo['FirstName'], $accInfo['LastName'], $accInfo['Address'],$accInfo['Phone'],$accInfo['City']];
-        }
-        return ['', '', '','','' ];
-    }
-    require_once('../Cart/add_to_cart.php');
-    // $totalPrice=calcTotal($account);
-
-    if (isset($_POST['order'])) {
-        // Insert the new order into the orders table
-        $insertQuery = "INSERT INTO orders (AccountNum, TotalPrice) VALUES (?,  ?)";
-        $stmt = $conn->prepare($insertQuery);
-        $stmt->bind_param("ii", $account, calcTotal($account));
-        $stmt->execute();
-        $selectmax="SELECT MAX(OrderNum) as OrderNum from orders";
-        $res=mysqli_query($conn,$selectmax);
-        $row=mysqli_fetch_assoc($res);
-        $newOrderNum = $row["OrderNum"];
-    
-        $ItemArray = [];
-        $selectQuery = "SELECT ItemNum, Quantity FROM Cart WHERE AccountNum = ?";
-        $stmt = $conn->prepare($selectQuery);
-        $stmt->bind_param("i", $account);
-        $stmt->execute();
-        $stmt->bind_result($itemNum, $quantity); 
-    
-        while ($stmt->fetch()) {
-            $ItemArray[] = ['ItemNum' => $itemNum, 'Quantity' => $quantity];
-        }
-    
-        foreach ($ItemArray as $item) {
-            $insertIncludesQuery = "INSERT INTO includes (OrderNum, ItemNum, Quantity) VALUES (?, ?, ?)";
-            $stmt = $conn->prepare($insertIncludesQuery);
-            $stmt->bind_param("iii", $newOrderNum, $item['ItemNum'], $item['Quantity']);
-            $stmt->execute();
-        }
-          //delete all rows from thew cart items
-        $deleteQuery = "DELETE FROM Cart WHERE AccountNum = ?";
-        $stmt = $conn->prepare($deleteQuery);
-        $stmt->bind_param("i", $account);
-        $stmt->execute();
-    }
-
-
-
+if(session_status()!=2){
+    session_start();
+}
+include('../config.php');
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <title>Checkout</title>
@@ -89,11 +21,16 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="checkout-style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://fonts.cdnfonts.com/css/tw-cen-mt-std" rel="stylesheet">
 </head>
 
 <body class="transition-fade">
+    <?php
+    require("../sign-forms.php");
+    signForms();
+    include "account-info.php";
+    ?>
+
     <!-- Main Content -->
     <main>
         <a id="back-div" href="../Cart/cart.php">
@@ -104,7 +41,8 @@
             </svg>
             <h3 id="back-to-cart">Back to Cart</h2>
         </a>
-        <form class="checkout-content">
+        
+        <form class="checkout-content" action="checkout-order.php" method="post" id="formOrder">
 
             <div class="main-content">
                 <div class="checkout-section sub-section">
@@ -136,40 +74,6 @@
                     </div>
                 </div>
 
-                <script>
-//update the inputs
-    $(document).ready(function() {
-        $('#order').click(function(e) {
-            e.preventDefault(); 
-            var fullname = $('#fullname').val();
-            var phone = $('#phone').val();
-            var address = $('#address').val();
-            var city = $('#city').val();
-            let fname=fullname.split(' ');
-            let f=fname[0];
-            let lname=fname[1];
-            $.ajax({
-                type: 'POST',
-                url: 'update_account.php',
-                data: {
-                    fname: f,
-                    lname:lname,
-                    phone: phone,
-                    address: address,
-                    city: city,
-                    id:<?php echo $account;  ?>
-                },
-                success: function(response) {
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-        })
-    });
-</script>
-
                 <div class="checkout-section sub-section">
                     <div class="payment-info">
                         <h4>Payment</h4>
@@ -182,6 +86,7 @@
                                 <option value="American Express Card">American Express Card</option>
                                 <option value="Cash on Delivery"> Cash on Delivery</option>
                             </select>
+                            <small class="error"></small>
                             <p>*note that when Cash on Delivery is selected, you are not required to fill out card
                                 details</p>
                         </div>
@@ -196,7 +101,7 @@
                             </div>
                             <div class="payment-element">
                                 <label for="" class="payment-lbl">CVV:</label>
-                                <input type="text" name="cvv" class="payment-lbl" placeholder="***" >
+                                <input type="text" name="cvv" class="payment-lbl" placeholder="***" min="1" max="3">
                             </div>
 
                         </div>
@@ -204,15 +109,17 @@
                             <h3 class="total-title">Total:</h3>
                             <p class="total-price">
                         <?php 
-                        calcTotal($account);?>
-            </p>
+                        echo "$" . strval(number_format($total, 2, '.', ""));
+                        ?>
+                        </p>
                         </div>
 
                     </div>
 
                 </div>
-                <input name="order" id="order" type="submit" value="Order Now">
-
+                <?php
+                echo '<input name="order" id="order" type="submit" value="Order Now" data-account="'.$account.'">';
+                ?>
             </div>
 
         </form>
@@ -236,6 +143,7 @@
     var city = "<?php echo $city; ?>";
     </script>
     <script src="https://unpkg.com/swup@4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="checkout.js"></script>
 </body>
 

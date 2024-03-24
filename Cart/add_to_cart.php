@@ -21,6 +21,6 @@ function calcTotal($account)
     }
     $stmt->close();
     $result->free();
-    echo "$" . strval(number_format($total, 2, '.', ""));
+    return $total;
 }
 
