@@ -1,47 +1,47 @@
 $(document).ready(function () {
 
     // Apply validation on form submission
-    // $('#order').click(function (event) {
-    //     preventDefaultt(event);
-    //     var isValid = true;
+    $('#order').click(function (event) {
+        preventDefaultt(event);
 
-    //     $('.required').each(function () {
-    //         isValid = validateAndHighlight($(this)) && isValid;
-    //     });
-    //     if (!isValid) {
-    //         valid = false;
-    //     }
-    //     else{
-    //         popUp();
-            // var fullname = $('#fullname').val();
-            // var phone = $('#phone').val();
-            // var address = $('#address').val();
-            // var city = $('#city').val();
-            // let fname=fullname.split(' ');
-            // let f=fname[0];
-            // let lname=fname[1];
-            // let id=$('#order').data('account');
-            // $.ajax({
-            //     type: 'POST',
-            //     url: 'checkout-order.php',
-            //     data: {
-            //         fname: f,
-            //         lname:lname,
-            //         phone: phone,
-            //         address: address,
-            //         city: city,
-            //         id:id,
-            //     },
-            //     success: function(response) {
-            //         popUp();
-            //         console.log(response);
-            //     },
-            //     error: function(xhr, status, error) {
-            //         console.error(xhr.responseText);
-            //     }
-            // });
-    //     }
-    // });
+        // var isValid = true;
+
+        // $('.required').each(function () {
+        //     isValid = validateAndHighlight($(this)) && isValid;
+        // });
+        // if (!isValid) {
+        //     valid = false;
+        // }
+        // else{
+            var fullname = $('#fullname').val();
+            var phone = $('#phone').val();
+            var address = $('#address').val();
+            var city = $('#city').val();
+            let fname=fullname.split(' ');
+            let f=fname[0];
+            let lname=fname[1];
+            let id=$('#order').data('account');
+            $.ajax({
+                type: 'POST',
+                url: 'checkout-order.php',
+                data: {
+                    fname: f,
+                    lname:lname,
+                    phone: phone,
+                    address: address,
+                    city: city,
+                    id:id,
+                },
+                success: function(response) {
+                    $(".total-price").html('$0.00');
+                    popUp();
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        // }
+    });
 
     let valid = true
 

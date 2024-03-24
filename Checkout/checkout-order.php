@@ -2,7 +2,6 @@
     include "../config.php";
     include "account-info.php";
 
-    if (isset($_POST['order'])) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $fullname = $_POST['fname'];
@@ -27,7 +26,7 @@
         } else {
             echo "Invalid request method.";
         }
-        
+
         // Insert the new order into the orders table
         $insertQuery = "INSERT INTO orders (AccountNum, TotalPrice) VALUES (?,  ?)";
         $stmt = $conn->prepare($insertQuery);
@@ -61,10 +60,9 @@
         if($stmt = $conn->prepare($deleteQuery)){
             $stmt->bind_param("i", $account);
             $stmt->execute();
-            header( "Location: checkout.php" );
         }
         else{
             echo "error";
         }  
-    }
+    
 ?>

@@ -42,7 +42,7 @@ include('../config.php');
             <h3 id="back-to-cart">Back to Cart</h2>
         </a>
         
-        <form class="checkout-content" action="checkout-order.php" method="post" id="formOrder">
+        <form class="checkout-content" id="formOrder">
 
             <div class="main-content">
                 <div class="checkout-section sub-section">
