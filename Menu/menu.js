@@ -138,7 +138,7 @@ $(document).ready(function () {
         }
     });
     //opens cart if logged in
-    $(".cart-btns").click(function(){
+    $(".cart-btns").click(function () {
         if (account != 3) {
             window.open("../Cart/cart.php", "_self");
         }
@@ -175,10 +175,12 @@ $(document).ready(function () {
                         }).done(function (response, status, xhr) {
                             if (status === "success") {
                                 //displays success msg
-                                success.show()
-                                setTimeout(function () {
-                                    success.hide()
-                                }, 5000);
+                                if (qt != 0 && !isNaN(qt)) {
+                                    success.show()
+                                    setTimeout(function () {
+                                        success.hide()
+                                    }, 5000);
+                                }
                                 //updates total price of the items in cart
                                 $("#total-price").text(response);
                                 //updates the count of items that appears on the cart icon
@@ -224,10 +226,12 @@ $(document).ready(function () {
             }).done(function (response, status, xhr) {
                 if (status === "success") {
                     //displays success msg
-                    success.show()
-                    setTimeout(function () {
-                        success.hide()
-                    }, 5000);
+                    if (qt != 0 && !isNaN(qt)) {
+                        success.show()
+                        setTimeout(function () {
+                            success.hide()
+                        }, 5000);
+                    }
                     //updates total price of the items in cart
                     $("#total-price").text(response);
                     //updates the count of items that appears on the cart icon
