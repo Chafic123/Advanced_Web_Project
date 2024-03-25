@@ -25,6 +25,30 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         include "cms-nav.php";
     ?>
 
+    <?php
+    if (isset($_SESSION["message"])) {
+        include "error-popup.php";
+    }
+    // // Check if a message is set in the session and if it's an array
+    // if (isset($_SESSION["message"]) && is_array($_SESSION["message"])) {
+    //     // Display the message
+    //     echo "<div id='message'>" . $_SESSION["message"]["text"] . "</div>";
+
+    //     // Check if 5 seconds have passed since the message was set
+    //     if (time() - $_SESSION["message"]["timestamp"] >= 5) {
+    //         // Unset the message from the session
+    //         unset($_SESSION["message"]);
+    //     } else {
+    //         // Add JavaScript to hide the message after 5 seconds
+    //         echo "<script>
+    //                 setTimeout(function() {
+    //                     document.getElementById('message').style.display = 'none';
+    //                 }, 5000); // 5000 milliseconds = 5 seconds
+    //               </script>";
+    //     }
+    // }
+    ?>
+
     <form action="filter-menu.php" method="post" id="filter-menu">
         <div class="form-group">
             <label for="search">Search:</label>

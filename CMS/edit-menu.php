@@ -43,12 +43,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
             $stmt->close();
 
             if ($result && ($result->num_rows > 0)) { 
-                while ($row = $result->fetch_assoc()) {
-                    $_SESSION["message"] = array(
-                        "text" => "Item already found!",
-                        "timestamp" => time() // Store the current timestamp
-                    );
-                }
+                $_SESSION["message"] = "Item already found!";
                 header("Location: cms-viewmenu.php");
             }else{
                 $query1="UPDATE menuitem SET ItemName=? where  ItemNum=?;";

@@ -29,12 +29,8 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         $stmt->close();
 
         if ($result && ($result->num_rows > 0)) { 
-            while ($row = $result->fetch_assoc()) {
-                $_SESSION["message"] = array(
-                    "text" => "Item already found!",
-                    "timestamp" => time() // Store the current timestamp
-                );
-            }
+            $_SESSION["message"] = "Item already found!";
+            header("Location: cms-addmenuform.php");           
         }
         else{
 
@@ -62,23 +58,20 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
                 // Insert image data into database
                 $sql = "INSERT INTO menuitem (ItemName, Category, Description, Price, Photo, IsActive) VALUES ('$name', '$catID', '$descr', '$price', '$photoName', 1)";
                 if (!$conn->query($sql) === true) {
-                    $_SESSION["message"] = array(
-                        "text" => "Error: " . $sql . "<br>" . $conn->error,
-                        "timestamp" => time() // Store the current timestamp
-                    );
+                    $_SESSION["message"] = "Error: " . $sql . "<br>" . $conn->error;
+                    header("Location: cms-addmenuform.php");           
+                }
+                else{
+                    header("Location: cms-viewmenu.php");
                 }
             } else {
-                $_SESSION["message"] = array(
-                    "text" => "Error uploading image.",
-                    "timestamp" => time() // Store the current timestamp
-                );                
+                $_SESSION["message"] = "Error uploading image.";     
+                header("Location: cms-addmenuform.php");           
             }            
         }   
 
         $conn->close();
 
-        // Redirect to cms-viewmenu.php
-        header("Location: cms-viewmenu.php");
         exit();
     }
 }else{

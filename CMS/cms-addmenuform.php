@@ -24,6 +24,12 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
     <?php
         include "cms-nav.php";
     ?>
+
+    <?php
+    if (isset($_SESSION["message"])) {
+        include "error-popup.php";
+    }    
+    ?>
     
     <div class="container pt-5">
     <h2 class="my-4">Add Menu Item</h2>
