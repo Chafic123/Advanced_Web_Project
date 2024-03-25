@@ -58,7 +58,11 @@ function NavBar()
                     </a>
                 </div>
             </li>
-            <li style='text-align: center;'><button id='sign-out-btn' class='sign-out'>Sign Out</button></li>";
+            <li style='text-align: center;'>
+                <form action='../signout.php' method='post'>
+                    <button id='sign-out-btn' class='sign-out' name='signout'>Sign Out</button>
+                </form>
+            </li>";
     }
     echo "
             </ul>

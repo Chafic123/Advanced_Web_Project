@@ -6,9 +6,8 @@ if(isset($_POST['signout'])){
     // Unset all session variables
     session_unset();
     // Destroy the session
-    if(session_destroy()){
-        header("location:Home/index.php");
-    }
+    session_destroy();
+    header("location:Home/index.php");
     exit();
 }
 ?>
