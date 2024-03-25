@@ -92,12 +92,12 @@ include('../config.php');
                         </div>
                         <div class="payment-element c">
                             <label for="" class="payment-lbl">Card Number:</label>
-                            <input type="text" name="cart_number" class="payment-lbl" pattern="[0-9]*" placeholder="0000 0000 0000 0000" maxlength="16">
+                            <input type="text" name="cart_number" class="payment-lbl" pattern="[0-9]*" placeholder="0000 0000 0000 0000" maxlength="16" id="cn">
                         </div>
                         <div class="final-payment-elements c">
                             <div class="payment-element">
                                 <label for="" class="payment-lbl">Expiration Date:</label>
-                                <input type="date" name="expiration" class="expiration" placeholder="dd/mm/yyyy" >
+                                <input type="date" name="expiration" class="expiration" placeholder="dd/mm/yyyy" id="expdate">
                             </div>
                             <script>
      //expiration
@@ -120,7 +120,7 @@ include('../config.php');
 </script>
        <div class="payment-element">
                                 <label for="" class="payment-lbl">CVV:</label>
-                                <input type="text" name="cvv" class="payment-lbl" placeholder="***" pattern="[0-9]*" minlength="1" maxlength="3">
+                                <input type="text" name="cvv" class="payment-lbl" placeholder="***" pattern="[0-9]*" minlength="1" maxlength="3" id="cvv">
                             </div>
 
                         </div>

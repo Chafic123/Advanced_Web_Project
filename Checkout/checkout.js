@@ -33,7 +33,11 @@ $(document).ready(function () {
                     id:id,
                 },
                 success: function(response) {
-                    // $(".total-price").html('$0.00');
+                    $(".total-price").html('$0.00');
+                    $("#payment-method").val("");
+                    $("#expdate").val("");
+                    $("#cvv").val("");
+                    $('.c').show();
                     popUp();
                 },
                 error: function(xhr, status, error) {

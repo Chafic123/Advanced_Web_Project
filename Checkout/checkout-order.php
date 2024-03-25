@@ -1,7 +1,7 @@
 <?php
     include "../config.php";
     include "account-info.php";
-    include "../add";
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $fullname = $_POST['fname'];
@@ -10,8 +10,6 @@
             $address = $_POST['address'];
             $city = $_POST['city'];
             $account = $_POST['id'];
-            require_once('../add_to_cart.php');
-            $total=calcTotal($account);
             if ($conn) {
                 // Update account information
                 $updateQuery = "UPDATE account SET FirstName=?, LastName=?, Phone=?, Address=?, City=? WHERE AccountNum=?";
