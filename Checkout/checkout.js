@@ -20,7 +20,6 @@ $(document).ready(function () {
             url: 'checkout-order.php',
             data: $('#formOrder').serialize(),
             success: function (response) {
-                // $(".total-price").html('$0.00');
                 popUp();
             },
             error: function (xhr, status, error) {
@@ -67,7 +66,7 @@ $(document).ready(function () {
         $('#overlay').addClass('hidden');
         $('#popup-container').addClass('hidden');
         $('body').css('overflow', 'auto'); // Allow scrolling again
-        window.location.href='../Home/index.php'
+        window.location.href='../Menu/menu.php'
     });
 
 
