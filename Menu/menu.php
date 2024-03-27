@@ -66,7 +66,6 @@ if(session_status()!=2){
                 <!-- Menu Items Will be Displayed Here -->
                 <?php
                 require_once("menu-repository.php");
-                generateItems(0);
                 ?>
             </div>
         </div>
