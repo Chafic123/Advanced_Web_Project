@@ -5,7 +5,10 @@
 }
 body{
     background-color: beige;
-
+margin: 0;
+background:white;
+display: flex;
+justify-content: center;
 }
 
 main{
@@ -30,11 +33,6 @@ main h4{
     padding-left: 6px;
 }
 
-body {
-    background:white;
-    display: flex;
-    justify-content: center;
-}
 main {
     display: flex;
     flex-direction: column;

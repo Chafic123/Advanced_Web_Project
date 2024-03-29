@@ -19,6 +19,7 @@ include('../config.php');
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="checkout-style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://fonts.cdnfonts.com/css/tw-cen-mt-std" rel="stylesheet">
 </head>
 
@@ -72,8 +73,8 @@ include('../config.php');
                     <div class="payment-info">
                         <h4>Payment</h4>
                         <div class="payment-element">
-                            <label for="" class="payment-lbl" id="">Payment Method:</label>
-                            <select name="payment-method" id="payment-method">
+                            <label for="payment-lbl">Payment Method:</label>
+                            <select name="payment-method" id="payment-method" >
                                 <option value="">Select Payment Method</option>
                                 <option value="Master Card">Master Card</option>
                                 <option value="Visa Card">Visa Card</option>
@@ -85,37 +86,39 @@ include('../config.php');
                                 details</p>
                         </div>
                         <div class="payment-element c">
-                            <label for="" class="payment-lbl">Card Number:</label>
-                            <input type="text" name="cart_number" class="payment-lbl" pattern="[0-9]*" placeholder="0000 0000 0000 0000" maxlength="16">
+                            <label for="payment-lbl">Card Number:</label>
+                            <input type="text" name="cart_number" class="required cvv" pattern="[0-9]*" placeholder="0000 0000 0000 0000" maxlength="16">
                         </div>
                         <div class="final-payment-elements c">
                             <div class="payment-element">
-                                <label for="" class="payment-lbl">Expiration Date:</label>
-                                <input type="date" name="expiration" class="expiration" placeholder="dd/mm/yyyy">
+                                <label for="payment-lbl" class="">Expiration Date:</label>
+                                <input type="date" name="expiration" class="required expiration" placeholder="dd/mm/yyyy">
                             </div>
                             <script>
-                                //expiration
-                                $(document).ready(function() {
-                                    $('#expiration').change(function() {
-                                        var expirationDate = $(this).val();
-                                        $.ajax({
-                                            url: 'set_expiration.php',
-                                            method: 'POST',
-                                            data: {
-                                                expirationDate: expirationDate
-                                            },
-                                            success: function(response) {
-                                                console.log(response);
-                                            },
-                                            error: function(xhr, status, error) {
-                                                console.error(xhr.responseText);
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
+    //expiration
+    $(document).ready(function() {
+        $('.expiration').change(function() {
+            var expirationDate = $(this).val();
+            if(expirationDate){
+            $.ajax({
+                url: 'set_expiration.php',
+                method: 'POST',
+                data: {
+                    expirationDate: expirationDate
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });}
+        });
+    });
+</script>
+
                             <div class="payment-element">
-                                <label for="" class="payment-lbl">CVV:</label>
+                                <label for="payment-lbl">CVV:</label>
                                 <input type="text" name="cvv" class="payment-lbl" placeholder="***" pattern="[0-9]*" minlength="1" maxlength="3">
                             </div>
 
@@ -135,7 +138,7 @@ include('../config.php');
                 <script>
                     function clearInputs() {
                         // Clear CVV input
-                        $('.payment-lbl').val('');
+                        $('payment-lbl').val('');
 
                         // Clear expiration date input
                         $('.expiration').val('');
@@ -159,7 +162,11 @@ include('../config.php');
                         <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
                     </svg>
                 </button>
-                <h2>Order Complete!</h2>
+                <style>h2{
+                    text-align: center;
+                    font-weight: bold;
+                }</style>
+                <h2 class="order completed">Order Complete!</h2>
                 <p>Thank you for your Order.<br>Your Order is on its way...</p>
             </div>
         </div>
@@ -168,7 +175,7 @@ include('../config.php');
         var city = "<?php echo $city; ?>";
     </script>
     <script src="https://unpkg.com/swup@4"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <script src="checkout.js"></script>
 </body>
 

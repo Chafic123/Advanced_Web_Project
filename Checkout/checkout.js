@@ -1,38 +1,67 @@
 $(document).ready(function () {
 
-    // Apply validation on form submission
-    $('#order').click(function (event) {
-        preventDefaultt(event);
-
-        // var isValid = true;
-
-        // $('.required').each(function () {
-        //     isValid = validateAndHighlight($(this)) && isValid;
-        // });
-        // if (!isValid) {
-        //     valid = false;
-        // }
-        // else{
-
-
-        $.ajax({
-            type: 'POST',
-            url: 'checkout-order.php',
-            data: $('#formOrder').serialize(),
-            success: function (response) {
-                popUp();
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
+        $('#order').click(function (event) {
+            event.preventDefault();
+            let isValid1 = true;
+            let isValid2 = true;
+            
+            $('.required').each(function () {
+                if (!validateAndHighlight($(this))) {
+                    isValid1 = false;
+                }
+            });
+        
+            if ($('#payment-method').val() !== 'Cash on Delivery') {
+                $('.payment-lbl').each(function () {
+                    if (!validateAndHighlight($(this))) {
+                        isValid2 = false;
+                    }
+                });
+            } else {
+                if ($(this).val() === 'Cash on Delivery') {
+                    $('.c').hide();
+                } else {
+                    $('.c').show();
+                }
+                isValid2 = true;
+            }
+        
+            if (isValid1 && isValid2) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'checkout-order.php',
+                    data: $('#formOrder').serialize(),
+                    success: function (response) {
+                        popUp();
+                    },
+                    error: function (xhr) {
+                        console.error(xhr.responseText);
+                    }
+                });
             }
         });
-        // }
     });
+    $('#payment-method').change(function () {
+        if ($(this).val() === 'Cash on Delivery') {
+            $('.c').hide();
+        } else {
 
-    let valid = true
+            $('.c').show();
+        }
+    });
+   // Check if payment method is "Cash on Delivery"
+//    if ($('#payment-method').val() === 'Cash on Delivery') {
+//     // Clear card number and CVV fields
+//     $('.payment-lbl').val('');
+// } else {
+//     // Validate card number and CVV fields
+//     $('.payment-lbl').each(function () {
+//         if (!validateAndHighlight($(this))) {
+//             isValid2 = false;
+//         }
+//     });
+// }
 
-    // Calculate the total price
-    // Function to validate and add red border to bottom
     function validateAndHighlight(input) {
         let isValid = true;
 
@@ -41,22 +70,25 @@ $(document).ready(function () {
             isValid = parts.length >= 2;
         } else if (input.attr('name') === 'phone') {
             isValid = /^\+\d+$/.test(input.val().trim());
-            // } else if($("#payment-method").val()=""){
-            //     isValid=false;
-            // 
         } else {
-            isValid = input.val().trim() !== '' && $("#payment-method").val().trim() !== '';
+            isValid = input.val().trim() !== '';
         }
 
-        input.css('border-bottom', isValid ? '1px solid black' : '1px solid red');
+        if (isValid) {
+            input.css('border', '1px solid black');
+            input.siblings('.error-message').remove(); 
+        } else {
+            input.siblings('.error-message').remove();
+            input.after(`<span class="error-message"
+            style="font-size: 14px;
+            font-style: italic;
+            font-weight: bold;
+            color: #ce5b68;
+            ">
+            *Cannot be Empty</span>`);
+        }
         return isValid;
     }
-
-    // Apply validation on input change
-    $('.required').change(function () {
-        validateAndHighlight($(this));
-    });
-
 
     //selected city
     $("#city").val(city).toString();
@@ -68,18 +100,6 @@ $(document).ready(function () {
         $('body').css('overflow', 'auto'); // Allow scrolling again
         window.location.href='../Menu/menu.php'
     });
-
-
-
-    $('#payment-method').change(function () {
-        if ($(this).val() === 'Cash on Delivery') {
-            $('.c').hide();
-        } else {
-            // Show the card number and CVV
-            $('.c').show();
-        }
-    });
-
 
     function preventDefaultt(e) {
         e.preventDefault();
@@ -136,7 +156,6 @@ $(document).ready(function () {
         popUpMsg.css("display", "none");
     });
 
-});
 
 
 
