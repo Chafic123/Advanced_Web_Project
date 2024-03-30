@@ -95,7 +95,8 @@ if (isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
                     labels: xValues,
                     datasets: [{
                         backgroundColor: barColors,
-                        data: yValues
+                        data: yValues,
+                        label: "Number of Items",
                     }]
                 },
                 options: {
@@ -117,6 +118,10 @@ if (isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
                         yAxes: [{
                             ticks: {
                                 beginAtZero: true,
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Amount  Sold'
                             }
                         }]
                     },

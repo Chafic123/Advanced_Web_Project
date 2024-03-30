@@ -170,7 +170,6 @@ $(document).ready(function () {
                     removeError(email);
                     email.val("");
                     passin.val("");
-                    $("#rem").prop("checked", false);
                     window.sessionStorage.setItem('SignedIn', 'true');
                     location.reload(true);
                     loginPopup.hide();
@@ -180,7 +179,6 @@ $(document).ready(function () {
                     removeError(email);
                     email.val("");
                     passin.val("");
-                    $("#rem").prop("checked", false);
                     window.location.href = "../CMS/cms.php";
                     loginPopup.hide();
                     backdrop.hide();
