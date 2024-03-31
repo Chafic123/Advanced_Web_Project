@@ -1,0 +1,19 @@
+/* label */
+.required{
+    color: red;
+}
+
+/*Error*/
+.form-group small{
+    display: flex;
+    color: red;
+    margin: 5px 0;
+    margin-left: 1.5%;
+    height: 10px;
+    font-size: 14px;
+    visibility: hidden;
+}
+
+.error small {
+    visibility: visible;
+}

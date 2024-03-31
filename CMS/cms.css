@@ -109,6 +109,52 @@ body {
     align-self: flex-end;
 }
 
+/*Pop-up Msg*/
+
+.pop-up-container {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    z-index: 50;
+    display: none;
+}
+
+.pop-up {
+    width: 300px;
+    height: 180px;
+    background-color: #F8EFE5;
+    z-index: 5;
+    display: none;
+    text-align: center;
+    border-radius: 12px;
+    position: absolute;
+}
+
+.pop-up h2 {
+    margin-bottom: 2%;
+}
+
+.close-btn {
+    background-color: #F8EFE5;
+    border: none;
+    font-size: 1.4rem;
+    align-self: flex-end;
+    margin: 2%;
+}
+
+.close-btn svg {
+    background-color: #F8EFE5;
+    fill: black;
+}
+
+.close-btn svg:hover {
+    fill: #FAD370;
+}
+
+.cms-popup{
+    display: block;
+}
 @media screen and (max-width: 950px) {
     .footer-div-p1 {
         font-size: 15px;

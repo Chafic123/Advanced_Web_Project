@@ -24,37 +24,36 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
 <body>
     <?php
         include "cms-nav.php";
-        include "cms-popup.php";
     ?>
 
     <?php
-    if(isset($_SESSION["success"])|| isset($_SESSION["message"])){
-        echo '<script>
-                let popContainer = document.getElementsByClassName("pop-up-container")[0];
-                let popUpMsg = document.getElementsByClassName("pop-up")[0];
-                let closePopUp = document.getElementById("close-btn");
+    // Check if a message is set in the session and if it's an array
+    if (isset($_SESSION["message"]) && is_array($_SESSION["message"])) {
+        // Display the message
+        echo "<div id='message'>" . $_SESSION["message"]["text"] . "</div>";
 
-                popContainer.style.display = "flex";
-                popContainer.style.alignItems = "center";
-                popContainer.style.justifyContent = "center";
-                popUpMsg.style.display = "flex";
-                popUpMsg.style.flexDirection = "column";
-
-                closePopUp.addEventListener("click", () => {
-                    popContainer.style.display = "none";
-                    popUpMsg.style.display = "none";
-                });            
-              </script>';
+        // Check if 5 seconds have passed since the message was set
+        if (time() - $_SESSION["message"]["timestamp"] >= 5) {
+            // Unset the message from the session
+            unset($_SESSION["message"]);
+        } else {
+            // Add JavaScript to hide the message after 5 seconds
+            echo "<script>
+                    setTimeout(function() {
+                        document.getElementById('message').style.display = 'none';
+                    }, 5000); // 5000 milliseconds = 5 seconds
+                  </script>";
+        }
     }
     ?>
     
     <div class="container pt-5">
     <h2 class="my-4">Add Menu Item</h2>
-        <form id="addForm" action="cms-addmenu.php" method="post"  enctype="multipart/form-data">
+        <form id="addForm">
             <div class="form-group">
                 <label for="name">Name</label>
                 <span class='required'>*</span>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" id="name" name="name" required>
                 <small></small>
             </div>
             <div class="form-group">
@@ -75,13 +74,13 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
             <div class="form-group">
                 <label for="price">Price</label>
                 <span class='required'>*</span>
-                <input type="number" step="0.01" class="form-control" id="price" name="price" >
+                <input type="number" step="0.01" class="form-control" id="price" name="price" required>
                 <small></small>
             </div>
             <div class="form-group">
                 <label for="photo">Photo</label>
                 <span class='required'>*</span>
-                <input type="file" class="form-control" id="photo" name="photo" accept="image/png, image/jpeg, image/jpg" >
+                <input type="file" class="form-control" id="photo" name="photo" accept="image/png, image/jpeg, image/jpg" required>
                 <small></small>
             </div>
 

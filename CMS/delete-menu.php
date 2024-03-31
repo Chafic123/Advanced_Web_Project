@@ -22,6 +22,9 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         if (file_exists($imagename)) {
             unlink($imagename);
         }
+        else{
+            $_SESSION["message"] = "Image not found.";
+        }
     }
 
     $q= "Delete from cart Where ItemNum=?";

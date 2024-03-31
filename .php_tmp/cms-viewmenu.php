@@ -24,27 +24,26 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
 <body>
     <?php
         include "cms-nav.php";
-        include "cms-popup.php";
     ?>
 
     <?php
-    if(isset($_SESSION["success"])|| isset($_SESSION["message"])){
-        echo '<script>
-                let popContainer = document.getElementsByClassName("pop-up-container")[0];
-                let popUpMsg = document.getElementsByClassName("pop-up")[0];
-                let closePopUp = document.getElementById("close-btn");
+    // Check if a message is set in the session and if it's an array
+    if (isset($_SESSION["message"]) && is_array($_SESSION["message"])) {
+        // Display the message
+        echo "<div id='message'>" . $_SESSION["message"]["text"] . "</div>";
 
-                popContainer.style.display = "flex";
-                popContainer.style.alignItems = "center";
-                popContainer.style.justifyContent = "center";
-                popUpMsg.style.display = "flex";
-                popUpMsg.style.flexDirection = "column";
-
-                closePopUp.addEventListener("click", () => {
-                    popContainer.style.display = "none";
-                    popUpMsg.style.display = "none";
-                });            
-              </script>';
+        // Check if 5 seconds have passed since the message was set
+        if (time() - $_SESSION["message"]["timestamp"] >= 5) {
+            // Unset the message from the session
+            unset($_SESSION["message"]);
+        } else {
+            // Add JavaScript to hide the message after 5 seconds
+            echo "<script>
+                    setTimeout(function() {
+                        document.getElementById('message').style.display = 'none';
+                    }, 5000); // 5000 milliseconds = 5 seconds
+                  </script>";
+        }
     }
     ?>
 
@@ -93,7 +92,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editForm" action="edit-menu.php" method="post"  enctype="multipart/form-data">
+                    <form id="editForm">
                         <div class="form-group">
                             <label for="name">Number:</label>
                             <input type="text" class="form-control-plaintext" id="id" name="id" readonly>
@@ -104,7 +103,6 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
                         <div class="form-group">
                             <label for="name">Name:</label>
                             <input type="text" class="form-control" id="name" name="name">
-                            <small></small>
                         </div>
                         <div class="form-group">
                             <label for="category">Category:</label>

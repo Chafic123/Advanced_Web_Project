@@ -31,8 +31,7 @@ echo '<!-- Navigation Bar -->
             </div>
         </div>
     </nav>';
-?>
-<?php
+
 }else{
     header("Location: ../Home/index.php");
 }
