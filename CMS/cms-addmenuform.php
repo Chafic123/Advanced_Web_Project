@@ -28,23 +28,25 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
     ?>
 
     <?php
-    if(isset($_SESSION["success"])|| isset($_SESSION["message"])){
-        echo '<script>
-                let popContainer = document.getElementsByClassName("pop-up-container")[0];
-                let popUpMsg = document.getElementsByClassName("pop-up")[0];
-                let closePopUp = document.getElementById("close-btn");
+   // Check if a message is set in the session and if it's an array
+   if(isset($_SESSION["message"])){
+    echo '<script>
+            let popContainer = document.getElementsByClassName("pop-up-container")[0];
+            let popUpMsg = document.getElementsByClassName("pop-up")[0];
+            let closePopUp = document.getElementById("close-btn");
 
-                popContainer.style.display = "flex";
-                popContainer.style.alignItems = "center";
-                popContainer.style.justifyContent = "center";
-                popUpMsg.style.display = "flex";
-                popUpMsg.style.flexDirection = "column";
+            popContainer.style.display = "flex";
+            popContainer.style.alignItems = "center";
+            popContainer.style.justifyContent = "center";
+            popUpMsg.style.display = "flex";
+            popUpMsg.style.flexDirection = "column";
 
-                closePopUp.addEventListener("click", () => {
-                    popContainer.style.display = "none";
-                    popUpMsg.style.display = "none";
-                });            
-              </script>';
+            closePopUp.addEventListener("click", () => {
+                popContainer.style.display = "none";
+                popUpMsg.style.display = "none";
+            });            
+          </script>';
+        unset($_SESSION["message"]);
     }
     ?>
     
@@ -94,9 +96,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
     ?>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/swup@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="../main.js"></script>
     <script src="cms-menu.js"></script>
 </body>
 

@@ -16,12 +16,9 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         if(isset($_SESSION["success"])){
             echo "<h2>Success!</h2>
             <p>".$_SESSION["success"]."</p>";
-            unset($_SESSION["success"]);    
         }else if (isset($_SESSION["message"])||(isset($_SESSION["message"])) && isset($_SESSION["success"])){
             echo "<h2>Error!</h2>
-            <p>".$_SESSION["message"]."</p>";
-            unset($_SESSION["message"]);
-            unset($_SESSION["success"]);    
+            <p>".$_SESSION["message"]."</p>";  
         }
         ?>
         </div>

@@ -20,32 +20,37 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
             $imagename= $basePath . '/' . $row['Photo'];
         }
         if (file_exists($imagename)) {
-            unlink($imagename);
+            if(unlink($imagename)){
+                $q= "Delete from cart Where ItemNum=?";
+                $stmt = $conn->prepare($q);
+                $stmt->bind_param("i", $id);
+                if ($stmt->execute()){
+                    $stmt->close();
+
+                    $sql="Delete from menuitem where ItemNum=?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("i", $id);
+                    if ($stmt->execute()){
+                        $_SESSION["success"] = "Item deleted successfully!";
+                    }
+                    
+                    $stmt->close();
+                }
+                else{
+                    $_SESSION["message"] = "Error: " . $sql . "<br>" . $conn->error;
+                }
+            }
+
         }
         else{
             $_SESSION["message"] = "Image not found.";
         }
     }
-
-    $q= "Delete from cart Where ItemNum=?";
-    $stmt = $conn->prepare($q);
-    $stmt->bind_param("i", $id);
-    if ($stmt->execute()){
-        $stmt->close();
-
-        $sql="Delete from menuitem where ItemNum=?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        if ($stmt->execute()){
-            header("Location:cms-viewmenu.php");
-        }
-        
-        $stmt->close();
-    }
     else{
-        echo $conn->error;
+        $_SESSION["message"] = "Item not found.";
     }
-    $conn->close();
+
+    header("Location: cms-viewmenu.php");
 }else{
     header("Location: ../Home/index.php");
 }

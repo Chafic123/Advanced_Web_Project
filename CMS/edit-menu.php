@@ -20,15 +20,6 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         $basePath=__DIR__;
 
         if(isset($name) && !empty($name)){
-            $query1="UPDATE menuitem SET ItemName=? where  ItemNum=?;";
-            $stmt=$conn->prepare($query1);
-            $stmt->bind_param("si", $name, $id);
-            if(!$stmt->execute()){
-                $_SESSION["message"] = "Error: " . $sql . "<br>" . $conn->error;
-                header("Location: cms-viewmenu.php");
-            }
-            $stmt->close();
-
             $qq="Select Photo From menuitem where ItemNum= ?";
             $stmt=$conn->prepare($qq);
             $stmt->bind_param("i", $id);
@@ -51,6 +42,14 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
                         $qqq = "UPDATE menuitem SET Photo=? where  ItemNum=?;";
                         $stmt=$conn->prepare($qqq);
                         $stmt->bind_param("si", $photoName, $id);
+                        if(!$stmt->execute()){
+                            $_SESSION["message"] = "Error: " . $sql . "<br>" . $conn->error;
+                        }
+                        $stmt->close();
+
+                        $query1="UPDATE menuitem SET ItemName=? where  ItemNum=?;";
+                        $stmt=$conn->prepare($query1);
+                        $stmt->bind_param("si", $name, $id);
                         if(!$stmt->execute()){
                             $_SESSION["message"] = "Error: " . $sql . "<br>" . $conn->error;
                         }
