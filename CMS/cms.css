@@ -1,11 +1,19 @@
+@import url('https://fonts.cdnfonts.com/css/tw-cen-mt-std');
+
 * {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
 }
+
 html {
     scroll-behavior: smooth;
 }
+body{
+    background-color: beige;
+    overflow-x: hidden;
+}
+
 ::-webkit-scrollbar {
     width: 9px;
 }
@@ -33,6 +41,118 @@ body {
     margin: 0;
 }
 
+div {
+    display: block;
+    unicode-bidi: isolate;
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+    margin: 0.5%;
+    font-family: 'Tw Cen MT Std', sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+a,
+button {
+    color: black;
+}
+
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+/* Side Image/Patter */
+.image {
+    width: 10%;
+    height: 120vh;
+    overflow: hidden;
+}
+  
+.image>img {
+    height: 100%;
+    object-fit: cover;
+}
+
+/*  */
+.title-text h1 {
+    font-size: 4.9rem;
+    margin: 5px 0;
+    color: black;
+}  
+
+/* hide imamge for bigger screen */
+.title-img {
+    display: none;
+}
+
+/*  */
+.bs{
+    padding: 1.3%;
+    border-radius: 30px;
+    border: none;
+    background-color: #ce5b68;
+    font-size: 1.2em;
+    color: aliceblue;
+    box-shadow: 3px 3px 10px rgb(202, 202, 202);
+}
+
+/* Submit button when on hover */
+.bs:hover{
+    background-color: #c94353;
+}
+
+/* label */
+.inLabel{
+    text-align: center;
+    background-color: #fad370;
+    border-radius: 5px;
+    padding: 3px;
+    width: 100px;
+}
+
+/* Table */
+.tcontainer{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+.table{
+    --bs-table-bg: rgba(255, 61, 93, 0.43);
+    --bs-table-striped-bg: white;
+    --bs-table-border-color: #555;
+}
+.table td, .table th {
+    text-align: center;
+}
+
+
+@keyframes openPage {
+    0% {
+        opacity: 0.1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* navbar */
 .navbar {
     background-color: #104d40;
     color: white;
@@ -156,11 +276,131 @@ body {
     display: block;
 }
 @media screen and (max-width: 950px) {
+
     .footer-div-p1 {
         font-size: 15px;
     }
+    ::-webkit-scrollbar{
+        display: none;
+    }
+    
+      .title-text {
+        width: 700px;
+        text-align: center;
+      }
+    
+      .image {
+        display: none;
+      }
 }
 
+  /* Media query for screen sizes between 867px and 699px */
+  @media screen and (max-width: 867px) {
+  
+    /* Font size adjustments for various elements */
+    .title-text h1 {
+      font-size: 65px;
+    }
+  
+    .title-text h6 {
+      font-size: 19px;
+    }
+  }
+
+   /* Media query for screen sizes between 698px and 360px */
+   @media screen and (max-width: 698px) {
+  
+    /* Hide the 'image' class */
+    .image {
+      display: none;
+    }
+  
+    /* Adjustments for text and input width */
+    .title-text {
+      max-width: 45vw;
+    }
+  
+    .title-text h1 {
+      font-size: 55px;
+    }
+  
+    .title-text h6 {
+      font-size: 15px;
+    }
+  
+    .title-img {
+      display: inline-block;
+    }
+  
+    .title-img img {
+      width: 250px;
+      height: 100px;
+    }
+
+    .Title {
+        align-self: center;
+        display: flex;
+        flex-wrap: wrap-reverse;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        margin-left: 10px;
+      }
+  
+  }
+
+  /* Media query for screen sizes between 594px */
+  @media screen and (max-width: 594px) {
+     /* Adjustments for image size and text width */
+     .title-img img {
+        width: 200px;
+        height: 80px;
+      }
+    
+      .Title{
+        align-self: center;
+      }
+    
+      .title-text {
+        max-width: 45vw;
+      }
+    
+      .title-text h1 {
+        font-size: 40px;
+      }
+    
+      .title-text h6 {
+        font-size: 10px;
+      }
+    
+    }
+    
+    /* Media query for screen sizes below 460px */
+    @media screen and (max-width: 460px) {
+      
+      /* Adjustments for image size and text width */
+      .title-img img {
+        width: 200px;
+        height: 80px;
+      }
+    
+      .title-text {
+        max-width: 55vw;
+      }
+    
+      .title-text h1 {
+        font-size: 40px;
+      }
+    
+      .title-text h6 {
+        font-size: 10px;
+      }
+    
+      .Title {
+        max-width: 300px;
+      }
+    
+    }
 @media screen and (max-width: 500px) {
     .footer-div-p1 {
         display: none;

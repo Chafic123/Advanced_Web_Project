@@ -31,7 +31,11 @@ $(document).ready(function() {
     //show id number in an input
     $(".editm").on("click", function () {
         var num=$(this).data("id");
+        var name=$(this).data("name");
+        var desc=$(this).data("desc");
         $("#id").val(num);
+        editname.val(name);
+        description.val(desc);
     });
 
     //display menu item table
@@ -85,12 +89,15 @@ $(document).ready(function() {
         let item=element;
         if(item.find(":selected").val()==="" || item.val().trim() === ''){
             setError(element, "Field can't be empty!");
+            return true;
         }
         else{
             removeError(element);
+            return false;
         }
     }
-
+    let addForm =$("#addForm");
+    let editForm=$("#editForm");
     let addname= $("#addForm #name");
     let editname=$("#editForm #name");
     let category=$("#category");
@@ -98,43 +105,33 @@ $(document).ready(function() {
     let price=$( "#price");
     let photo=$("#photo");
 
-    //validate name
-    addname.keyup(function(){
+    function validateName(form, element){
         $.ajax({
             type: "POST",
             url: "check-name.php",
-            data: $("#addForm").serialize(),
+            data: form.serialize(),
             success: function(response){
                 if(response!==""){
-                    setError(addname, response);
+                    setError(element, response);
                 }
                 else{
-                    removeError(addname);
+                    validate=false;
+                    removeError(element);
                 }
             },
             error: function(error){
                 console.log(error);
             }
         })
+    }
+
+    //validate name
+    addname.keyup(function(){
+        validateName(addForm, addname);    
     })
 
     editname.keyup(function(){
-        $.ajax({
-            type: "POST",
-            url: "check-name.php",
-            data: $("#editForm").serialize(),
-            success: function(response){
-                if(response!==""){
-                    setError(editname, response);
-                }
-                else{
-                    removeError(editname);
-                }
-            },
-            error: function(error){
-                console.log(error);
-            }
-        })
+        validateName(editForm, editname);    
     })
 
     category.change(function(){
@@ -147,20 +144,28 @@ $(document).ready(function() {
         removeError(price);
     })
 
+    function validatePhoto(photo){
+        file=photo.val();
+        if(file!==""){
+            fileName=file.split('.').shift();
+            var ext = file.split(".");
+            ext = ext[ext.length-1].toLowerCase();
+            var arrayExtensions = ["jpg" , "jpeg", "png"];
+            if(arrayExtensions.lastIndexOf(ext)===-1){
+                setError(photo, "Unaccepted file format! Please upload image of type jpg, jpeg or png.");
+                return false;
+            }
+            else{
+                removeError(photo);
+                return true;
+            }
+        } 
+        return true;
+    }
+
     //validate image
     photo.change(function(){
-        file=photo.val(); 
-        fileName=file.split('.').shift();
-        console.log(fileName);
-        var ext = file.split(".");
-        ext = ext[ext.length-1].toLowerCase();
-        var arrayExtensions = ["jpg" , "jpeg", "png"];
-        if(arrayExtensions.lastIndexOf(ext)===-1){
-            setError(photo, "Unaccepted file format! Please upload image of type jpg, jpeg or png.");
-        }
-        else{
-            removeError(photo);
-        }
+        validatePhoto(photo);
     })
 
     //add menu item
@@ -171,17 +176,34 @@ $(document).ready(function() {
         empty(price);
         empty(photo);
 
-        if(!valid){
+        if(empty(addname) || empty(category) || empty(description) || empty(price) || empty(photo)){
             e.preventDefault();
-            
         }
+        else if($("#nameA").html()!=="" || !validatePhoto(photo)) {
+            e.preventDefault();
+        }        
     })
 
     //edit menu item
     $("#editItem").click(function(e){
-        if(editname.val().trim()==='' && category.find(":selected").val()==='' && description.val().trim()==='' && price.val().trim()==='' && photo.val().trim()===''){
+        if((editname.val().trim()==='' && category.find(":selected").val()==='' && description.val().trim()==='' && price.val().trim()==='' && photo.val().trim()==='')){
             e.preventDefault();
             $("#editForm h6").css("color", "red");
         }
+        else if(!validatePhoto(photo) || $("#nameE").html()!==""){
+            e.preventDefault();
+            $("#editForm h6").css("color", "red");
+        }
+    })
+
+    $(".closee").on('click', function () {
+        editname.val('');
+        category.find(":selected").val('');
+        description.val('');
+        price.val('');
+        photo.val('');
+        removeError(editname);
+        removeError(photo);
+        $("#editForm h6").css("color", "default");
     })
 });

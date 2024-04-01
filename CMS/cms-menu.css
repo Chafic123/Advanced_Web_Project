@@ -1,19 +1,249 @@
+/* container */
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* title */
+.title-text h1 {
+  text-align: center;
+  margin: 0;
+}  
+
+/* add form */
+.addMain {
+    margin-left: 50px;
+    align-self: center;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-form {
+    display: flex;
+    padding: 5%;
+    margin: 10px 0px 20px 0px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgb(168, 168, 168);
+    max-width: 40vw;
+    min-width: 35vw;
+}
+#addForm{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    flex-direction: column;
+}
+
+.add-form input, .add-form select, .add-form textarea{
+    padding: 10px;
+    background: transparent;
+    border: 1px solid;
+    width: 30vw;
+    border-radius: 0%;
+}
+
+.add-form input:focus, .add-form select:focus, .add-form textarea:focus{
+    background: transparent;
+    border: 2px  solid;
+    box-shadow: none;
+    border-radius: 2px;
+}
+
+/* .add-form select option:hover{
+    background-color: #fad370;
+    color: black;
+    box-shadow: 0 0 10px 100px #fad370 inset !important;;
+} */
+
+/*  */
+.bs{
+    margin: 20px 0px;
+    width: 200px;
+    min-height: 40px;
+}
+
+/* view menu */
+#filter-menu{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.form-group{
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#filter-menu .form-group input, #filter-menu .form-group select{
+    padding: 10px;
+    background: transparent;
+    border: 1px solid;
+    width: 20vw;
+    border-radius: 0%;
+}
+
+#filter-menu .form-group input:focus, #filter-menu .form-group select:focus{
+  background: transparent;
+  border: 2px  solid;
+  box-shadow: none;
+  border-radius: 2px;
+}
+
 /* label */
 .required{
-    color: red;
+  color: red;
 }
 
 /*Error*/
 .form-group small{
-    display: flex;
-    color: red;
-    margin: 5px 0;
-    margin-left: 1.5%;
-    height: 10px;
-    font-size: 14px;
-    visibility: hidden;
+  display: flex;
+  color: red;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 1%;
+  height: 10px;
+  font-size: 14px;
+  visibility: hidden;
 }
 
 .error small {
-    visibility: visible;
+  visibility: visible;
+}
+
+/* Table */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
+
+input[type="checkbox"]:checked {
+  background-color: #104d40;
+  border-color: #104d40;
+}
+
+
+input[type="checkbox"]:checked::before {
+  content: '✓';
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bt{
+    padding: 2px;
+    border-radius: 10px;
+    border: none;
+    background-color: #104d40;
+    font-size: 1rem;
+    color: aliceblue;
+    text-align: center;
+    width: 50px;
+    margin: 5px 0;
+}
+
+.bt a{
+  color: aliceblue;
+  text-align: center;
+}
+
+.bt:hover{
+  background-color: #fad370;
+  color: black;
+}
+.bt a:hover{
+  color: black;
+}
+
+/* edit form */
+.modal-dialog{
+  background-color: beige;
+}
+
+#editForm{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#editForm .form-group input, #editForm .form-group select, #editForm .form-group textarea{
+    padding: 10px;
+    background: transparent;
+    border: 1px solid;
+    border-radius: 0%;
+    height: 50px;
+    /* margin: 5px 0; */
+}
+
+#editForm .form-group input:focus, #editForm .form-group select:focus, #editForm .form-group textarea:focus{
+  background: transparent;
+  border: 2px  solid;
+  box-shadow: none;
+  border-radius: 2px;
+}
+
+#editItem{
+  background-color: #ce5b68;
+  color: aliceblue;
+}
+#editItem:hover{
+  background-color: #c94353;
+  color: black;
+}
+  
+/* Media query for screen sizes between 950px and 698px */
+@media screen and (max-width: 950px) {
+    .addMain {
+      margin-left: 0px;
+      margin-right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+}
+/* Media query for screen sizes between 698px and 594px */
+@media screen and (max-width: 698px) {
+  .add-form {
+    box-shadow: none;
+    width: 50%;
+  }
+}
+
+/* Media query for screen sizes between 594px and 460px */  
+@media screen and (max-width: 594px) {
+  .addMain{
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+  }
+}
+  
+/* Media query for screen sizes below 460px */
+@media screen and (max-width: 460px) {
+  .bs {
+    margin-left: 10px;
+  }
 }

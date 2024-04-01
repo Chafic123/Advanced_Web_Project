@@ -7,7 +7,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         global $conn;
         if ($result && ($result->num_rows > 0)) { 
             while ($row = $result->fetch_assoc()) {
-                echo '<tr>';
+                echo '<tr scope="row">';
                 echo '<td>' . $row["ItemName"] . '</td>';
                 echo '<td>' . $row["Name"] . '</td>';
                 echo '<td>' . $row["Description"] . '</td>';
@@ -20,8 +20,8 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
                     echo '<td><input type="checkbox" name="active" class="active" data-id="' .$row["ItemNum"]. '"></td>';
                 }
                 echo '<td>
-                <button type="button" class="btn btn-primary editm" data-bs-toggle="modal" data-bs-target="#edit" data-id="' .$row["ItemNum"]. '">Edit</button>
-                <button type="button" class="btn btn-primary"><a href="delete-menu.php?id=' . $row["ItemNum"] . '" style="color:white; text-decoration:none;">Delete</a></button>
+                <button type="button" class="btn btn-dark bt editm" data-bs-toggle="modal" data-bs-target="#edit" data-id="' .$row["ItemNum"]. '" data-name="'.$row["ItemName"].'" data-desc="'.$row["Description"].'">Edit</button>
+                <button type="button" class="btn btn-dark bt"><a href="delete-menu.php?id=' . $row["ItemNum"] . '" style="text-decoration:none;">Delete</a></button>
                 </td>';
                 echo '</tr>';
             }

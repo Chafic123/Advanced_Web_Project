@@ -50,45 +50,64 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
     }
     ?>
     
-    <div class="container pt-5">
-    <h2 class="my-4">Add Menu Item</h2>
-        <form id="addForm" action="cms-addmenu.php" method="post"  enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <span class='required'>*</span>
-                <input type="text" class="form-control" id="name" name="name">
-                <small></small>
+    <div class="container">
+        <div class="image">
+            <img src="../Malaz Design/Malaz---Brand-Pattern-2.png">
+        </div>
+        <main class="addMain">
+            <div class="Title">
+                <section class="title-text">
+                    <h1 class="first-part">Add Menu Item</h1>
+                </section>
+                <section class="title-img">
+                    <img src="../Malaz Design\Malaz---icon cropped.png">
+                </section>
             </div>
-            <div class="form-group">
-                <label for="category">Category</label>
-                <span class='required'>*</span>
-                <select class="form-select category" name="category" id="category">
-                    <option value="" disabled selected>Select Category</option>
-                    <!-- Categories will be populated dynamically using jQuery -->
-                </select>
-                <small></small>
-            </div>
-            <div class="form-group">
-                <label for="descr">Description</label>
-                <span class='required'>*</span>
-                <textarea class="form-control" id="descr" name="descr"></textarea>
-                <small></small>
-            </div>
-            <div class="form-group">
-                <label for="price">Price</label>
-                <span class='required'>*</span>
-                <input type="number" step="0.01" class="form-control" id="price" name="price" >
-                <small></small>
-            </div>
-            <div class="form-group">
-                <label for="photo">Photo</label>
-                <span class='required'>*</span>
-                <input type="file" class="form-control" id="photo" name="photo" accept="image/png, image/jpeg, image/jpg" >
-                <small></small>
-            </div>
+            <div class="add-form">
+                <!-- <div class="wrapper"> -->
+                    <form id="addForm" action="cms-addmenu.php" method="post"  enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <span class='required'>*</span>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Item Name">
+                            <small id="nameA"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <span class='required'>*</span>
+                            <select class="form-select category" name="category" id="category">
+                                <option value="" disabled selected>Select Category</option>
+                                <!-- Categories will be populated dynamically using jQuery -->
+                            </select>
+                            <small></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="descr">Description</label>
+                            <span class='required'>*</span>
+                            <textarea class="form-control" id="descr" name="descr"  rows="3" placeholder="Enter item description here"></textarea>
+                            <small></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <span class='required'>*</span>
+                            <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Item Price">
+                            <small></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="photo">Photo</label>
+                            <span class='required'>*</span>
+                            <input type="file" class="form-control" id="photo" name="photo" accept="image/png, image/jpeg, image/jpg" >
+                            <small></small>
+                        </div>
 
-            <button type="submit" class="btn btn-primary" name="add" id="add">Add Item</button>
-        </form>
+                        <button type="submit" class="btn btn-light bs" name="add" id="add">Add Item</button>
+                    </form>
+                <!-- </div> -->
+            </div>
+        </main>
+        <div class="image">
+            <img src="../Malaz Design/Malaz---Brand-Pattern-2.png">
+        </div>
     </div>
 
     <?php
@@ -97,6 +116,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/swup@4"></script>
     <script src="cms-menu.js"></script>
 </body>
 
