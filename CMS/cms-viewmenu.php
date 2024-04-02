@@ -112,7 +112,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
                 <div class="modal-body">
                     <form id="editForm" action="edit-menu.php" method="post" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="name">Number:</label>
+                            <label for="id">Number:</label>
                             <input type="text" class="form-control-plaintext" id="id" name="id" readonly>
                         </div>
                         <hr>

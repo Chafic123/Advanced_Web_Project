@@ -113,9 +113,9 @@ $(document).ready(function() {
             success: function(response){
                 if(response!==""){
                     setError(element, response);
+                    return false;
                 }
                 else{
-                    validate=false;
                     removeError(element);
                 }
             },
@@ -123,6 +123,7 @@ $(document).ready(function() {
                 console.log(error);
             }
         })
+        return true;
     }
 
     //validate name
@@ -186,13 +187,15 @@ $(document).ready(function() {
 
     //edit menu item
     $("#editItem").click(function(e){
-        if((editname.val().trim()==='' && category.find(":selected").val()==='' && description.val().trim()==='' && price.val().trim()==='' && photo.val().trim()==='')){
-            e.preventDefault();
+        e.preventDefault();
+        if((editname.val().trim()==='' || category.find(":selected").val()==='' || description.val().trim()==='' || price.val().trim()==='' || photo.val().trim()==='')){
             $("#editForm h6").css("color", "red");
         }
         else if(!validatePhoto(photo) || $("#nameE").html()!==""){
-            e.preventDefault();
             $("#editForm h6").css("color", "red");
+        }
+        else{
+            $("#editForm").unbind('submit').submit();
         }
     })
 
