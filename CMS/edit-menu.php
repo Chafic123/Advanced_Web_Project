@@ -132,7 +132,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
             }
 
             $photoExtension = pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION);
-            if(!isset($name)&& empty($name)){
+            if(isset($name) && empty($name)){
                 $q1 = "SELECT ItemName FROM menuitem where ItemNum =?";
                 $stmt=$conn->prepare($q1);
                 $stmt->bind_param("i", $id);
