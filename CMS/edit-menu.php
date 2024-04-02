@@ -5,7 +5,6 @@ if(session_status()!=2){
 if(isset($_SESSION['admin']) && $_SESSION['admin']==true){ 
 
     // Check if form is submitted
-    if (isset($_POST["edit"])) {
         // Include database configuration
         include '../config.php';
 
@@ -169,7 +168,6 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
             }
         }
         header("Location: cms-viewmenu.php");
-    }
 }else{
     header("Location: ../Home/index.php");
 }
