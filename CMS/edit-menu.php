@@ -131,22 +131,27 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
                 }
             }
 
-            $q1 = "SELECT ItemName FROM menuitem where ItemNum =?";
-            $stmt=$conn->prepare($q1);
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $Mname="";
-            if ($res && ($res->num_rows > 0)) { 
-                while ($row = $res->fetch_assoc()) {
-                    $Mname = $row['ItemName'];
+            $photoExtension = pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION);
+            if(!isset($name)&& empty($name)){
+                $q1 = "SELECT ItemName FROM menuitem where ItemNum =?";
+                $stmt=$conn->prepare($q1);
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $Mname=null;
+                if ($result && ($result->num_rows > 0)) { 
+                    while ($row = $result->fetch_assoc()) {
+                        $Mname = $row['ItemName'];
+                    }
                 }
+                $stmt->close();
+                $photoName = '../Food/' . $Mname . '.' . $photoExtension;
             }
-            $stmt->close();
+            else{
+                $photoName = '../Food/' . $name . '.' . $photoExtension;
+            }
             
             // Generate a unique filename based on the user's input
-            $photoExtension = pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION);
-            $photoName = '../Food/' . $Mname . '.' . $photoExtension;
             // Upload image to server
             $targetDir = $basePath . '/../Food/';
             $targetFile = $targetDir . $photoName;
