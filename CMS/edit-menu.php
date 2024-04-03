@@ -17,9 +17,25 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         $photoTmpName = $_FILES["photo"]["tmp_name"];
         $photoType = $_FILES["photo"]["type"];
         $basePath=__DIR__;
+        $catID="";
+
+        if(isset($cat) && !empty($cat)){
+            //  Get CategoryID
+            $q = "SELECT CategoryID FROM categories where Name LIKE ?";
+            $stmt=$conn->prepare($q);
+            $stmt->bind_param("s", $cat);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            if ($res && ($res->num_rows > 0)) { 
+                while ($row = $res->fetch_assoc()) {
+                    $catID = $row['CategoryID'];
+                }
+            }
+            $stmt->close();
+        }
 
         if(isset($name) && !empty($name)){
-            $nameeCheck="Select ItemName, Description From menuitem where ItemNum= ?";
+            $nameeCheck="Select ItemName, Description, Category, Price From menuitem where ItemNum= ?";
             $stmt=$conn->prepare($nameeCheck);
             $stmt->bind_param("i", $id);
             $stmt->execute();
@@ -28,18 +44,22 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
 
             $dataName = "";
             $dataDesc = "";
+            $dataCategory="";
+            $dataPrice="";
             if($result && $result->num_rows > 0) {
                 while($row=$result->fetch_assoc()){
                     $dataName = $row['ItemName'];
                     $dataDesc = $row['Description'];
+                    $dataCategory= $row['Category'];
+                    $dataPrice = $row['Price'];
                 }
             }
             else{
                 $_SESSION["message"] = "Item not found.";
             }
             
-            if((($dataName == $name) && (((!isset($descr) || empty($descr)) || $dataDesc == $descr))) && (!isset($cat) || empty($cat)) && (!isset($price) || empty($price)) && (!isset($photoTmpName) || empty($photoTmpName))){
-                $_SESSION["message"] = "Please change Name/Description or fill any other field to continue editing.";
+            if(($dataName == $name) && ((!isset($descr) || empty($descr)) || $dataDesc == $descr) && ((!isset($cat) || empty($cat)) || $dataCategory == $catID) && ((!isset($price) || empty($price)) || $dataPrice == $price) && (!isset($photoTmpName) || empty($photoTmpName))){
+                $_SESSION["message"] = "No changes have been made. Please try again!";
             }
             else{
                 if(!isset($photoTmpName) || empty($photoTmpName)){
@@ -95,19 +115,6 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         }
         
         if(isset($cat) && !empty($cat)){
-            //  Get CategoryID
-            $q = "SELECT CategoryID FROM categories where Name LIKE ?";
-            $stmt=$conn->prepare($q);
-            $stmt->bind_param("s", $cat);
-            $stmt->execute();
-            $res = $stmt->get_result();
-            $catID="";
-            if ($res && ($res->num_rows > 0)) { 
-                while ($row = $res->fetch_assoc()) {
-                    $catID = $row['CategoryID'];
-                }
-            }
-            $stmt->close();
 
             $query2="UPDATE menuitem SET Category=? where  ItemNum=?;";
             $stmt=$conn->prepare($query2);
