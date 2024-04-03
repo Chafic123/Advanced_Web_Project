@@ -7,8 +7,6 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
     // Define base path
     $basePath = __DIR__ ;
 
-    // Check if form is submitted
-    if (isset($_POST["add"])) {
         // Include database configuration
         include '../config.php';
 
@@ -55,10 +53,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         } else {
             $_SESSION["message"] = "Error uploading image.";     
             header("Location: cms-addmenuform.php");           
-        }            
-    }   
-
-    $conn->close();
+        }  
 
     exit();
     

@@ -13,12 +13,13 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
             </svg>
         </button>
         <?php
-        if(isset($_SESSION["success"])){
-            echo "<h2>Success!</h2>
-            <p>".$_SESSION["success"]."</p>";
-        }else if (isset($_SESSION["message"])||(isset($_SESSION["message"])) && isset($_SESSION["success"])){
+        if (isset($_SESSION["message"])||(isset($_SESSION["message"])) && isset($_SESSION["success"])){
             echo "<h2>Error!</h2>
             <p>".$_SESSION["message"]."</p>";  
+        }
+        else if(isset($_SESSION["success"])){
+            echo "<h2>Success!</h2>
+            <p>".$_SESSION["success"]."</p>";
         }
         ?>
         </div>

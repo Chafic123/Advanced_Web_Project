@@ -19,51 +19,80 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
         $basePath=__DIR__;
 
         if(isset($name) && !empty($name)){
-            $qq="Select Photo From menuitem where ItemNum= ?";
-            $stmt=$conn->prepare($qq);
+            $nameeCheck="Select ItemName, Description From menuitem where ItemNum= ?";
+            $stmt=$conn->prepare($nameeCheck);
             $stmt->bind_param("i", $id);
             $stmt->execute();
             $result = $stmt->get_result();
             $stmt->close();
 
-            $pTmpName="";
-            $pname="";
+            $dataName = "";
+            $dataDesc = "";
             if($result && $result->num_rows > 0) {
                 while($row=$result->fetch_assoc()){
-                    $pTmpName= $basePath . '/' . $row['Photo'];
-                    $pname=$row['Photo'];
-                }
-                $iname=explode("/", $pname, 3)[2];
-                $photoExtension=explode(".", $iname, 2)[1];
-                $photoName='../Food/' . $name . '.' . $photoExtension;
-                if (file_exists($pTmpName)) {
-                    if(rename($pTmpName, $photoName)){
-                        $qqq = "UPDATE menuitem SET Photo=? where  ItemNum=?;";
-                        $stmt=$conn->prepare($qqq);
-                        $stmt->bind_param("si", $photoName, $id);
-                        if(!$stmt->execute()){
-                            $_SESSION["message"] = "Error: " . $sql . "<br>" . $conn->error;
-                        }
-                        $stmt->close();
-
-                        $query1="UPDATE menuitem SET ItemName=? where  ItemNum=?;";
-                        $stmt=$conn->prepare($query1);
-                        $stmt->bind_param("si", $name, $id);
-                        if(!$stmt->execute()){
-                            $_SESSION["message"] = "Error: " . $sql . "<br>" . $conn->error;
-                        }
-                        $stmt->close();
-                        $_SESSION["success"] = "Item edited successfully!";
-                    }
-                    else{
-                        $_SESSION["message"] = "Error uploading image.";
-                    }
-                }
-                else{
-                    $_SESSION["message"] = "Image not found.";
+                    $dataName = $row['ItemName'];
+                    $dataDesc = $row['Description'];
                 }
             }
-        } 
+            else{
+                $_SESSION["message"] = "Item not found.";
+            }
+            
+            if((($dataName == $name) && (((!isset($descr) || empty($descr)) || $dataDesc == $descr))) && (!isset($cat) || empty($cat)) && (!isset($price) || empty($price)) && (!isset($photoTmpName) || empty($photoTmpName))){
+                $_SESSION["message"] = "Please change Name/Description or fill any other field to continue editing.";
+            }
+            else{
+                if(!isset($photoTmpName) || empty($photoTmpName)){
+                    $qq="Select Photo From menuitem where ItemNum= ?";
+                    $stmt=$conn->prepare($qq);
+                    $stmt->bind_param("i", $id);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $stmt->close();
+
+                    $pTmpName="";
+                    $pname="";
+                    if($result && $result->num_rows > 0) {
+                        while($row=$result->fetch_assoc()){
+                            $pTmpName= $basePath . '/' . $row['Photo'];
+                            $pname=$row['Photo'];
+                        }
+                        $iname=explode("/", $pname, 3)[2];
+                        $photoExtension=explode(".", $iname, 2)[1];
+                        $photoName='../Food/' . $name . '.' . $photoExtension;
+                        if (file_exists($pTmpName)) {
+                            if(rename($pTmpName, $photoName)){
+                                $qqq = "UPDATE menuitem SET Photo=? where  ItemNum=?;";
+                                $stmt=$conn->prepare($qqq);
+                                $stmt->bind_param("si", $photoName, $id);
+                                if(!$stmt->execute()){
+                                    $_SESSION["message"] = "Error: " . $sql . "<br>" . $conn->error;
+                                }
+                                $stmt->close();
+            
+                            }
+                            else{
+                                $_SESSION["message"] = "Error uploading image.";
+                            }
+                        }
+                        else{
+                            $_SESSION["message"] = "Image not found.";
+                        }
+                    }
+                    else{
+                        $_SESSION["message"] = "Image not found.";
+                    }
+                }
+                $query1="UPDATE menuitem SET ItemName=? where  ItemNum=?;";
+                $stmt=$conn->prepare($query1);
+                $stmt->bind_param("si", $name, $id);
+                if(!$stmt->execute()){
+                    $_SESSION["message"] = "Error: " . $sql . "<br>" . $conn->error;
+                }
+                $stmt->close();
+                $_SESSION["success"] = "Item edited successfully!";
+            } 
+        }
         
         if(isset($cat) && !empty($cat)){
             //  Get CategoryID
@@ -131,7 +160,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']==true){
             }
 
             $photoExtension = pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION);
-            if(!isset($name)&& empty($name)){
+            if(!isset($name) || empty($name)){
                 $q1 = "SELECT ItemName FROM menuitem where ItemNum =?";
                 $stmt=$conn->prepare($q1);
                 $stmt->bind_param("i", $id);

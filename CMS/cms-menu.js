@@ -113,7 +113,6 @@ $(document).ready(function() {
             success: function(response){
                 if(response!==""){
                     setError(element, response);
-                    return false;
                 }
                 else{
                     removeError(element);
@@ -123,7 +122,6 @@ $(document).ready(function() {
                 console.log(error);
             }
         })
-        return true;
     }
 
     //validate name
@@ -171,37 +169,40 @@ $(document).ready(function() {
 
     //add menu item
     $("#add").click(function(e){
-        empty(addname);
-        empty(category);
-        empty(description);
-        empty(price);
-        empty(photo);
+        e.preventDefault();
 
-        if(empty(addname) || empty(category) || empty(description) || empty(price) || empty(photo)){
+        if($("#nameA").html()!=="" || !validatePhoto(photo)){
             e.preventDefault();
         }
-        else if($("#nameA").html()!=="" || !validatePhoto(photo)) {
-            e.preventDefault();
-        }        
+        else if(addname.val().trim()==='' || empty(category) || empty(description) || empty(price) || empty(photo)) {
+            empty(addname);
+            empty(category);
+            empty(description);
+            empty(price);
+            empty(photo);
+        }    
+        else{
+            addForm.unbind('submit').submit();
+        }    
     })
 
     //edit menu item
     $("#editItem").click(function(e){
         e.preventDefault();
-        if((editname.val().trim()==='' || category.find(":selected").val()==='' || description.val().trim()==='' || price.val().trim()==='' || photo.val().trim()==='')){
+        if(editname.val().trim()==='' && category.find(":selected").val()==='' && description.val().trim()==='' && price.val().trim()==='' && photo.val().trim()===''){
             $("#editForm h6").css("color", "red");
         }
         else if(!validatePhoto(photo) || $("#nameE").html()!==""){
             $("#editForm h6").css("color", "red");
         }
         else{
-            $("#editForm").unbind('submit').submit();
+            editForm.unbind('submit').submit();
         }
     })
 
     $(".closee").on('click', function () {
         editname.val('');
-        category.find(":selected").val('');
+        category.find(":selected").val(''); 
         description.val('');
         price.val('');
         photo.val('');
