@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2024 at 08:03 AM
+-- Generation Time: Apr 05, 2024 at 10:22 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `advwebproject`
 --
-CREATE DATABASE advwebproject;
-USE advwebproject;
 
 -- --------------------------------------------------------
 
@@ -70,17 +68,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`ItemNum`, `AccountNum`, `Quantity`) VALUES
-(2, 1, 2),
-(7, 1, 1),
-(14, 1, 1),
-(19, 1, 1),
-(20, 1, 1),
-(29, 1, 1),
-(35, 1, 1),
-(46, 1, 1),
-(48, 1, 1),
-(50, 1, 1),
-(63, 1, 1);
+(2, 1, 1),
+(3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -225,7 +214,8 @@ INSERT INTO `menuitem` (`ItemNum`, `Category`, `ItemName`, `Description`, `Price
 (60, 11, 'Pepsi', 'A carbonated cola-flavored soft drink with a caffeine content.', 1.25, '../Food/pepsi.jpg', 1),
 (61, 11, '7up', 'A carbonated lemon-lime flavored soft drink with a caffeine content.', 1.25, '../Food/7up.jpg', 1),
 (62, 11, 'Miranda', 'A carbonated fruit-flavored soft drink with a caffeine content.', 1.25, '../Food/miranda.jpg', 1),
-(63, 11, 'Coca Cola', 'A classic carbonated cola-flavored soft drink with a caffeine content.', 1.25, '../Food/cola.jpg', 1);
+(63, 11, 'Coca Cola', 'A classic carbonated cola-flavored soft drink with a caffeine content.', 1.25, '../Food/Coca Cola.png', 1),
+(64, 11, 'Red Bull', 'An energy drink', 1.5, '../Food/Red Bull.png', 1);
 
 -- --------------------------------------------------------
 
@@ -236,7 +226,7 @@ INSERT INTO `menuitem` (`ItemNum`, `Category`, `ItemName`, `Description`, `Price
 CREATE TABLE `orders` (
   `OrderNum` int(11) NOT NULL,
   `AccountNum` int(11) NOT NULL,
-  `DateTime` datetime NOT NULL,
+  `DateTime` datetime NOT NULL DEFAULT current_timestamp(),
   `TotalPrice` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -341,7 +331,7 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `AccountNum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `AccountNum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -353,13 +343,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `menuitem`
 --
 ALTER TABLE `menuitem`
-  MODIFY `ItemNum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `ItemNum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderNum` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `OrderNum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `review`
