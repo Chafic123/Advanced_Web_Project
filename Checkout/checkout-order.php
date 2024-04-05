@@ -13,7 +13,7 @@ if (isset($_POST['fname']) && isset($_POST["lname"]) && isset($_POST['phone']) &
     $phone = $_POST['phone'];
     $address = $_POST['address'];
     $city = $_POST['city'];
-    require_once('../add_to_cart.php');
+    require_once('../Cart/add_to_cart.php');
     $total = calcTotal($account);
     if ($conn) {
         // Update account information
@@ -32,9 +32,10 @@ if (isset($_POST['fname']) && isset($_POST["lname"]) && isset($_POST['phone']) &
 }
 
 // Insert the new order into the orders table
-$insertQuery = "INSERT INTO orders (AccountNum, TotalPrice) VALUES (?,  ?)";
+$now=date('Y-m-d H:i:s');
+$insertQuery = "INSERT INTO orders (AccountNum, DateTime, TotalPrice) VALUES (?, ?, ?)";
 $stmt = $conn->prepare($insertQuery);
-$stmt->bind_param("ii", $account, $total);
+$stmt->bind_param("isi", $account, $now, $total);
 $stmt->execute();
 $selectmax = "SELECT MAX(OrderNum) as OrderNum from orders";
 $res = mysqli_query($conn, $selectmax);

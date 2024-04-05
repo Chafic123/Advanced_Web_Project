@@ -63,16 +63,12 @@ $(document).ready(function() {
         menuItemTable();
     });
 
-    //validate form
-    let valid=true;
-
     /*Function to Add Error Message*/
     function setError(element, errorMessage) {
         let parentElement = element.closest('.form-group');
         parentElement.addClass('error');
         let alertMessage = parentElement.find('small');
         alertMessage.text(errorMessage);
-        valid=false;
     }
 
     /*Function to Remove Error Message*/
@@ -81,7 +77,6 @@ $(document).ready(function() {
         parentElement.removeClass('error');
         let alertMessage = parentElement.find('small');
         alertMessage.text('');
-        valid=true;
     }
 
     //check if inputs are empty!
@@ -96,6 +91,7 @@ $(document).ready(function() {
             return false;
         }
     }
+    
     let addForm =$("#addForm");
     let editForm=$("#editForm");
     let addname= $("#addForm #name");

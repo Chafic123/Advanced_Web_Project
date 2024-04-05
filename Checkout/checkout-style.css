@@ -383,3 +383,19 @@ input{
     border-radius:0px;
     padding: 20px;
 }
+
+.formC small{
+    display: flex;
+    margin-top: -15px;
+    margin-bottom: 30px;
+    margin-left: 1%;
+    height: 10px;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: bold;
+    color: #ce5b68;
+    visibility: hidden;
+  }
+  .error small{
+    visibility: visible;
+  }

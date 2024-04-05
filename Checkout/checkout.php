@@ -45,26 +45,30 @@ include('../config.php');
                     <h2 class="section-title">Checkout</h2>
                     <div class="location-delivery">
                         <h4>Details</h4>
-                        <div class="location-element">
+                        <div class="formC location-element">
                             <label for="">Full Name:</label>
                             <input type="text" name="fullname" id="fullname" placeholder="John Doe" class="required" value="<?php echo $fname . " " . $lname; ?>">
+                            <small></small>
                         </div>
-                        <div class="location-element">
+                        <div class="formC location-element">
                             <label for="">Phone Number:</label>
                             <input type="tel" name="Phone" id="phone" placeholder="eg. +961 76 000 000" class="required" value="<?php echo $phone; ?>">
+                            <small></small>
                         </div>
-                        <div class="location-element address">
+                        <div class="formC location-element address">
                             <label for="">Address:</label>
                             <input type="text" name="Address" id="address" placeholder="Street address, building, floor, etc" class="required" value="<?php echo $Add; ?>">
+                            <small></small>
                         </div>
-                        <div class="location-element">
+                        <div class="formC location-element">
                             <label for="city">City:</label>
-                            <select name="city" id="city">
+                            <select name="city" id="city" class="required">
                                 <option value="0" disabled selected>Select a City</option>
                                 <option value="Beirut">Beirut</option>
                                 <option value="Byblos">Byblos</option>
                                 <option value="Batroun">Batroun</option>
                             </select>
+                            <small></small>
                         </div>
                     </div>
                 </div>
@@ -72,54 +76,57 @@ include('../config.php');
                 <div class="checkout-section sub-section">
                     <div class="payment-info">
                         <h4>Payment</h4>
-                        <div class="payment-element">
+                        <div class="formC payment-element">
                             <label for="payment-lbl">Payment Method:</label>
-                            <select name="payment-method" id="payment-method" >
+                            <select name="payment-method" id="payment-method">
                                 <option value="">Select Payment Method</option>
                                 <option value="Master Card">Master Card</option>
                                 <option value="Visa Card">Visa Card</option>
                                 <option value="American Express Card">American Express Card</option>
                                 <option value="Cash on Delivery"> Cash on Delivery</option>
                             </select>
-                            <small class="error"></small>
+                            <small></small>
                             <p>*note that when Cash on Delivery is selected, you are not required to fill out card
                                 details</p>
                         </div>
-                        <div class="payment-element c">
+                        <div class="formC payment-element c">
                             <label for="payment-lbl">Card Number:</label>
-                            <input type="text" name="cart_number" class="required cvv" pattern="[0-9]*" placeholder="0000 0000 0000 0000" maxlength="16">
+                            <input type="text" name="cart_number" id="cn" class="required cvv" pattern="[0-9]*" placeholder="0000 0000 0000 0000" maxlength="16">
+                            <small></small>
                         </div>
                         <div class="final-payment-elements c">
-                            <div class="payment-element">
+                            <div class="formC payment-element">
                                 <label for="payment-lbl" class="">Expiration Date:</label>
-                                <input type="date" name="expiration" class="required expiration" placeholder="dd/mm/yyyy">
+                                <input type="date" id="ed" name="expiration" class="required expiration" placeholder="dd/mm/yyyy">
+                                <small></small>
                             </div>
                             <script>
-    //expiration
-    $(document).ready(function() {
-        $('.expiration').change(function() {
-            var expirationDate = $(this).val();
-            if(expirationDate){
-            $.ajax({
-                url: 'set_expiration.php',
-                method: 'POST',
-                data: {
-                    expirationDate: expirationDate
-                },
-                success: function(response) {
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });}
-        });
-    });
-</script>
+                                //expiration
+                                $(document).ready(function() {
+                                    $('.expiration').change(function() {
+                                        var expirationDate = $(this).val();
+                                        if(expirationDate){
+                                        $.ajax({
+                                            url: 'set_expiration.php',
+                                            method: 'POST',
+                                            data: {
+                                                expirationDate: expirationDate
+                                            },
+                                            success: function(response) {
+                                                console.log(response);
+                                            },
+                                            error: function(xhr, status, error) {
+                                                console.error(xhr.responseText);
+                                            }
+                                        });}
+                                    });
+                                });
+                            </script>
 
-                            <div class="payment-element">
+                            <div class="formC payment-element">
                                 <label for="payment-lbl">CVV:</label>
-                                <input type="text" name="cvv" class="payment-lbl" placeholder="***" pattern="[0-9]*" minlength="1" maxlength="3">
+                                <input type="text" name="cvv" id="cvv" class="payment-lbl" placeholder="***" pattern="[0-9]*" minlength="1" maxlength="3">
+                                <small></small>
                             </div>
 
                         </div>
