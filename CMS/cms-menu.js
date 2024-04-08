@@ -46,16 +46,40 @@ $(document).ready(function() {
             data: $("#filter-menu").serialize(),
             success: function(data){
                 $("#menuitems").html(data);
+                //show id number in an input
+                $(".editm").on("click", function () {
+                    var num=$(this).data("id");
+                    var name=$(this).data("name");
+                    var desc=$(this).data("desc");
+                    $("#id").val(num);
+                    editname.val(name);
+                    description.val(desc);
+                });
+                //making items active
+                $(".active").on("change", function(){
+                    var id = {id: $(this).data('id')};
+                    $.ajax({
+                        type: 'POST',
+                        url: 'active-menu.php',
+                        data: id,
+                        success: function(data){
+                            console.log(data);
+                        },
+                        error:function(error){
+                            console.error(error);
+                        } 
+                    });     
+                });
             },
             error:function(error){
                 console.error(error);
             } 
-        });
+        });  
     }
 
     //apply filter when typing in search input
     $("#search").keyup(function(){
-        menuItemTable();
+        menuItemTable();        
     });
 
     //apply filter when selecting a category
