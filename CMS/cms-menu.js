@@ -32,10 +32,15 @@ $(document).ready(function() {
     $(".editm").on("click", function () {
         var num=$(this).data("id");
         var name=$(this).data("name");
+        var cat= $(this).data("category");
+        console.log(cat)
         var desc=$(this).data("desc");
+        var Dprice=$(this).data("price")
         $("#id").val(num);
         editname.val(name);
+        $("#category option[value='"+cat+"']").attr("selected","selected");
         description.val(desc);
+        price.val(Dprice);
     });
 
     //display menu item table
@@ -50,10 +55,14 @@ $(document).ready(function() {
                 $(".editm").on("click", function () {
                     var num=$(this).data("id");
                     var name=$(this).data("name");
+                    var cat= $(this).data("category");
                     var desc=$(this).data("desc");
+                    var Dprice=$(this).data("price")
                     $("#id").val(num);
                     editname.val(name);
+                    $("#category option[value='"+cat+"']").attr("selected","selected");
                     description.val(desc);
+                    price.val(Dprice);
                 });
                 //making items active
                 $(".active").on("change", function(){
